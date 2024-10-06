@@ -1,0 +1,48 @@
+{
+  "name": "Routify",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~3.2.3",
+    "@react-native-async-storage/async-storage": "^1.24.0",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "@react-navigation/stack": "^6.4.1",
+    "expo": "~51.0.28",
+    "expo-firebase": "^0.0.0-alpha.0",
+    "expo-status-bar": "~1.12.1",
+    "firebase": "^10.13.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-vector-icons": "^10.2.0",
+    "react-native-web": "~0.19.10",
+    "expo-font": "~12.0.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3"
+  },
+  "prettier": {
+    "bracketSameLine": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,html,json,css,scss}": "prettier --write --bracket-same-line"
+  },
+  "private": true
+}
