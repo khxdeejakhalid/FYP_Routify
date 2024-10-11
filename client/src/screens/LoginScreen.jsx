@@ -26,9 +26,6 @@ const LoginScreen = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const [modalText, setModalText] = useState("");
-  const [modalHeader, setModalHeader] = useState("");
-  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -36,11 +33,6 @@ const LoginScreen = () => {
   const redirectToSignupPage = () => {
     navigation.navigate("Signup");
   };
-
-  const handleModalClose = () => {
-    setModalVisible(false);
-  };
-
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -126,15 +118,6 @@ const LoginScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-
-        <CustomModal
-          visible={isModalVisible}
-          title={modalHeader}
-          message={modalText}
-          singleButton={true}
-          buttonOneText="Close"
-          onButtonOnePress={handleModalClose}
-        />
       </View>
     </TouchableWithoutFeedback>
   );
