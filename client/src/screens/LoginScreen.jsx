@@ -17,7 +17,6 @@ import CustomModal from "../components/CustomModal";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
-import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 
 const { width, height } = Dimensions.get("window");
 
@@ -42,24 +41,7 @@ const LoginScreen = () => {
     setModalVisible(false);
   };
 
-  const loginHandler = () => {
-    if (email && password) {
-      firebaseUtilService
-        .signInUser({ email, password })
-        .then((response) => {
-          // Firebase Success Response
-        })
-        .catch((error) => {
-          setModalHeader("Login Error");
-          setModalText("Invalid credentials. Please try again.");
-          setModalVisible(true);
-        });
-    } else {
-      setModalHeader("Missing Fields");
-      setModalText("Please enter both email and password.");
-      setModalVisible(true);
-    }
-  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -124,8 +106,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.loginButtonWrapper}
-            activeOpacity={0.7}
-            onPress={loginHandler}>
+            activeOpacity={0.7}>
             <Text style={styles.loginText} selectable={false}>
               Login
             </Text>
