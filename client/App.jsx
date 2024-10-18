@@ -7,10 +7,14 @@ import { useFonts } from "expo-font";
 import SignupScreen from "./src/screens/SignupScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
+import useAuth from "./hooks/useAuth";
+import HomeScreen from "./src/screens/HomeScreen";
+
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const { user } = useAuth();
   const [fontsLoaded] = useFonts({
     "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
     "Poppins-Light": require("./assets/fonts/Poppins-Light.ttf"),
@@ -24,6 +28,20 @@ const App = () => {
       <ActivityIndicator size="large" color="#ffffff" style={{ flex: 1 }} />
     );
   }
+
+  if (user) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name={"Home"} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+    } else {
     return (
       <NavigationContainer>
         <Stack.Navigator
@@ -37,7 +55,8 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     );
-};
+  }
+ };
 
 export default App;
 

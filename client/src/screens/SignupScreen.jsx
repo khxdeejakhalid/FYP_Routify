@@ -11,9 +11,11 @@ import {
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import CustomModal from "../components/CustomModal";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
+import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -22,6 +24,9 @@ const SignupScreen = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const [modalText, setModalText] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -30,7 +35,30 @@ const SignupScreen = () => {
     navigation.navigate("Login");
   };
 
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
 
+  const signupHandler = () => {
+    if (email && password) {
+      firebaseUtilService
+        .signupUser({ email, password })
+        .then((response) => {
+          // Firebase Success Response
+        })
+
+        .catch((error) => {
+          console.log(error)
+          setModalHeader("Sign Up Error");
+          setModalText("Invalid information provided. Please try again.");
+          setModalVisible(true);
+        });
+    } else {
+      setModalHeader("Missing Fields");
+      setModalText("Please enter both email and password.");
+      setModalVisible(true);
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -106,7 +134,7 @@ const SignupScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginButtonWrapper}> 
+          <TouchableOpacity style={styles.loginButtonWrapper} onPress={signupHandler}> 
             <Text style={styles.loginText}>
               Sign up
             </Text>
@@ -126,6 +154,15 @@ const SignupScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        <CustomModal
+          visible={isModalVisible}
+          title={modalHeader}
+          message={modalText}
+          singleButton={true}
+          buttonOneText="Close"
+          onButtonOnePress={handleModalClose}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

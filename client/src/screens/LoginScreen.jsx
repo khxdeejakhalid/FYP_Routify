@@ -17,6 +17,7 @@ import CustomModal from "../components/CustomModal";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
+import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 
 const { width, height } = Dimensions.get("window");
 
@@ -26,6 +27,9 @@ const LoginScreen = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const [modalText, setModalText] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -34,6 +38,28 @@ const LoginScreen = () => {
     navigation.navigate("Signup");
   };
 
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
+
+  const loginHandler = () => {
+    if (email && password) {
+      firebaseUtilService
+        .signInUser({ email, password })
+        .then((response) => {
+          // Firebase Success Response
+        })
+        .catch((error) => {
+          setModalHeader("Login Error");
+          setModalText("Invalid credentials. Please try again.");
+          setModalVisible(true);
+        });
+    } else {
+      setModalHeader("Missing Fields");
+      setModalText("Please enter both email and password.");
+      setModalVisible(true);
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -98,7 +124,8 @@ const LoginScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.loginButtonWrapper}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+            onPress={loginHandler}>
             <Text style={styles.loginText} selectable={false}>
               Login
             </Text>
@@ -118,6 +145,15 @@ const LoginScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        <CustomModal
+          visible={isModalVisible}
+          title={modalHeader}
+          message={modalText}
+          singleButton={true}
+          buttonOneText="Close"
+          onButtonOnePress={handleModalClose}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
