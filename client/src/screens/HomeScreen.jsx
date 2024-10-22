@@ -19,26 +19,26 @@ const HomeScreen = () => {
     {
       id: 1,
       title: "Routes",
-      route: "Routes",
-      iconSrc: require("../assets/routes-home-icon.png"),
+      route: "TestCenteres",
+      iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
     },
     {
       id: 2,
       title: "Progress",
       route: "Progress",
-      iconSrc: require("../assets/progress-home-icon.png"),
+      iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
     },
     {
       id: 3,
       title: "Help",
       route: "Help",
-      iconSrc: require("../assets/help-home-icon.png"),
+      iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
     },
     {
       id: 4,
       title: "Profile",
       route: "UserProfile",
-      iconSrc: require("../assets/profile-home-icon.png"),
+      iconSrc: require("../assets/icons/dashboard/profile-home-icon.png"),
     },
   ];
 

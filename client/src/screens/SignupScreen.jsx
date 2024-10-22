@@ -46,9 +46,7 @@ const SignupScreen = () => {
         .then((response) => {
           // Firebase Success Response
         })
-
         .catch((error) => {
-          console.log(error)
           setModalHeader("Sign Up Error");
           setModalText("Invalid information provided. Please try again.");
           setModalVisible(true);
@@ -76,7 +74,8 @@ const SignupScreen = () => {
           <Text style={styles.headingText}>Let's get</Text>
           <Text style={styles.headingText}>started</Text>
         </View>
-        {/* form  */}
+
+        {/* Form  */}
         <View style={styles.formContainer}>
           <Text style={styles.label}>Username</Text>
           <View style={styles.inputContainer}>
@@ -134,15 +133,15 @@ const SignupScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginButtonWrapper} onPress={signupHandler}> 
-            <Text style={styles.loginText}>
-              Sign up
-            </Text>
+          <TouchableOpacity
+            style={styles.loginButtonWrapper}
+            onPress={signupHandler}>
+            <Text style={styles.loginText}>Sign up</Text>
           </TouchableOpacity>
           <Text style={styles.continueText}>or continue with</Text>
           <TouchableOpacity style={styles.googleButtonContainer}>
             <Image
-              source={require("../assets/google.png")}
+              source={require("../assets/icons/social/google.png")}
               style={styles.googleImage}
             />
             <Text style={styles.googleText}>Sign Up With Google</Text>

@@ -9,7 +9,11 @@ import LoginScreen from "./src/screens/LoginScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import useAuth from "./hooks/useAuth";
 import HomeScreen from "./src/screens/HomeScreen";
-
+import ProgressScreen from "./src/screens/ProgressScreen";
+import HelpScreen from "./src/screens/HelpScreen";
+import UserProfileScreen from "./src/screens/UserProfileScreen";
+import TestCenterScreen from "./src/screens/TestCenterScreen";
+import RouteScreen from "./src/screens/RoutesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,10 +42,15 @@ const App = () => {
             headerShown: false,
           }}>
           <Stack.Screen name={"Home"} component={HomeScreen} />
+          <Stack.Screen name={"Progress"} component={ProgressScreen} />
+          <Stack.Screen name={"TestCenteres"} component={TestCenterScreen} />
+          <Stack.Screen name={"Routes"} component={RouteScreen} />
+          <Stack.Screen name={"Help"} component={HelpScreen} />
+          <Stack.Screen name={"UserProfile"} component={UserProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    )
-    } else {
+    );
+  } else {
     return (
       <NavigationContainer>
         <Stack.Navigator
@@ -56,7 +65,7 @@ const App = () => {
       </NavigationContainer>
     );
   }
- };
+};
 
 export default App;
 

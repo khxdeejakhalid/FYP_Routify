@@ -73,7 +73,6 @@ const LoginScreen = () => {
           />
         </TouchableOpacity>
         <View style={styles.textContainer}>
-          <Text style={styles.headingText}>Hey,</Text>
           <Text style={styles.headingText}>Welcome</Text>
           <Text style={styles.headingText}>Back</Text>
         </View>
@@ -133,7 +132,7 @@ const LoginScreen = () => {
           <Text style={styles.continueText}>or continue with</Text>
           <TouchableOpacity style={styles.googleButtonContainer}>
             <Image
-              source={require("../assets/google.png")}
+              source={require("../assets/icons/social/google.png")}
               style={styles.googleImage}
             />
             <Text style={styles.googleText}>Sign In With Google</Text>
