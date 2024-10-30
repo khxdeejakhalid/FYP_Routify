@@ -8,7 +8,7 @@ export const signIn = async (email, password) => {
     };
 
     const response = await axios.post(
-      `http://192.168.100.237:8080/api/auth/login`,
+      `http://192.168.0.94:8080/api/auth/login`,
       requestBody,
       {
         headers: {
@@ -51,7 +51,7 @@ export const signUp = async (
   };
   try {
     const response = await axios.post(
-      "http://192.168.100.237:8080/api/users",
+      "http://192.168.0.94:8080/api/users",
       requestBody,
       {
         headers: {
@@ -79,7 +79,7 @@ export const signUp = async (
 export const logout = async () => {
   try {
     const response = await axios.post(
-      `http://192.168.100.237:8080/api/auth/logout`,
+      `http://192.168.0.94:8080/api/auth/logout`,
       {},
       {
         headers: {
