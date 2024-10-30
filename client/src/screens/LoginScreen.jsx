@@ -8,21 +8,24 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
-
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import CustomModal from "../components/CustomModal";
+import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
+import { AuthContext } from "../context/AuthContext";
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const { handleSignIn } = useContext(AuthContext);
   const [secureEntry, setSecureEntry] = useState(true);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -42,7 +45,18 @@ const LoginScreen = () => {
     setModalVisible(false);
   };
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
+    if (email && password) {
+      const response = await handleSignIn(email, password);
+      if (!response.success) {
+        setModalHeader("Failure");
+        setModalText(response.description);
+        setModalVisible(true);
+      }
+    }
+  };
+
+  const googleSigninHandler = () => {
     if (email && password) {
       firebaseUtilService
         .signInUser({ email, password })
@@ -72,6 +86,7 @@ const LoginScreen = () => {
             size={25}
           />
         </TouchableOpacity>
+
         <View style={styles.textContainer}>
           <Text style={styles.headingText}>Welcome</Text>
           <Text style={styles.headingText}>Back</Text>
@@ -121,22 +136,26 @@ const LoginScreen = () => {
           <TouchableOpacity>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.loginButtonWrapper}
-            activeOpacity={0.7}
-            onPress={loginHandler}>
-            <Text style={styles.loginText} selectable={false}>
+
+          <View style={styles.authenticationButtonContainer}>
+            <Button
+              clickHandler={loginHandler}
+              disabled={false}
+              buttonType="AuthButton">
               Login
-            </Text>
-          </TouchableOpacity>
-          <Text style={styles.continueText}>or continue with</Text>
-          <TouchableOpacity style={styles.googleButtonContainer}>
-            <Image
-              source={require("../assets/icons/social/google.png")}
-              style={styles.googleImage}
-            />
-            <Text style={styles.googleText}>Sign In With Google</Text>
-          </TouchableOpacity>
+            </Button>
+
+            <Text style={styles.continueText}>or continue with</Text>
+
+            <Button
+              clickHandler={googleSigninHandler}
+              disabled={false}
+              buttonType="AuthButton"
+              imageSource={require("../assets/icons/social/google.png")}>
+              Sign In With Google
+            </Button>
+          </View>
+
           <View style={styles.footerContainer}>
             <Text style={styles.accountText}>Don’t have an account?</Text>
             <TouchableOpacity onPress={redirectToSignupPage}>
@@ -164,16 +183,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     padding: 20,
+    justifyContent: "space-between",
   },
   backButtonWrapper: {
-    height: "10%",
-    width: "10%",
+    position: "absolute",
+    top: 50,
+    left: 10,
+    height: 40,
+    width: 40,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },
   textContainer: {
-    marginVertical: "5%",
+    marginTop: height * 0.12,
   },
   headingText: {
     fontSize: 24,
@@ -181,7 +204,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.SemiBold,
   },
   formContainer: {
-    marginTop: "5%",
+    flex: 1,
+    marginTop: 20,
   },
   label: {
     fontSize: 14,
@@ -194,8 +218,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
-    marginBottom: "5%",
+    padding: Platform.OS === "android" ? "2%" : "3%",
+    marginBottom: 15,
   },
   textInput: {
     flex: 1,
@@ -208,44 +232,15 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontFamily: fonts.Regular,
   },
-  loginButtonWrapper: {
-    backgroundColor: colors.primary,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    marginTop: "7%",
-    padding: "4%",
-  },
-  loginText: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: fonts.Regular,
-    textAlign: "center",
-  },
   continueText: {
     textAlign: "center",
-    marginVertical: "5%",
+    marginVertical: Platform.OS === "android" ? "3%" : "4%",
     fontSize: 14,
     fontFamily: fonts.Regular,
     color: colors.primary,
   },
-  googleButtonContainer: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3%",
-    gap: 10,
-  },
-  googleImage: {
-    height: 25,
-    width: 25,
-  },
-  googleText: {
-    fontSize: 14,
-    fontFamily: fonts.Regular,
+  authenticationButtonContainer: {
+    marginTop: "7%",
   },
   footerContainer: {
     flexDirection: "row",

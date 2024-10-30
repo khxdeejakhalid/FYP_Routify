@@ -6,14 +6,22 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import React from "react";
+import { useContext } from "react";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { AuthContext } from "../context/AuthContext";
 
 const { width, height } = Dimensions.get("window");
 const HomeScreen = () => {
+  const { handleSignOut } = useContext(AuthContext);
   const navigation = useNavigation();
+
+  const handleLogout = async () => {
+    await handleSignOut();
+    navigation.navigate("Welcome");
+  };
 
   const homeNavItems = [
     {
@@ -44,12 +52,18 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* @TODO: Lets turn this into a header component  */}
+      <TouchableOpacity
+        style={styles.logoutButtonWrapper}
+        onPress={handleLogout}>
+        <Ionicons name={"log-out-outline"} color={colors.primary} size={25} />
+      </TouchableOpacity>
+
       <Image
         alt="Logo"
         source={require("../assets/logo.png")}
         style={styles.logo}
       />
+
       <Text style={styles.title}>Your Route To Success</Text>
 
       <View style={styles.gridContainer}>
@@ -73,9 +87,19 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.background,
+  },
+  logoutButtonWrapper: {
+    position: "absolute",
+    top: 50,
+    right: 10,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
   logo: {
     height: height * 0.1,
@@ -85,7 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: fonts.SemiBold,
     color: colors.primary,
-    marginBottom: '20%'
+    marginBottom: "20%",
   },
   gridContainer: {
     flexDirection: "row",

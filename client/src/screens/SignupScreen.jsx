@@ -1,5 +1,4 @@
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -7,15 +6,21 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
+  Dimensions,
+  Platform,
 } from "react-native";
+import axios from "axios";
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import CustomModal from "../components/CustomModal";
+import Button from "../components/Button";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
 import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
+
+const { height } = Dimensions.get("window");
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -39,22 +44,59 @@ const SignupScreen = () => {
     setModalVisible(false);
   };
 
-  const signupHandler = () => {
-    if (email && password) {
-      firebaseUtilService
-        .signupUser({ email, password })
-        .then((response) => {
-          // Firebase Success Response
-        })
-        .catch((error) => {
-          setModalHeader("Sign Up Error");
-          setModalText("Invalid information provided. Please try again.");
-          setModalVisible(true);
-        });
-    } else {
-      setModalHeader("Missing Fields");
-      setModalText("Please enter both email and password.");
-      setModalVisible(true);
+  const googleSignupHandler = () => {
+    // if (email && password) {
+    //   firebaseUtilService
+    //     .signupUser({ email, password })
+    //     .then((response) => {
+    //       navigation.navigate("UserInformation", {
+    //         email,
+    //         password,
+    //         username,
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       setModalHeader("Sign Up Error");
+    //       setModalText("Invalid information provided. Please try again.");
+    //       setModalVisible(true);
+    //     });
+    // } else {
+    //   setModalHeader("Missing Fields");
+    //   setModalText("Please enter both email and password.");
+    //   setModalVisible(true);
+    // }
+  };
+
+  const signupHandler = async () => {
+    if (email) {
+      try {
+        // TODO: Fetch backend url from environment variables
+        const response = await axios.get(
+          `http://192.168.100.237:8080/api/users/exists?email=${email}`,
+        );
+
+        if (response.data.status === "success") {
+          if (response.data.exists) {
+            setModalHeader(`Email Already Exists`);
+            setModalText(
+              `Please try a different email. This email already exists.`,
+            );
+            setModalVisible(true);
+          } else {
+            if (email && password && username) {
+              navigation.navigate("UserInformation", {
+                email,
+                password,
+                username,
+              });
+            }
+          }
+        }
+      } catch (error) {
+        setModalHeader("Failure");
+        setModalText("System Cannot Process. Please try again.");
+        setModalVisible(true);
+      }
     }
   };
 
@@ -70,6 +112,7 @@ const SignupScreen = () => {
             size={25}
           />
         </TouchableOpacity>
+
         <View style={styles.textContainer}>
           <Text style={styles.headingText}>Let's get</Text>
           <Text style={styles.headingText}>started</Text>
@@ -88,7 +131,6 @@ const SignupScreen = () => {
               style={styles.textInput}
               placeholder="Enter username"
               placeholderTextColor={colors.secondary}
-              secureTextEntry={secureEntry}
               keyboardType="default"
               onChangeText={(username) => setUsername(username)}
               value={username}
@@ -133,19 +175,25 @@ const SignupScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            style={styles.loginButtonWrapper}
-            onPress={signupHandler}>
-            <Text style={styles.loginText}>Sign up</Text>
-          </TouchableOpacity>
-          <Text style={styles.continueText}>or continue with</Text>
-          <TouchableOpacity style={styles.googleButtonContainer}>
-            <Image
-              source={require("../assets/icons/social/google.png")}
-              style={styles.googleImage}
-            />
-            <Text style={styles.googleText}>Sign Up With Google</Text>
-          </TouchableOpacity>
+          <View style={styles.authenticationButtonContainer}>
+            <Button
+              clickHandler={signupHandler}
+              disabled={false}
+              buttonType="AuthButton">
+              Sign Up
+            </Button>
+
+            <Text style={styles.continueText}>or continue with</Text>
+
+            <Button
+              clickHandler={googleSignupHandler}
+              disabled={false}
+              buttonType="AuthButton"
+              imageSource={require("../assets/icons/social/google.png")}>
+              Sign Up With Google
+            </Button>
+          </View>
+
           <View style={styles.footerContainer}>
             <Text style={styles.accountText}>Already have an account?</Text>
             <TouchableOpacity onPress={redirectToLoginScreen}>
@@ -174,16 +222,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     padding: 20,
+    justifyContent: "space-between",
   },
   backButtonWrapper: {
-    height: "10%",
-    width: "10%",
+    position: "absolute",
+    top: 50,
+    left: 10,
+    height: 40,
+    width: 40,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },
   textContainer: {
-    marginVertical: "5%",
+    marginTop: height * 0.12,
   },
   headingText: {
     fontSize: 24,
@@ -191,7 +243,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.SemiBold,
   },
   formContainer: {
-    marginTop: "5%",
+    flex: 1,
+    marginTop: 20,
   },
   label: {
     fontSize: 14,
@@ -204,52 +257,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
-    marginBottom: "5%",
+    padding: Platform.OS === "android" ? "2%" : "3%",
+    marginBottom: 15,
   },
   textInput: {
     flex: 1,
     paddingHorizontal: 10,
     fontFamily: fonts.Light,
   },
-  loginButtonWrapper: {
-    backgroundColor: colors.primary,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    marginTop: "7%",
-    padding: "4%",
-  },
-  loginText: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: fonts.Regular,
-    textAlign: "center",
-  },
   continueText: {
     textAlign: "center",
-    marginVertical: "5%",
+    marginVertical: Platform.OS === "android" ? "3%" : "4%",
     fontSize: 14,
     fontFamily: fonts.Regular,
     color: colors.primary,
   },
-  googleButtonContainer: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "3%",
-    gap: 10,
-  },
-  googleImage: {
-    height: 25,
-    width: 25,
-  },
-  googleText: {
-    fontSize: 14,
-    fontFamily: fonts.Regular,
+  authenticationButtonContainer: {
+    marginTop: "7%",
   },
   footerContainer: {
     flexDirection: "row",
