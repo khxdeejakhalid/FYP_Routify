@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const BACKEND_URL = `http://192.168.0.94:8080/api`;
+
 export const signIn = async (email, password) => {
   try {
     const requestBody = {
@@ -8,7 +10,7 @@ export const signIn = async (email, password) => {
     };
 
     const response = await axios.post(
-      `http://192.168.0.94:8080/api/auth/login`,
+      `${BACKEND_URL}/auth/login`,
       requestBody,
       {
         headers: {
@@ -26,6 +28,7 @@ export const signIn = async (email, password) => {
       };
     }
   } catch (error) {
+    console.log(error);
     return {
       success: false,
       description: "System Cannot Process. Please try again.",
@@ -37,28 +40,24 @@ export const signUp = async (
   email,
   password,
   username,
-  firstName,
-  lastName,
+  fullName,
+  dateOfPermit,
   dateOfBirth,
 ) => {
   const requestBody = {
     email,
     password,
     username,
-    firstName,
-    lastName,
+    fullName,
+    dateOfPermit: dateOfPermit.toISOString().split("T")[0],
     dateOfBirth: dateOfBirth.toISOString().split("T")[0],
   };
   try {
-    const response = await axios.post(
-      "http://192.168.0.94:8080/api/users",
-      requestBody,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const response = await axios.post(`${BACKEND_URL}/users`, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (response.data.status === "success") {
       return { success: true, user: { email } };
@@ -79,7 +78,7 @@ export const signUp = async (
 export const logout = async () => {
   try {
     const response = await axios.post(
-      `http://192.168.0.94:8080/api/auth/logout`,
+      `${BACKEND_URL}/auth/logout`,
       {},
       {
         headers: {
@@ -92,6 +91,63 @@ export const logout = async () => {
       return { success: true };
     }
   } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const getTestCenters = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/centers`);
+
+    if (response.data.status === "success") {
+      return { success: true, centers: response.data.centers };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const getUserInformation = async (email) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/users/${email}`);
+    if (response.data.status === "success") {
+      return { success: true, user: response.data.user };
+    } else {
+      return { success: false, user: response.data.description };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const updateUserInformation = async (email, userInfo) => {
+  try {
+    const response = await axios.put(
+      `${BACKEND_URL}/users/${email}`,
+      userInfo,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true, user: response.data.user };
+    } else {
+      return { success: false, user: response.data.description };
+    }
+  } catch (error) {
+    console.error(error);
     return {
       success: false,
       description: "System Cannot Process. Please try again.",

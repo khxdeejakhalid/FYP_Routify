@@ -1,13 +1,28 @@
-import { StyleSheet, Text, TouchableOpacity, Image, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from "react-native";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 
-const Button = ({ buttonType, clickHandler, disabled, children, imageSource }) => {
+const Button = ({
+  buttonType,
+  clickHandler,
+  disabled,
+  children,
+  imageSource,
+}) => {
   return (
     <>
       {buttonType === "BottomButton" && (
         <TouchableOpacity
-          style={styles.bottomButton}
+          style={[
+            styles.bottomButton,
+            disabled ? styles.buttonDisabled : styles.buttonEnabled,
+          ]}
           onPress={clickHandler}
           disabled={disabled}>
           <Text style={styles.bottomButtonText}>{children}</Text>
@@ -30,7 +45,6 @@ const Button = ({ buttonType, clickHandler, disabled, children, imageSource }) =
 
 const styles = StyleSheet.create({
   bottomButton: {
-    backgroundColor: colors.primary,
     padding: Platform.OS === "android" ? "3%" : "4%",
     borderRadius: 10,
     alignItems: "center",
@@ -42,6 +56,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
     fontFamily: fonts.Medium,
+  },
+  buttonEnabled: {
+    backgroundColor: colors.primary,
+  },
+  buttonDisabled: {
+    backgroundColor: colors.disabled,
   },
   authButton: {
     flexDirection: "row",

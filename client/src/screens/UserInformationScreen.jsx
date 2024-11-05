@@ -27,11 +27,16 @@ const UserInformationScreen = ({ route }) => {
   const navigation = useNavigation();
   const { handleSignUp } = useContext(AuthContext);
   const { email, username, password } = route.params;
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+
+  const [fullName, setFullName] = useState("");
+  const [dateOfPermit, setDateOfPermit] = useState(new Date());
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [isDateConfirmed, setIsDateConfirmed] = useState(false);
+  const [showDatePickerForDOB, setShowDatePickerForDOB] = useState(false);
+  const [showDatePickerForPermit, setShowDatePickerForPermit] = useState(false);
+  const [isDateConfirmed, setIsDateConfirmed] = useState({
+    permit: false,
+    dob: false,
+  });
   const [isInformationCorrect, setIsInformationCorrect] = useState(false);
 
   const [modalText, setModalText] = useState("");
@@ -42,34 +47,45 @@ const UserInformationScreen = ({ route }) => {
     navigation.goBack();
   };
 
-  const onDateChange = (event, selectedDate) => {
-    setShowDatePicker(false);
-    if (selectedDate) {
-      setDateOfBirth(selectedDate);
-      setIsDateConfirmed(true);
+  const onDateChange = (event, selectedDate, type) => {
+    if (type === "dob") {
+      setShowDatePickerForDOB(false);
+      if (selectedDate) {
+        setDateOfBirth(selectedDate);
+        setIsDateConfirmed((prev) => ({ ...prev, dob: true }));
+      }
+    } else if (type === "permit") {
+      setShowDatePickerForPermit(false);
+      if (selectedDate) {
+        setDateOfPermit(selectedDate);
+        setIsDateConfirmed((prev) => ({ ...prev, permit: true }));
+      }
     }
   };
 
-  const showDatePickerHandler = () => {
-    setShowDatePicker(true);
-  };
+  const showDOBPicker = () => setShowDatePickerForDOB(true);
+  const showPermitPicker = () => setShowDatePickerForPermit(true);
 
   const handleModalClose = () => {
     setModalVisible(false);
   };
 
   const signupHandler = async () => {
-    if (!isInformationCorrect) {
-      return;
-    }
-
-    if (email && password && username && firstName && dateOfBirth) {
+    if (
+      isInformationCorrect &&
+      email &&
+      password &&
+      username &&
+      fullName &&
+      dateOfBirth &&
+      dateOfPermit
+    ) {
       const response = await handleSignUp(
         email,
         password,
         username,
-        firstName,
-        lastName,
+        fullName,
+        dateOfPermit,
         dateOfBirth,
       );
       if (!response.success) {
@@ -77,31 +93,12 @@ const UserInformationScreen = ({ route }) => {
         setModalText(response.description);
         setModalVisible(true);
       }
+    } else {
+      setModalHeader("Missing Fields");
+      setModalText("Please enter full name, date of permit and date of birth.");
+      setModalVisible(true);
     }
   };
-
-  // const googleSignupHandler = () => {
-  //   if (email && password) {
-  //     firebaseUtilService
-  //       .signupUser({ email, password })
-  //       .then((response) => {
-  //         navigation.navigate("UserInformation", {
-  //           email,
-  //           password,
-  //           username,
-  //         });
-  //       })
-  //       .catch((error) => {
-  //         setModalHeader("Sign Up Error");
-  //         setModalText("Invalid information provided. Please try again.");
-  //         setModalVisible(true);
-  //       });
-  //   } else {
-  //     setModalHeader("Missing Fields");
-  //     setModalText("Please enter both email and password.");
-  //     setModalVisible(true);
-  //   }
-  // };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -123,53 +120,72 @@ const UserInformationScreen = ({ route }) => {
         </View>
 
         <View style={styles.formContainer}>
-          <Text style={styles.label}>First Name</Text>
-
+          <Text style={styles.label}>
+            Full Name <Text style={styles.required}>*</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.textInput}
-              placeholder="Enter first name"
-              onChangeText={setFirstName}
-              value={firstName}
+              placeholder="Enter full name"
+              onChangeText={setFullName}
+              value={fullName}
+              required={true}
             />
           </View>
 
-          <Text style={styles.label}>Last Name</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter last name"
-              onChangeText={setLastName}
-              value={lastName}
-            />
-          </View>
-
-          <Text style={styles.label}>Date Of Birth</Text>
+          <Text style={styles.label}>
+            Permit Issue Date <Text style={styles.required}>*</Text>
+          </Text>
           <TouchableOpacity
             style={styles.inputContainer}
-            onPress={showDatePickerHandler}>
+            onPress={showPermitPicker}>
             <SimpleLineIcons
               name={"calendar"}
               size={20}
               color={colors.secondary}
             />
             <Text style={styles.textInput}>
-              {isDateConfirmed
+              {isDateConfirmed.permit
+                ? dateOfPermit.toDateString()
+                : "Select date of permit"}
+            </Text>
+          </TouchableOpacity>
+
+          {showDatePickerForPermit && (
+            <DateTimePicker
+              value={dateOfPermit}
+              mode="date"
+              display="default"
+              onChange={(e, date) => onDateChange(e, date, "permit")}
+            />
+          )}
+
+          <Text style={styles.label}>
+            Date Of Birth <Text style={styles.required}>*</Text>
+          </Text>
+          <TouchableOpacity
+            style={styles.inputContainer}
+            onPress={showDOBPicker}>
+            <SimpleLineIcons
+              name={"calendar"}
+              size={20}
+              color={colors.secondary}
+            />
+            <Text style={styles.textInput}>
+              {isDateConfirmed.dob
                 ? dateOfBirth.toDateString()
                 : "Select date of birth"}
             </Text>
           </TouchableOpacity>
 
-          {showDatePicker && (
+          {showDatePickerForDOB && (
             <DateTimePicker
               value={dateOfBirth}
               mode="date"
               display="default"
-              onChange={onDateChange}
+              onChange={(e, date) => onDateChange(e, date, "dob")}
             />
           )}
-
-          <Text style={styles.label}>{!isInformationCorrect}</Text>
 
           <View style={styles.checkboxContainer}>
             <BouncyCheckbox
@@ -178,17 +194,12 @@ const UserInformationScreen = ({ route }) => {
               unFillColor={colors.white}
               text="I confirm that the information entered is correct"
               textStyle={styles.checkboxTextStyle}
-              onPress={(isChecked) => {
-                setIsInformationCorrect(isChecked);
-              }}
+              onPress={(isChecked) => setIsInformationCorrect(isChecked)}
             />
           </View>
         </View>
 
-        <Button
-          clickHandler={signupHandler}
-          disabled={!isInformationCorrect}
-          buttonType="BottomButton">
+        <Button clickHandler={signupHandler} buttonType="BottomButton">
           Confirm
         </Button>
 
@@ -262,6 +273,9 @@ const styles = StyleSheet.create({
     textDecorationLine: "none",
     fontFamily: fonts.Light,
     fontSize: 14,
+  },
+  required: {
+    color: colors.primary,
   },
 });
 
