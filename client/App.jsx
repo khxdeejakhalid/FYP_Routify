@@ -20,6 +20,7 @@ import UserProfileScreen from "./src/screens/UserProfileScreen";
 import TestCenterScreen from "./src/screens/TestCenterScreen";
 import RouteScreen from "./src/screens/RoutesScreen";
 import UserInformationScreen from "./src/screens/UserInformationScreen";
+import MapScreen from "./src/screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,7 @@ const App = () => {
                 name={"UserProfile"}
                 component={UserProfileScreen}
               />
+              <Stack.Screen name={"Map"} component={MapScreen} />
             </>
           ) : (
             <>

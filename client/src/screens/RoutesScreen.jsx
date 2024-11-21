@@ -44,7 +44,7 @@ const RoutesScreen = () => {
   const handleNext = () => {
     if (selectedRoute) {
       console.log("Selected route:", selectedRoute);
-      //navigation.navigate("Map", { selectedRoute });
+      navigation.navigate("Map", { selectedRoute });
     }
   };
 
