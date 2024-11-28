@@ -23,7 +23,7 @@ const TestCenterScreen = () => {
   const [selectedCenter, setSelectedCenter] = useState("");
 
   const testCenters = [
-    { label: "Test Center 1", value: "center1" },
+    { label: "Tallaght", value: "center1" },
     { label: "Test Center 2", value: "center2" },
     { label: "Test Center 3", value: "center3" },
     { label: "Test Center 4", value: "center4" },

@@ -3,7 +3,8 @@ import { StyleSheet, View, Dimensions } from "react-native";
 import MapView, { Marker, Polyline, AnimatedRegion } from "react-native-maps";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
-import dummyRoute from "../assets/json/Route1.json";
+import { getSnappedRoutes } from "../utils/api";
+import route1 from "../assets/json/Route1Accurate.json";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,9 +22,23 @@ const MapScreen = () => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
 
+  // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
+  // const [snappedRoute, setSnappedRoute] = useState([]);
+
   useEffect(() => {
-    setRoute(dummyRoute);
+    setRoute(route1);
   }, []);
+
+
+  // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
+  // useEffect(() => {
+  //   async function fetchRoute() {
+  //     const route = await getSnappedRoutes(route1);
+  //     console.log(route);
+  //     setSnappedRoute(route);
+  //   }
+  //   fetchRoute();
+  // }, []);
 
   return (
     <View style={styles.container}>

@@ -154,3 +154,24 @@ export const updateUserInformation = async (email, userInfo) => {
     };
   }
 };
+
+export const getSnappedRoutes = async (coordinates) => {
+  const apiKey = "AIzaSyDiKRbF4b5T_oCV0p7CsTgWGpKuCsEKCDk";
+  const path = coordinates
+    .map((coord) => `${coord.latitude},${coord.longitude}`)
+    .join("|");
+  const url = `https://roads.googleapis.com/v1/snapToRoads?path=${path}&interpolate=true&key=${apiKey}`;
+
+  try {
+    const response = await axios.get(url);
+    if (response.data.snappedPoints) {
+      return response.data.snappedPoints.map((point) => ({
+        latitude: point.location.latitude,
+        longitude: point.location.longitude,
+      }));
+    }
+  } catch (error) {
+    console.error("Error snapping route to roads:", error);
+    return [];
+  }
+};
