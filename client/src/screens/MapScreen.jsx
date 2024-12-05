@@ -1,10 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import MapView, { Marker, Polyline, AnimatedRegion } from "react-native-maps";
+import * as Speech from "expo-speech";
+
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { getSnappedRoutes } from "../utils/api";
 import route1 from "../assets/json/Route1Accurate.json";
+import { routifyConstantsService } from "../services/routifyConstantsService";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,6 +38,12 @@ const MapScreen = () => {
     setRoute(route1);
   }, []);
 
+  const playRemindersWithDelay = async (reminders, delay = 2000) => {
+    for (const reminder of reminders) {
+      Speech.speak(reminder);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  };
 
   // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
   // useEffect(() => {
@@ -39,6 +54,11 @@ const MapScreen = () => {
   //   }
   //   fetchRoute();
   // }, []);
+
+  const startJourney = () => {
+    const goshoReminders = routifyConstantsService.goshoReminders;
+    playRemindersWithDelay(goshoReminders, 2000);
+  };
 
   return (
     <View style={styles.container}>
@@ -65,6 +85,10 @@ const MapScreen = () => {
           pinColor={colors.primary}
         />
       </MapView>
+
+      <TouchableOpacity style={styles.startButton} onPress={startJourney}>
+        <Text style={styles.startButtonText}>Start Journey</Text>
+      </TouchableOpacity>
     </View>
   );
 };

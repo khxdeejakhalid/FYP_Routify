@@ -72,7 +72,7 @@ const SignupScreen = () => {
       try {
         // TODO: Fetch backend url from environment variables
         const response = await axios.get(
-          `http://192.168.0.94:8080/api/users/exists?email=${email}`,
+          `http://147.252.144.79:8080/api/users/exists?email=${email}`,
         );
 
         if (response.data.status === "success") {
