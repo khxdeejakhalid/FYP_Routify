@@ -20,6 +20,8 @@ const { width, height } = Dimensions.get("window");
 const MapScreen = () => {
   const [route, setRoute] = useState([]);
 
+  const [currentInstruction, setCurrentInstruction] = useState(null);
+
   const [userLocation, setUserLocation] = useState(
     new AnimatedRegion({
       latitude: 53.296626,
@@ -41,8 +43,10 @@ const MapScreen = () => {
   const playRemindersWithDelay = async (reminders, delay = 2000) => {
     for (const reminder of reminders) {
       Speech.speak(reminder);
+      setCurrentInstruction(reminder);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
+    setCurrentInstruction(null);
   };
 
   // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
@@ -86,6 +90,12 @@ const MapScreen = () => {
         />
       </MapView>
 
+      {currentInstruction && (
+        <View style={styles.instructionContainer}>
+          <Text style={styles.instructionText}>{currentInstruction}</Text>
+        </View>
+      )}
+
       <TouchableOpacity style={styles.startButton} onPress={startJourney}>
         <Text style={styles.startButtonText}>Start Journey</Text>
       </TouchableOpacity>
@@ -101,6 +111,21 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
   },
+  instructionContainer: {
+    position: "absolute",
+    top: 50,
+    left: 20,
+    right: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    padding: 15,
+    borderRadius: 10,
+  },
+  instructionText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: fonts.SemiBold,
+    textAlign: "center",
+  },
   startButton: {
     position: "absolute",
     bottom: 20,
@@ -110,12 +135,22 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     alignItems: "center",
-    marginBottom: 10,
   },
   startButtonText: {
     color: colors.white,
     fontSize: 18,
     fontFamily: fonts.SemiBold,
+  },
+  reminderContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  reminderText: {
+    fontSize: 24,
+    fontFamily: fonts.SemiBold,
+    color: colors.primary,
+    textAlign: "center",
   },
 });
 
