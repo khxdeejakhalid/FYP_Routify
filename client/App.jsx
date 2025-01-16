@@ -19,8 +19,8 @@ import HelpScreen from "./src/screens/HelpScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import TestCenterScreen from "./src/screens/TestCenterScreen";
 import RouteScreen from "./src/screens/RoutesScreen";
-import UserInformationScreen from "./src/screens/UserInformationScreen";
 import MapScreen from "./src/screens/MapScreen";
+import UserInformationScreen from "./src/screens/UserInformationScreen";
 
 const Stack = createNativeStackNavigator();
 
