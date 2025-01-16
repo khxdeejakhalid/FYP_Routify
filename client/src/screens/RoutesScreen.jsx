@@ -43,7 +43,6 @@ const RoutesScreen = () => {
 
   const handleNext = () => {
     if (selectedRoute) {
-      console.log("Selected route:", selectedRoute);
       navigation.navigate("Map", { selectedRoute });
     }
   };
@@ -92,7 +91,10 @@ const RoutesScreen = () => {
         />
       </View>
 
-      <Button clickHandler={handleNext} disabled={false} buttonType="BottomButton">
+      <Button
+        clickHandler={handleNext}
+        disabled={false}
+        buttonType="BottomButton">
         Next
       </Button>
     </SafeAreaView>

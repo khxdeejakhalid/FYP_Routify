@@ -9,7 +9,6 @@ import {
   Dimensions,
   Platform,
 } from "react-native";
-import axios from "axios";
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
@@ -19,6 +18,7 @@ import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
 import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
+import { checkEmail } from "../utils/api";
 
 const { height } = Dimensions.get("window");
 
@@ -70,26 +70,24 @@ const SignupScreen = () => {
   const signupHandler = async () => {
     if (email) {
       try {
-        // TODO: Fetch backend url from environment variables
-        const response = await axios.get(
-          `http://147.252.144.79:8080/api/users/exists?email=${email}`,
-        );
-
-        if (response.data.status === "success") {
-          if (response.data.exists) {
-            setModalHeader(`Email Already Exists`);
-            setModalText(
-              `Please try a different email. This email already exists.`,
-            );
-            setModalVisible(true);
-          } else {
-            if (email && password && username) {
-              navigation.navigate("UserInformation", {
-                email,
-                password,
-                username,
-              });
-            }
+        const response = await checkEmail(email);
+        if (!response.success) {
+          setModalHeader("Failure");
+          setModalText(response.description);
+          setModalVisible(true);
+        } else if (response.exists) {
+          setModalHeader(`Email Already Exists`);
+          setModalText(
+            `Please try a different email. This email already exists.`,
+          );
+          setModalVisible(true);
+        } else {
+          if (email && password && username) {
+            navigation.navigate("UserInformation", {
+              email,
+              password,
+              username,
+            });
           }
         }
       } catch (error) {
@@ -123,7 +121,7 @@ const SignupScreen = () => {
           <Text style={styles.label}>Username</Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
-              name={"screen-smartphone"}
+              name={"screen-smartphone"} 
               size={20}
               color={colors.secondary}
             />

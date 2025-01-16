@@ -156,7 +156,7 @@ export const updateUserInformation = async (email, userInfo) => {
 };
 
 export const getSnappedRoutes = async (coordinates) => {
-  const apiKey = "AIzaSyDiKRbF4b5T_oCV0p7CsTgWGpKuCsEKCDk";
+  const apiKey = "API_KEY";
   const path = coordinates
     .map((coord) => `${coord.latitude},${coord.longitude}`)
     .join("|");
@@ -173,5 +173,22 @@ export const getSnappedRoutes = async (coordinates) => {
   } catch (error) {
     console.error("Error snapping route to roads:", error);
     return [];
+  }
+};
+
+export const checkEmail = async (email) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_URL}/users/exists?email=${email}`,
+    );
+    if (response.data.status === "success") {
+      return { success: true, exists: response.data.exists };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
   }
 };
