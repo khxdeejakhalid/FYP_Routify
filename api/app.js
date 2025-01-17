@@ -3,6 +3,7 @@ import session from "express-session";
 import cors from "cors";
 import userRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js';
+import testCenterRoutes from './routes/test-center.js';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(session({
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/centers", testCenterRoutes);
 
 app.listen(8080, () => {
   console.log("Running on localhost 8080");

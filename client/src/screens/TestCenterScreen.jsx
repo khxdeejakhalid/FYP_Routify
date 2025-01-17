@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -14,23 +14,38 @@ import { useNavigation } from "@react-navigation/native";
 import Button from "../components/Button";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
+import CustomModal from "../components/CustomModal";
+import { getTestCenters } from "../utils/api";
 
 const { width, height } = Dimensions.get("window");
 
 const TestCenterScreen = () => {
   const navigation = useNavigation();
-
+  const [testCenters, setTestCenters] = useState([]);
   const [selectedCenter, setSelectedCenter] = useState("");
 
-  const testCenters = [
-    { label: "Tallaght", value: "center1" },
-    { label: "Test Center 2", value: "center2" },
-    { label: "Test Center 3", value: "center3" },
-    { label: "Test Center 4", value: "center4" },
-    { label: "Test Center 5", value: "center5" },
-    { label: "Test Center 6", value: "center6" },
-    { label: "Test Center 7", value: "center7" },
-  ];
+  const [modalText, setModalText] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    async function fetchTestCenters() {
+      const response = await getTestCenters();
+      if (response.success) {
+        setTestCenters(response.centers);
+      } else {
+        setModalHeader("Failure");
+        setModalText(response.description);
+        setModalVisible(true);
+      }
+    }
+
+    fetchTestCenters();
+  }, []);
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -67,9 +82,9 @@ const TestCenterScreen = () => {
           onValueChange={(itemValue) => setSelectedCenter(itemValue)}>
           {testCenters.map((center) => (
             <Picker.Item
-              key={center.value}
-              label={center.label}
-              value={center.value}
+              key={center.NAME}
+              label={center.NAME}
+              value={center.NAME}
             />
           ))}
         </Picker>
@@ -81,6 +96,15 @@ const TestCenterScreen = () => {
         buttonType="BottomButton">
         Next
       </Button>
+
+      <CustomModal
+        visible={isModalVisible}
+        title={modalHeader}
+        message={modalText}
+        singleButton={true}
+        buttonOneText="Close"
+        onButtonOnePress={handleModalClose}
+      />
     </SafeAreaView>
   );
 };
