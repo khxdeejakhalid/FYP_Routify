@@ -192,3 +192,34 @@ export const checkEmail = async (email) => {
     };
   }
 };
+export const fetchDirections = async (origin, destination, waypoints) => {
+  const apiKey = "API_KEY";
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
+    origin,
+  )}&destination=${encodeURIComponent(
+    destination,
+  )}&waypoints=optimize:false|${encodeURIComponent(waypoints)}&key=${apiKey}`;
+
+  try {
+    const response = await axios.get(url);
+    const legs = response.data.routes[0].legs;
+
+    const filteredResponse = legs.map((leg) => {
+      const [step] = leg.steps;
+      return {
+        instruction: step.html_instructions.replace(/<[^>]+>/g, ""),
+        distance: step.distance.text,
+        duration: step.duration.text,
+        currentLatitude: step.start_location.lat,
+        currentLongitude: step.start_location.lng,
+        nextLatitude: step.end_location.lat,
+        nextLongitude: step.end_location.lng,
+      }
+    });
+
+    return filteredResponse;
+
+  } catch (error) {
+    console.error("Error fetching directions:", error);
+  }
+}

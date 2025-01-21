@@ -1,0 +1,3540 @@
+[
+    {
+      "currentLatitude": 53.2966261,
+      "currentLongitude": -6.3615716,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north",
+      "nextLatitude": 53.2966993,
+      "nextLongitude": -6.361592099999999
+    },
+    {
+      "currentLatitude": 53.2966993,
+      "currentLongitude": -6.361592099999999,
+      "distance": "41 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2967588,
+      "nextLongitude": -6.360988600000001
+    },
+    {
+      "currentLatitude": 53.2967588,
+      "currentLongitude": -6.360988600000001,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2967993,
+      "nextLongitude": -6.3605778
+    },
+    {
+      "currentLatitude": 53.2967993,
+      "currentLongitude": -6.3605778,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968268,
+      "nextLongitude": -6.3602339
+    },
+    {
+      "currentLatitude": 53.2968268,
+      "currentLongitude": -6.3602339,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.29683929999999,
+      "nextLongitude": -6.3601177
+    },
+    {
+      "currentLatitude": 53.29683929999999,
+      "currentLongitude": -6.3601177,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968708,
+      "nextLongitude": -6.3598247
+    },
+    {
+      "currentLatitude": 53.2968708,
+      "currentLongitude": -6.3598247,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968869,
+      "nextLongitude": -6.3595806
+    },
+    {
+      "currentLatitude": 53.2968869,
+      "currentLongitude": -6.3595806,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968973,
+      "nextLongitude": -6.3592051
+    },
+    {
+      "currentLatitude": 53.2968973,
+      "currentLongitude": -6.3592051,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.296889,
+      "nextLongitude": -6.3588358
+    },
+    {
+      "currentLatitude": 53.296889,
+      "currentLongitude": -6.3588358,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968817,
+      "nextLongitude": -6.3587124
+    },
+    {
+      "currentLatitude": 53.2968817,
+      "currentLongitude": -6.3587124,
+      "distance": "34 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2968284,
+      "nextLongitude": -6.3582019
+    },
+    {
+      "currentLatitude": 53.2968284,
+      "currentLongitude": -6.3582019,
+      "distance": "69 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.296653,
+      "nextLongitude": -6.3572096
+    },
+    {
+      "currentLatitude": 53.296653,
+      "currentLongitude": -6.3572096,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2966334,
+      "nextLongitude": -6.3571069
+    },
+    {
+      "currentLatitude": 53.2966334,
+      "currentLongitude": -6.3571069,
+      "distance": "54 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.296485,
+      "nextLongitude": -6.3563314
+    },
+    {
+      "currentLatitude": 53.296485,
+      "currentLongitude": -6.3563314,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd",
+      "nextLatitude": 53.2964044,
+      "nextLongitude": -6.3559152
+    },
+    {
+      "currentLatitude": 53.2964044,
+      "currentLongitude": -6.3559152,
+      "distance": "86 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd toward Greenhills Rd/R819",
+      "nextLatitude": 53.2961628,
+      "nextLongitude": -6.3546812
+    },
+    {
+      "currentLatitude": 53.2961628,
+      "currentLongitude": -6.3546812,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head east on Broomhill Rd toward Greenhills Rd/R819",
+      "nextLatitude": 53.29612119999999,
+      "nextLongitude": -6.354468799999999
+    },
+    {
+      "currentLatitude": 53.29612119999999,
+      "currentLongitude": -6.354468799999999,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head on Greenhills Rd/R819",
+      "nextLatitude": 53.29612119999999,
+      "nextLongitude": -6.354468799999999
+    },
+    {
+      "currentLatitude": 53.29612119999999,
+      "currentLongitude": -6.354468799999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29625540000001,
+      "nextLongitude": -6.3544109
+    },
+    {
+      "currentLatitude": 53.29625540000001,
+      "currentLongitude": -6.3544109,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2963587,
+      "nextLongitude": -6.354358
+    },
+    {
+      "currentLatitude": 53.2963587,
+      "currentLongitude": -6.354358,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2965303,
+      "nextLongitude": -6.354278
+    },
+    {
+      "currentLatitude": 53.2965303,
+      "currentLongitude": -6.354278,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29669060000001,
+      "nextLongitude": -6.3542437
+    },
+    {
+      "currentLatitude": 53.29669060000001,
+      "currentLongitude": -6.3542437,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2967478,
+      "nextLongitude": -6.354241399999999
+    },
+    {
+      "currentLatitude": 53.2967478,
+      "currentLongitude": -6.354241399999999,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2968894,
+      "nextLongitude": -6.3542435
+    },
+    {
+      "currentLatitude": 53.2968894,
+      "currentLongitude": -6.3542435,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.297089,
+      "nextLongitude": -6.354254999999999
+    },
+    {
+      "currentLatitude": 53.297089,
+      "currentLongitude": -6.354254999999999,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2971258,
+      "nextLongitude": -6.354254999999999
+    },
+    {
+      "currentLatitude": 53.2971258,
+      "currentLongitude": -6.354254999999999,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29735909999999,
+      "nextLongitude": -6.354261699999999
+    },
+    {
+      "currentLatitude": 53.29735909999999,
+      "currentLongitude": -6.354261699999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.297429,
+      "nextLongitude": -6.3542646
+    },
+    {
+      "currentLatitude": 53.297429,
+      "currentLongitude": -6.3542646,
+      "distance": "21 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2976138,
+      "nextLongitude": -6.354266099999999
+    },
+    {
+      "currentLatitude": 53.2976138,
+      "currentLongitude": -6.354266099999999,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2977564,
+      "nextLongitude": -6.354254399999999
+    },
+    {
+      "currentLatitude": 53.2977564,
+      "currentLongitude": -6.354254399999999,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2979056,
+      "nextLongitude": -6.354231599999999
+    },
+    {
+      "currentLatitude": 53.2979056,
+      "currentLongitude": -6.354231599999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2979754,
+      "nextLongitude": -6.354220199999999
+    },
+    {
+      "currentLatitude": 53.2979754,
+      "currentLongitude": -6.354220199999999,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2980963,
+      "nextLongitude": -6.354185699999999
+    },
+    {
+      "currentLatitude": 53.2980963,
+      "currentLongitude": -6.354185699999999,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819 toward Mayberry Rd",
+      "nextLatitude": 53.2981838,
+      "nextLongitude": -6.3541747
+    },
+    {
+      "currentLatitude": 53.2981838,
+      "currentLongitude": -6.3541747,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819 toward Mayberry Rd",
+      "nextLatitude": 53.2982494,
+      "nextLongitude": -6.3541609
+    },
+    {
+      "currentLatitude": 53.2982494,
+      "currentLongitude": -6.3541609,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29831429999999,
+      "nextLongitude": -6.3541405
+    },
+    {
+      "currentLatitude": 53.29831429999999,
+      "currentLongitude": -6.3541405,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2983702,
+      "nextLongitude": -6.3541217
+    },
+    {
+      "currentLatitude": 53.2983702,
+      "currentLongitude": -6.3541217,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2984749,
+      "nextLongitude": -6.354093499999999
+    },
+    {
+      "currentLatitude": 53.2984749,
+      "currentLongitude": -6.354093499999999,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29851799999999,
+      "nextLongitude": -6.3540785
+    },
+    {
+      "currentLatitude": 53.29851799999999,
+      "currentLongitude": -6.3540785,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2985617,
+      "nextLongitude": -6.354057
+    },
+    {
+      "currentLatitude": 53.2985617,
+      "currentLongitude": -6.354057,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2987048,
+      "nextLongitude": -6.3540212
+    },
+    {
+      "currentLatitude": 53.2987048,
+      "currentLongitude": -6.3540212,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.298903,
+      "nextLongitude": -6.3539714
+    },
+    {
+      "currentLatitude": 53.298903,
+      "currentLongitude": -6.3539714,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2989831,
+      "nextLongitude": -6.353951299999999
+    },
+    {
+      "currentLatitude": 53.2989831,
+      "currentLongitude": -6.353951299999999,
+      "distance": "37 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2993161,
+      "nextLongitude": -6.353893999999999
+    },
+    {
+      "currentLatitude": 53.2993161,
+      "currentLongitude": -6.353893999999999,
+      "distance": "45 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2997217,
+      "nextLongitude": -6.353824899999999
+    },
+    {
+      "currentLatitude": 53.2997217,
+      "currentLongitude": -6.353824899999999,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2998177,
+      "nextLongitude": -6.353807400000001
+    },
+    {
+      "currentLatitude": 53.2998177,
+      "currentLongitude": -6.353807400000001,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2998732,
+      "nextLongitude": -6.3537895
+    },
+    {
+      "currentLatitude": 53.2998732,
+      "currentLongitude": -6.3537895,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.3000416,
+      "nextLongitude": -6.3537342
+    },
+    {
+      "currentLatitude": 53.3000416,
+      "currentLongitude": -6.3537342,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.30016579999999,
+      "nextLongitude": -6.3536784
+    },
+    {
+      "currentLatitude": 53.30016579999999,
+      "currentLongitude": -6.3536784,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.3002505,
+      "nextLongitude": -6.3536247
+    },
+    {
+      "currentLatitude": 53.3002505,
+      "currentLongitude": -6.3536247,
+      "distance": "2 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.3002681,
+      "nextLongitude": -6.3536135
+    },
+    {
+      "currentLatitude": 53.3002681,
+      "currentLongitude": -6.3536135,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3003449,
+      "nextLongitude": -6.353552499999999
+    },
+    {
+      "currentLatitude": 53.3003449,
+      "currentLongitude": -6.353552499999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3004049,
+      "nextLongitude": -6.3534967
+    },
+    {
+      "currentLatitude": 53.3004049,
+      "currentLongitude": -6.3534967,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3005131,
+      "nextLongitude": -6.353370099999999
+    },
+    {
+      "currentLatitude": 53.3005131,
+      "currentLongitude": -6.353370099999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3005684,
+      "nextLongitude": -6.3532908
+    },
+    {
+      "currentLatitude": 53.3005684,
+      "currentLongitude": -6.3532908,
+      "distance": "21 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3007117,
+      "nextLongitude": -6.3530853
+    },
+    {
+      "currentLatitude": 53.3007117,
+      "currentLongitude": -6.3530853,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819 toward Parkview",
+      "nextLatitude": 53.3007648,
+      "nextLongitude": -6.3530116
+    },
+    {
+      "currentLatitude": 53.3007648,
+      "currentLongitude": -6.3530116,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819 toward Parkview",
+      "nextLatitude": 53.30090209999999,
+      "nextLongitude": -6.3528132
+    },
+    {
+      "currentLatitude": 53.30090209999999,
+      "currentLongitude": -6.3528132,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819 toward Tymonville Dr",
+      "nextLatitude": 53.3010992,
+      "nextLongitude": -6.3525212
+    },
+    {
+      "currentLatitude": 53.3010992,
+      "currentLongitude": -6.3525212,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.3011703,
+      "nextLongitude": -6.3524327
+    },
+    {
+      "currentLatitude": 53.3011703,
+      "currentLongitude": -6.3524327,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819 toward Castletymon Road",
+      "nextLatitude": 53.3012793,
+      "nextLongitude": -6.3522969
+    },
+    {
+      "currentLatitude": 53.3012793,
+      "currentLongitude": -6.3522969,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819 toward Castletymon Road",
+      "nextLatitude": 53.3013305,
+      "nextLongitude": -6.3522561
+    },
+    {
+      "currentLatitude": 53.3013305,
+      "currentLongitude": -6.3522561,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road",
+      "nextLatitude": 53.30125659999999,
+      "nextLongitude": -6.351884699999999
+    },
+    {
+      "currentLatitude": 53.30125659999999,
+      "currentLongitude": -6.351884699999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road",
+      "nextLatitude": 53.3012338,
+      "nextLongitude": -6.3517866
+    },
+    {
+      "currentLatitude": 53.3012338,
+      "currentLongitude": -6.3517866,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road",
+      "nextLatitude": 53.3012025,
+      "nextLongitude": -6.3516189
+    },
+    {
+      "currentLatitude": 53.3012025,
+      "currentLongitude": -6.3516189,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road",
+      "nextLatitude": 53.30113619999999,
+      "nextLongitude": -6.351262999999999
+    },
+    {
+      "currentLatitude": 53.30113619999999,
+      "currentLongitude": -6.351262999999999,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road",
+      "nextLatitude": 53.3011146,
+      "nextLongitude": -6.3511392
+    },
+    {
+      "currentLatitude": 53.3011146,
+      "currentLongitude": -6.3511392,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head east on Castletymon Road toward Tymonville Rd",
+      "nextLatitude": 53.3010505,
+      "nextLongitude": -6.350803
+    },
+    {
+      "currentLatitude": 53.3010505,
+      "currentLongitude": -6.350803,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Rd toward Castletymon Road",
+      "nextLatitude": 53.3009913,
+      "nextLongitude": -6.350837299999999
+    },
+    {
+      "currentLatitude": 53.3009913,
+      "currentLongitude": -6.350837299999999,
+      "distance": "31 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Rd",
+      "nextLatitude": 53.3007259,
+      "nextLongitude": -6.3509619
+    },
+    {
+      "currentLatitude": 53.3007259,
+      "currentLongitude": -6.3509619,
+      "distance": "50 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Rd toward Ascaill Bhaile Thigh Motháin",
+      "nextLatitude": 53.3002937,
+      "nextLongitude": -6.351164799999999
+    },
+    {
+      "currentLatitude": 53.3002937,
+      "currentLongitude": -6.351164799999999,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Rd toward Ascaill Bhaile Thigh Motháin",
+      "nextLatitude": 53.3002702,
+      "nextLongitude": -6.3511758
+    },
+    {
+      "currentLatitude": 53.3002702,
+      "currentLongitude": -6.3511758,
+      "distance": "31 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymonville Ave toward Tymonville Grove",
+      "nextLatitude": 53.30021199999999,
+      "nextLongitude": -6.3507251
+    },
+    {
+      "currentLatitude": 53.30021199999999,
+      "currentLongitude": -6.3507251,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave",
+      "nextLatitude": 53.3001447,
+      "nextLongitude": -6.3505047
+    },
+    {
+      "currentLatitude": 53.3001447,
+      "currentLongitude": -6.3505047,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave",
+      "nextLatitude": 53.3000791,
+      "nextLongitude": -6.350250399999999
+    },
+    {
+      "currentLatitude": 53.3000791,
+      "currentLongitude": -6.350250399999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave",
+      "nextLatitude": 53.3000206,
+      "nextLongitude": -6.3500536
+    },
+    {
+      "currentLatitude": 53.3000206,
+      "currentLongitude": -6.3500536,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2999354,
+      "nextLongitude": -6.3497051
+    },
+    {
+      "currentLatitude": 53.2999354,
+      "currentLongitude": -6.3497051,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2998889,
+      "nextLongitude": -6.349545500000001
+    },
+    {
+      "currentLatitude": 53.2998889,
+      "currentLongitude": -6.349545500000001,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2998463,
+      "nextLongitude": -6.3493879
+    },
+    {
+      "currentLatitude": 53.2998463,
+      "currentLongitude": -6.3493879,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.29980940000001,
+      "nextLongitude": -6.3492602
+    },
+    {
+      "currentLatitude": 53.29980940000001,
+      "currentLongitude": -6.3492602,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2997738,
+      "nextLongitude": -6.349177200000001
+    },
+    {
+      "currentLatitude": 53.2997738,
+      "currentLongitude": -6.349177200000001,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2997401,
+      "nextLongitude": -6.3491154
+    },
+    {
+      "currentLatitude": 53.2997401,
+      "currentLongitude": -6.3491154,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymonville Ave/Tymonville Park",
+      "nextLatitude": 53.2997192,
+      "nextLongitude": -6.3490927
+    },
+    {
+      "currentLatitude": 53.2997192,
+      "currentLongitude": -6.3490927,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park",
+      "nextLatitude": 53.2996902,
+      "nextLongitude": -6.3490844
+    },
+    {
+      "currentLatitude": 53.2996902,
+      "currentLongitude": -6.3490844,
+      "distance": "2 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park",
+      "nextLatitude": 53.299672,
+      "nextLongitude": -6.3490856
+    },
+    {
+      "currentLatitude": 53.299672,
+      "currentLongitude": -6.3490856,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park",
+      "nextLatitude": 53.2994487,
+      "nextLongitude": -6.3491623
+    },
+    {
+      "currentLatitude": 53.2994487,
+      "currentLongitude": -6.3491623,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park",
+      "nextLatitude": 53.2992977,
+      "nextLongitude": -6.3492178
+    },
+    {
+      "currentLatitude": 53.2992977,
+      "currentLongitude": -6.3492178,
+      "distance": "37 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park toward Tymonville Lawn",
+      "nextLatitude": 53.2989723,
+      "nextLongitude": -6.3493368
+    },
+    {
+      "currentLatitude": 53.2989723,
+      "currentLongitude": -6.3493368,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park toward Tymonville Lawn",
+      "nextLatitude": 53.2987451,
+      "nextLongitude": -6.3494145
+    },
+    {
+      "currentLatitude": 53.2987451,
+      "currentLongitude": -6.3494145,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park toward Tymonville Lawn",
+      "nextLatitude": 53.2985232,
+      "nextLongitude": -6.3494715
+    },
+    {
+      "currentLatitude": 53.2985232,
+      "currentLongitude": -6.3494715,
+      "distance": "68 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park toward Tymon N Ave",
+      "nextLatitude": 53.2979082,
+      "nextLongitude": -6.3494584
+    },
+    {
+      "currentLatitude": 53.2979082,
+      "currentLongitude": -6.3494584,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymonville Park toward Tymon N Ave",
+      "nextLatitude": 53.2978835,
+      "nextLongitude": -6.3494579
+    },
+    {
+      "currentLatitude": 53.2978835,
+      "currentLongitude": -6.3494579,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.2978856,
+      "nextLongitude": -6.349177300000001
+    },
+    {
+      "currentLatitude": 53.2978856,
+      "currentLongitude": -6.349177300000001,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.29788989999999,
+      "nextLongitude": -6.3489168
+    },
+    {
+      "currentLatitude": 53.29788989999999,
+      "currentLongitude": -6.3489168,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.2978963,
+      "nextLongitude": -6.3486566
+    },
+    {
+      "currentLatitude": 53.2978963,
+      "currentLongitude": -6.3486566,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.29788989999999,
+      "nextLongitude": -6.3484916
+    },
+    {
+      "currentLatitude": 53.29788989999999,
+      "currentLongitude": -6.3484916,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.2978834,
+      "nextLongitude": -6.3484326
+    },
+    {
+      "currentLatitude": 53.2978834,
+      "currentLongitude": -6.3484326,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave",
+      "nextLatitude": 53.2978721,
+      "nextLongitude": -6.3483619
+    },
+    {
+      "currentLatitude": 53.2978721,
+      "currentLongitude": -6.3483619,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Ave",
+      "nextLatitude": 53.2978546,
+      "nextLongitude": -6.348295999999999
+    },
+    {
+      "currentLatitude": 53.2978546,
+      "currentLongitude": -6.348295999999999,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Ave",
+      "nextLatitude": 53.2977834,
+      "nextLongitude": -6.3480703
+    },
+    {
+      "currentLatitude": 53.2977834,
+      "currentLongitude": -6.3480703,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Ave toward Plás Thigh Motháin Thuaidh",
+      "nextLatitude": 53.2977,
+      "nextLongitude": -6.34781
+    },
+    {
+      "currentLatitude": 53.2977,
+      "currentLongitude": -6.34781,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave toward Bóthar Thigh Motháin Thuaidh",
+      "nextLatitude": 53.29770730000001,
+      "nextLongitude": -6.3475725
+    },
+    {
+      "currentLatitude": 53.29770730000001,
+      "currentLongitude": -6.3475725,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave toward Bóthar Thigh Motháin Thuaidh",
+      "nextLatitude": 53.297726,
+      "nextLongitude": -6.34737
+    },
+    {
+      "currentLatitude": 53.297726,
+      "currentLongitude": -6.34737,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave toward Bóthar Thigh Motháin Thuaidh",
+      "nextLatitude": 53.2977303,
+      "nextLongitude": -6.347331899999999
+    },
+    {
+      "currentLatitude": 53.2977303,
+      "currentLongitude": -6.347331899999999,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head east on Tymon N Ave toward Bóthar Thigh Motháin Thuaidh",
+      "nextLatitude": 53.2977394,
+      "nextLongitude": -6.3472507
+    },
+    {
+      "currentLatitude": 53.2977394,
+      "currentLongitude": -6.3472507,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd",
+      "nextLatitude": 53.2976715,
+      "nextLongitude": -6.3472259
+    },
+    {
+      "currentLatitude": 53.2976715,
+      "currentLongitude": -6.3472259,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd",
+      "nextLatitude": 53.297536,
+      "nextLongitude": -6.347177299999999
+    },
+    {
+      "currentLatitude": 53.297536,
+      "currentLongitude": -6.347177299999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd",
+      "nextLatitude": 53.2974728,
+      "nextLongitude": -6.347146
+    },
+    {
+      "currentLatitude": 53.2974728,
+      "currentLongitude": -6.347146,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.2974177,
+      "nextLongitude": -6.3471217
+    },
+    {
+      "currentLatitude": 53.2974177,
+      "currentLongitude": -6.3471217,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.2973761,
+      "nextLongitude": -6.3471003
+    },
+    {
+      "currentLatitude": 53.2973761,
+      "currentLongitude": -6.3471003,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.29732689999999,
+      "nextLongitude": -6.3470714
+    },
+    {
+      "currentLatitude": 53.29732689999999,
+      "currentLongitude": -6.3470714,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.2972783,
+      "nextLongitude": -6.347037299999999
+    },
+    {
+      "currentLatitude": 53.2972783,
+      "currentLongitude": -6.347037299999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.29722599999999,
+      "nextLongitude": -6.346992999999999
+    },
+    {
+      "currentLatitude": 53.29722599999999,
+      "currentLongitude": -6.346992999999999,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.2970492,
+      "nextLongitude": -6.346832000000001
+    },
+    {
+      "currentLatitude": 53.2970492,
+      "currentLongitude": -6.346832000000001,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.2969456,
+      "nextLongitude": -6.346745500000001
+    },
+    {
+      "currentLatitude": 53.2969456,
+      "currentLongitude": -6.346745500000001,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.29680159999999,
+      "nextLongitude": -6.346629999999999
+    },
+    {
+      "currentLatitude": 53.29680159999999,
+      "currentLongitude": -6.346629999999999,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd",
+      "nextLatitude": 53.2966596,
+      "nextLongitude": -6.346648500000001
+    },
+    {
+      "currentLatitude": 53.2966596,
+      "currentLongitude": -6.346648500000001,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Green",
+      "nextLatitude": 53.296477,
+      "nextLongitude": -6.3466723
+    },
+    {
+      "currentLatitude": 53.296477,
+      "currentLongitude": -6.3466723,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Ct",
+      "nextLatitude": 53.2963823,
+      "nextLongitude": -6.3466634
+    },
+    {
+      "currentLatitude": 53.2963823,
+      "currentLongitude": -6.3466634,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Ct",
+      "nextLatitude": 53.296277,
+      "nextLongitude": -6.346663899999999
+    },
+    {
+      "currentLatitude": 53.296277,
+      "currentLongitude": -6.346663899999999,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Ct",
+      "nextLatitude": 53.29619150000001,
+      "nextLongitude": -6.3466556
+    },
+    {
+      "currentLatitude": 53.29619150000001,
+      "currentLongitude": -6.3466556,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Ct",
+      "nextLatitude": 53.2961081,
+      "nextLongitude": -6.346636999999999
+    },
+    {
+      "currentLatitude": 53.2961081,
+      "currentLongitude": -6.346636999999999,
+      "distance": "30 m",
+      "duration": "1 min",
+      "instruction": "Head south on Tymon N Rd toward Tymon N Ct",
+      "nextLatitude": 53.2958468,
+      "nextLongitude": -6.3465473
+    },
+    {
+      "currentLatitude": 53.2958468,
+      "currentLongitude": -6.3465473,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.2957057,
+      "nextLongitude": -6.346393399999999
+    },
+    {
+      "currentLatitude": 53.2957057,
+      "currentLongitude": -6.346393399999999,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.2956442,
+      "nextLongitude": -6.3463159
+    },
+    {
+      "currentLatitude": 53.2956442,
+      "currentLongitude": -6.3463159,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.2955768,
+      "nextLongitude": -6.346230900000001
+    },
+    {
+      "currentLatitude": 53.2955768,
+      "currentLongitude": -6.346230900000001,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.295531,
+      "nextLongitude": -6.3461634
+    },
+    {
+      "currentLatitude": 53.295531,
+      "currentLongitude": -6.3461634,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd",
+      "nextLatitude": 53.2954428,
+      "nextLongitude": -6.3460043
+    },
+    {
+      "currentLatitude": 53.2954428,
+      "currentLongitude": -6.3460043,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Tymon N Rd toward Tymon North Lawn",
+      "nextLatitude": 53.29537999999999,
+      "nextLongitude": -6.345899999999999
+    },
+    {
+      "currentLatitude": 53.29537999999999,
+      "currentLongitude": -6.345899999999999,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on St Aongus' Rd",
+      "nextLatitude": 53.2953676,
+      "nextLongitude": -6.3458539
+    },
+    {
+      "currentLatitude": 53.2953676,
+      "currentLongitude": -6.3458539,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on St Aongus' Rd",
+      "nextLatitude": 53.2952989,
+      "nextLongitude": -6.3456157
+    },
+    {
+      "currentLatitude": 53.2952989,
+      "currentLongitude": -6.3456157,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd",
+      "nextLatitude": 53.2952577,
+      "nextLongitude": -6.345446799999999
+    },
+    {
+      "currentLatitude": 53.2952577,
+      "currentLongitude": -6.345446799999999,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd",
+      "nextLatitude": 53.2952323,
+      "nextLongitude": -6.345305799999999
+    },
+    {
+      "currentLatitude": 53.2952323,
+      "currentLongitude": -6.345305799999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd",
+      "nextLatitude": 53.2952199,
+      "nextLongitude": -6.3452077
+    },
+    {
+      "currentLatitude": 53.2952199,
+      "currentLongitude": -6.3452077,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd",
+      "nextLatitude": 53.29520669999999,
+      "nextLongitude": -6.3451032
+    },
+    {
+      "currentLatitude": 53.29520669999999,
+      "currentLongitude": -6.3451032,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd",
+      "nextLatitude": 53.2952032,
+      "nextLongitude": -6.3450463
+    },
+    {
+      "currentLatitude": 53.2952032,
+      "currentLongitude": -6.3450463,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd toward Tymon N Park",
+      "nextLatitude": 53.295194,
+      "nextLongitude": -6.3448978
+    },
+    {
+      "currentLatitude": 53.295194,
+      "currentLongitude": -6.3448978,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd toward St Aongus Mews",
+      "nextLatitude": 53.29523589999999,
+      "nextLongitude": -6.344488
+    },
+    {
+      "currentLatitude": 53.29523589999999,
+      "currentLongitude": -6.344488,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd toward St Aongus Mews",
+      "nextLatitude": 53.2952494,
+      "nextLongitude": -6.344334099999999
+    },
+    {
+      "currentLatitude": 53.2952494,
+      "currentLongitude": -6.344334099999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.2952692,
+      "nextLongitude": -6.3442259
+    },
+    {
+      "currentLatitude": 53.2952692,
+      "currentLongitude": -6.3442259,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.2952956,
+      "nextLongitude": -6.3441098
+    },
+    {
+      "currentLatitude": 53.2952956,
+      "currentLongitude": -6.3441098,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.2953352,
+      "nextLongitude": -6.343967
+    },
+    {
+      "currentLatitude": 53.2953352,
+      "currentLongitude": -6.343967,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.2953791,
+      "nextLongitude": -6.3438437
+    },
+    {
+      "currentLatitude": 53.2953791,
+      "currentLongitude": -6.3438437,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.29542319999999,
+      "nextLongitude": -6.343739299999999
+    },
+    {
+      "currentLatitude": 53.29542319999999,
+      "currentLongitude": -6.343739299999999,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.2954511,
+      "nextLongitude": -6.3436884
+    },
+    {
+      "currentLatitude": 53.2954511,
+      "currentLongitude": -6.3436884,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Park",
+      "nextLatitude": 53.29549790000001,
+      "nextLongitude": -6.3436239
+    },
+    {
+      "currentLatitude": 53.29549790000001,
+      "currentLongitude": -6.3436239,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus Yard",
+      "nextLatitude": 53.2955348,
+      "nextLongitude": -6.3435747
+    },
+    {
+      "currentLatitude": 53.2955348,
+      "currentLongitude": -6.3435747,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd",
+      "nextLatitude": 53.29553629999999,
+      "nextLongitude": -6.3435728
+    },
+    {
+      "currentLatitude": 53.29553629999999,
+      "currentLongitude": -6.3435728,
+      "distance": "2 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus Yard",
+      "nextLatitude": 53.2955534,
+      "nextLongitude": -6.34355
+    },
+    {
+      "currentLatitude": 53.2955534,
+      "currentLongitude": -6.34355,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus Yard",
+      "nextLatitude": 53.2956742,
+      "nextLongitude": -6.3433891
+    },
+    {
+      "currentLatitude": 53.2956742,
+      "currentLongitude": -6.3433891,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus Yard",
+      "nextLatitude": 53.2957309,
+      "nextLongitude": -6.3433195
+    },
+    {
+      "currentLatitude": 53.2957309,
+      "currentLongitude": -6.3433195,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus Yard",
+      "nextLatitude": 53.29579469999999,
+      "nextLongitude": -6.3432534
+    },
+    {
+      "currentLatitude": 53.29579469999999,
+      "currentLongitude": -6.3432534,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Cres",
+      "nextLatitude": 53.295946,
+      "nextLongitude": -6.343103999999999
+    },
+    {
+      "currentLatitude": 53.295946,
+      "currentLongitude": -6.343103999999999,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Cres",
+      "nextLatitude": 53.2959656,
+      "nextLongitude": -6.343084600000001
+    },
+    {
+      "currentLatitude": 53.2959656,
+      "currentLongitude": -6.343084600000001,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head on St Aongus' Cres",
+      "nextLatitude": 53.2959656,
+      "nextLongitude": -6.343084600000001
+    },
+    {
+      "currentLatitude": 53.2959656,
+      "currentLongitude": -6.343084600000001,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2960109,
+      "nextLongitude": -6.3430563
+    },
+    {
+      "currentLatitude": 53.2960109,
+      "currentLongitude": -6.3430563,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2960544,
+      "nextLongitude": -6.343034299999999
+    },
+    {
+      "currentLatitude": 53.2960544,
+      "currentLongitude": -6.343034299999999,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2961531,
+      "nextLongitude": -6.343013699999999
+    },
+    {
+      "currentLatitude": 53.2961531,
+      "currentLongitude": -6.343013699999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2962247,
+      "nextLongitude": -6.3430158
+    },
+    {
+      "currentLatitude": 53.2962247,
+      "currentLongitude": -6.3430158,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2963159,
+      "nextLongitude": -6.3430147
+    },
+    {
+      "currentLatitude": 53.2963159,
+      "currentLongitude": -6.3430147,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2963706,
+      "nextLongitude": -6.343017499999999
+    },
+    {
+      "currentLatitude": 53.2963706,
+      "currentLongitude": -6.343017499999999,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2964271,
+      "nextLongitude": -6.343032399999999
+    },
+    {
+      "currentLatitude": 53.2964271,
+      "currentLongitude": -6.343032399999999,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.29647660000001,
+      "nextLongitude": -6.3430497
+    },
+    {
+      "currentLatitude": 53.29647660000001,
+      "currentLongitude": -6.3430497,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head northwest on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.29652979999999,
+      "nextLongitude": -6.3430889
+    },
+    {
+      "currentLatitude": 53.29652979999999,
+      "currentLongitude": -6.3430889,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head northwest on St Aongus' Rd toward St Aongus' Green",
+      "nextLatitude": 53.2965857,
+      "nextLongitude": -6.3431413
+    },
+    {
+      "currentLatitude": 53.2965857,
+      "currentLongitude": -6.3431413,
+      "distance": "38 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Ct",
+      "nextLatitude": 53.2969071,
+      "nextLongitude": -6.3433411
+    },
+    {
+      "currentLatitude": 53.2969071,
+      "currentLongitude": -6.3433411,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northwest on St Aongus' Rd toward St Aongus' Lawn",
+      "nextLatitude": 53.2969748,
+      "nextLongitude": -6.3433914
+    },
+    {
+      "currentLatitude": 53.2969748,
+      "currentLongitude": -6.3433914,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Lawn",
+      "nextLatitude": 53.2970817,
+      "nextLongitude": -6.3434542
+    },
+    {
+      "currentLatitude": 53.2970817,
+      "currentLongitude": -6.3434542,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Lawn",
+      "nextLatitude": 53.2971494,
+      "nextLongitude": -6.343483399999999
+    },
+    {
+      "currentLatitude": 53.2971494,
+      "currentLongitude": -6.343483399999999,
+      "distance": "21 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd toward St Aongus' Lawn",
+      "nextLatitude": 53.2973379,
+      "nextLongitude": -6.343535999999999
+    },
+    {
+      "currentLatitude": 53.2973379,
+      "currentLongitude": -6.343535999999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd",
+      "nextLatitude": 53.2974671,
+      "nextLongitude": -6.3434849
+    },
+    {
+      "currentLatitude": 53.2974671,
+      "currentLongitude": -6.3434849,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd",
+      "nextLatitude": 53.2975298,
+      "nextLongitude": -6.3434626
+    },
+    {
+      "currentLatitude": 53.2975298,
+      "currentLongitude": -6.3434626,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head north on St Aongus' Rd",
+      "nextLatitude": 53.2977153,
+      "nextLongitude": -6.3433674
+    },
+    {
+      "currentLatitude": 53.2977153,
+      "currentLongitude": -6.3433674,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Cres",
+      "nextLatitude": 53.29777540000001,
+      "nextLongitude": -6.3433252
+    },
+    {
+      "currentLatitude": 53.29777540000001,
+      "currentLongitude": -6.3433252,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward St Aongus' Cres",
+      "nextLatitude": 53.2978365,
+      "nextLongitude": -6.3432726
+    },
+    {
+      "currentLatitude": 53.2978365,
+      "currentLongitude": -6.3432726,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd",
+      "nextLatitude": 53.29793249999999,
+      "nextLongitude": -6.3431881
+    },
+    {
+      "currentLatitude": 53.29793249999999,
+      "currentLongitude": -6.3431881,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd",
+      "nextLatitude": 53.2979723,
+      "nextLongitude": -6.343153099999999
+    },
+    {
+      "currentLatitude": 53.2979723,
+      "currentLongitude": -6.343153099999999,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd",
+      "nextLatitude": 53.2980774,
+      "nextLongitude": -6.3430436
+    },
+    {
+      "currentLatitude": 53.2980774,
+      "currentLongitude": -6.3430436,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head on St Aongus' Rd",
+      "nextLatitude": 53.2980774,
+      "nextLongitude": -6.3430436
+    },
+    {
+      "currentLatitude": 53.2980774,
+      "currentLongitude": -6.3430436,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward Castletymon Road",
+      "nextLatitude": 53.2981363,
+      "nextLongitude": -6.3429753
+    },
+    {
+      "currentLatitude": 53.2981363,
+      "currentLongitude": -6.3429753,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on St Aongus' Rd toward Castletymon Road",
+      "nextLatitude": 53.298179,
+      "nextLongitude": -6.3429232
+    },
+    {
+      "currentLatitude": 53.298179,
+      "currentLongitude": -6.3429232,
+      "distance": "32 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2980173,
+      "nextLongitude": -6.342531999999999
+    },
+    {
+      "currentLatitude": 53.2980173,
+      "currentLongitude": -6.342531999999999,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2979016,
+      "nextLongitude": -6.3422521
+    },
+    {
+      "currentLatitude": 53.2979016,
+      "currentLongitude": -6.3422521,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2977594,
+      "nextLongitude": -6.3419072
+    },
+    {
+      "currentLatitude": 53.2977594,
+      "currentLongitude": -6.3419072,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2976419,
+      "nextLongitude": -6.3416351
+    },
+    {
+      "currentLatitude": 53.2976419,
+      "currentLongitude": -6.3416351,
+      "distance": "2 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2976283,
+      "nextLongitude": -6.341607199999999
+    },
+    {
+      "currentLatitude": 53.2976283,
+      "currentLongitude": -6.341607199999999,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.29756399999999,
+      "nextLongitude": -6.341475699999999
+    },
+    {
+      "currentLatitude": 53.29756399999999,
+      "currentLongitude": -6.341475699999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.29747039999999,
+      "nextLongitude": -6.3413156
+    },
+    {
+      "currentLatitude": 53.29747039999999,
+      "currentLongitude": -6.3413156,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.29736270000001,
+      "nextLongitude": -6.3411693
+    },
+    {
+      "currentLatitude": 53.29736270000001,
+      "currentLongitude": -6.3411693,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.297224,
+      "nextLongitude": -6.3409976
+    },
+    {
+      "currentLatitude": 53.297224,
+      "currentLongitude": -6.3409976,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2970827,
+      "nextLongitude": -6.3408564
+    },
+    {
+      "currentLatitude": 53.2970827,
+      "currentLongitude": -6.3408564,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head southeast on Castletymon Road",
+      "nextLatitude": 53.2970051,
+      "nextLongitude": -6.3407855
+    },
+    {
+      "currentLatitude": 53.2970051,
+      "currentLongitude": -6.3407855,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29696389999999,
+      "nextLongitude": -6.340761499999999
+    },
+    {
+      "currentLatitude": 53.29696389999999,
+      "currentLongitude": -6.340761499999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2969067,
+      "nextLongitude": -6.340728299999999
+    },
+    {
+      "currentLatitude": 53.2969067,
+      "currentLongitude": -6.340728299999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2967767,
+      "nextLongitude": -6.3406829
+    },
+    {
+      "currentLatitude": 53.2967767,
+      "currentLongitude": -6.3406829,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2967054,
+      "nextLongitude": -6.340657999999999
+    },
+    {
+      "currentLatitude": 53.2967054,
+      "currentLongitude": -6.340657999999999,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2964759,
+      "nextLongitude": -6.3406036
+    },
+    {
+      "currentLatitude": 53.2964759,
+      "currentLongitude": -6.3406036,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29635709999999,
+      "nextLongitude": -6.3405929
+    },
+    {
+      "currentLatitude": 53.29635709999999,
+      "currentLongitude": -6.3405929,
+      "distance": "32 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2960735,
+      "nextLongitude": -6.3406332
+    },
+    {
+      "currentLatitude": 53.2960735,
+      "currentLongitude": -6.3406332,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Tymon Ln",
+      "nextLatitude": 53.2960074,
+      "nextLongitude": -6.3406509
+    },
+    {
+      "currentLatitude": 53.2960074,
+      "currentLongitude": -6.3406509,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2959228,
+      "nextLongitude": -6.3406763
+    },
+    {
+      "currentLatitude": 53.2959228,
+      "currentLongitude": -6.3406763,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2958537,
+      "nextLongitude": -6.3407199
+    },
+    {
+      "currentLatitude": 53.2958537,
+      "currentLongitude": -6.3407199,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2958154,
+      "nextLongitude": -6.340744099999999
+    },
+    {
+      "currentLatitude": 53.2958154,
+      "currentLongitude": -6.340744099999999,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.2956958,
+      "nextLongitude": -6.340830299999999
+    },
+    {
+      "currentLatitude": 53.2956958,
+      "currentLongitude": -6.340830299999999,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.2956441,
+      "nextLongitude": -6.340867599999999
+    },
+    {
+      "currentLatitude": 53.2956441,
+      "currentLongitude": -6.340867599999999,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.295502,
+      "nextLongitude": -6.3410001
+    },
+    {
+      "currentLatitude": 53.295502,
+      "currentLongitude": -6.3410001,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.295451,
+      "nextLongitude": -6.3410476
+    },
+    {
+      "currentLatitude": 53.295451,
+      "currentLongitude": -6.3410476,
+      "distance": "27 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.29524869999999,
+      "nextLongitude": -6.3412625
+    },
+    {
+      "currentLatitude": 53.29524869999999,
+      "currentLongitude": -6.3412625,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road toward Tymon Rd",
+      "nextLatitude": 53.2950545,
+      "nextLongitude": -6.3414714
+    },
+    {
+      "currentLatitude": 53.2950545,
+      "currentLongitude": -6.3414714,
+      "distance": "33 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.2948085,
+      "nextLongitude": -6.3417412
+    },
+    {
+      "currentLatitude": 53.2948085,
+      "currentLongitude": -6.3417412,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.2946345,
+      "nextLongitude": -6.341895
+    },
+    {
+      "currentLatitude": 53.2946345,
+      "currentLongitude": -6.341895,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road toward Tymon N Gardens",
+      "nextLatitude": 53.29456039999999,
+      "nextLongitude": -6.3419605
+    },
+    {
+      "currentLatitude": 53.29456039999999,
+      "currentLongitude": -6.3419605,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road toward Tymon N Gardens",
+      "nextLatitude": 53.2944313,
+      "nextLongitude": -6.342050299999999
+    },
+    {
+      "currentLatitude": 53.2944313,
+      "currentLongitude": -6.342050299999999,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head southwest on Castletymon Road",
+      "nextLatitude": 53.2943608,
+      "nextLongitude": -6.3421088
+    },
+    {
+      "currentLatitude": 53.2943608,
+      "currentLongitude": -6.3421088,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29427039999999,
+      "nextLongitude": -6.3421651
+    },
+    {
+      "currentLatitude": 53.29427039999999,
+      "currentLongitude": -6.3421651,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2941177,
+      "nextLongitude": -6.3422493
+    },
+    {
+      "currentLatitude": 53.2941177,
+      "currentLongitude": -6.3422493,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29400740000001,
+      "nextLongitude": -6.3423041
+    },
+    {
+      "currentLatitude": 53.29400740000001,
+      "currentLongitude": -6.3423041,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Castle Lawns",
+      "nextLatitude": 53.2939702,
+      "nextLongitude": -6.3423151
+    },
+    {
+      "currentLatitude": 53.2939702,
+      "currentLongitude": -6.3423151,
+      "distance": "27 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Castle Lawns",
+      "nextLatitude": 53.2937358,
+      "nextLongitude": -6.3424247
+    },
+    {
+      "currentLatitude": 53.2937358,
+      "currentLongitude": -6.3424247,
+      "distance": "35 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Castle Lawns",
+      "nextLatitude": 53.2934316,
+      "nextLongitude": -6.342553199999999
+    },
+    {
+      "currentLatitude": 53.2934316,
+      "currentLongitude": -6.342553199999999,
+      "distance": "58 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2929236,
+      "nextLongitude": -6.342752
+    },
+    {
+      "currentLatitude": 53.2929236,
+      "currentLongitude": -6.342752,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Castle Park",
+      "nextLatitude": 53.2927665,
+      "nextLongitude": -6.3428114
+    },
+    {
+      "currentLatitude": 53.2927665,
+      "currentLongitude": -6.3428114,
+      "distance": "24 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29255550000001,
+      "nextLongitude": -6.342903199999999
+    },
+    {
+      "currentLatitude": 53.29255550000001,
+      "currentLongitude": -6.342903199999999,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2923057,
+      "nextLongitude": -6.3430117
+    },
+    {
+      "currentLatitude": 53.2923057,
+      "currentLongitude": -6.3430117,
+      "distance": "42 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2919431,
+      "nextLongitude": -6.34316
+    },
+    {
+      "currentLatitude": 53.2919431,
+      "currentLongitude": -6.34316,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2917117,
+      "nextLongitude": -6.3432428
+    },
+    {
+      "currentLatitude": 53.2917117,
+      "currentLongitude": -6.3432428,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2916215,
+      "nextLongitude": -6.3432685
+    },
+    {
+      "currentLatitude": 53.2916215,
+      "currentLongitude": -6.3432685,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.291543,
+      "nextLongitude": -6.343284499999999
+    },
+    {
+      "currentLatitude": 53.291543,
+      "currentLongitude": -6.343284499999999,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Balrothery Estate",
+      "nextLatitude": 53.2913773,
+      "nextLongitude": -6.343321299999999
+    },
+    {
+      "currentLatitude": 53.2913773,
+      "currentLongitude": -6.343321299999999,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Balrothery Estate",
+      "nextLatitude": 53.2912024,
+      "nextLongitude": -6.3433329
+    },
+    {
+      "currentLatitude": 53.2912024,
+      "currentLongitude": -6.3433329,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Balrothery Estate",
+      "nextLatitude": 53.2910506,
+      "nextLongitude": -6.3433375
+    },
+    {
+      "currentLatitude": 53.2910506,
+      "currentLongitude": -6.3433375,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2909613,
+      "nextLongitude": -6.3433195
+    },
+    {
+      "currentLatitude": 53.2909613,
+      "currentLongitude": -6.3433195,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2908453,
+      "nextLongitude": -6.343302899999999
+    },
+    {
+      "currentLatitude": 53.2908453,
+      "currentLongitude": -6.343302899999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.290784,
+      "nextLongitude": -6.3432822
+    },
+    {
+      "currentLatitude": 53.290784,
+      "currentLongitude": -6.3432822,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29062560000001,
+      "nextLongitude": -6.343248099999999
+    },
+    {
+      "currentLatitude": 53.29062560000001,
+      "currentLongitude": -6.343248099999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2905624,
+      "nextLongitude": -6.343241400000001
+    },
+    {
+      "currentLatitude": 53.2905624,
+      "currentLongitude": -6.343241400000001,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2904631,
+      "nextLongitude": -6.3432062
+    },
+    {
+      "currentLatitude": 53.2904631,
+      "currentLongitude": -6.3432062,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Castle Park",
+      "nextLatitude": 53.2903345,
+      "nextLongitude": -6.3431499
+    },
+    {
+      "currentLatitude": 53.2903345,
+      "currentLongitude": -6.3431499,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29022519999999,
+      "nextLongitude": -6.343115
+    },
+    {
+      "currentLatitude": 53.29022519999999,
+      "currentLongitude": -6.343115,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.29002759999999,
+      "nextLongitude": -6.3430729
+    },
+    {
+      "currentLatitude": 53.29002759999999,
+      "currentLongitude": -6.3430729,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.28997529999999,
+      "nextLongitude": -6.3430629
+    },
+    {
+      "currentLatitude": 53.28997529999999,
+      "currentLongitude": -6.3430629,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2898332,
+      "nextLongitude": -6.3430215
+    },
+    {
+      "currentLatitude": 53.2898332,
+      "currentLongitude": -6.3430215,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2897939,
+      "nextLongitude": -6.3430178
+    },
+    {
+      "currentLatitude": 53.2897939,
+      "currentLongitude": -6.3430178,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road",
+      "nextLatitude": 53.2897691,
+      "nextLongitude": -6.3430107
+    },
+    {
+      "currentLatitude": 53.2897691,
+      "currentLongitude": -6.3430107,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2895365,
+      "nextLongitude": -6.3429405
+    },
+    {
+      "currentLatitude": 53.2895365,
+      "currentLongitude": -6.3429405,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head south on Castletymon Road toward Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28947369999999,
+      "nextLongitude": -6.342933899999999
+    },
+    {
+      "currentLatitude": 53.28947369999999,
+      "currentLongitude": -6.342933899999999,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28950020000001,
+      "nextLongitude": -6.342635100000001
+    },
+    {
+      "currentLatitude": 53.28950020000001,
+      "currentLongitude": -6.342635100000001,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2895379,
+      "nextLongitude": -6.3422255
+    },
+    {
+      "currentLatitude": 53.2895379,
+      "currentLongitude": -6.3422255,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2895556,
+      "nextLongitude": -6.3420333
+    },
+    {
+      "currentLatitude": 53.2895556,
+      "currentLongitude": -6.3420333,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd toward Balrothery Rise",
+      "nextLatitude": 53.289565,
+      "nextLongitude": -6.3419677
+    },
+    {
+      "currentLatitude": 53.289565,
+      "currentLongitude": -6.3419677,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2895822,
+      "nextLongitude": -6.341853
+    },
+    {
+      "currentLatitude": 53.2895822,
+      "currentLongitude": -6.341853,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd toward Glenview Park",
+      "nextLatitude": 53.289603,
+      "nextLongitude": -6.3417157
+    },
+    {
+      "currentLatitude": 53.289603,
+      "currentLongitude": -6.3417157,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd toward Glenview Park",
+      "nextLatitude": 53.2896167,
+      "nextLongitude": -6.3415995
+    },
+    {
+      "currentLatitude": 53.2896167,
+      "currentLongitude": -6.3415995,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head east on Main Rd/Old Blessington Rd toward Glenview Park",
+      "nextLatitude": 53.2896303,
+      "nextLongitude": -6.3415323
+    },
+    {
+      "currentLatitude": 53.2896303,
+      "currentLongitude": -6.3415323,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head south on Glenview Park",
+      "nextLatitude": 53.289606,
+      "nextLongitude": -6.3415266
+    },
+    {
+      "currentLatitude": 53.289606,
+      "currentLongitude": -6.3415266,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head south on Glenview Park",
+      "nextLatitude": 53.2894966,
+      "nextLongitude": -6.3415009
+    },
+    {
+      "currentLatitude": 53.2894966,
+      "currentLongitude": -6.3415009,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head south on Glenview Park",
+      "nextLatitude": 53.2893573,
+      "nextLongitude": -6.341468099999999
+    },
+    {
+      "currentLatitude": 53.2893573,
+      "currentLongitude": -6.341468099999999,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head south on Glenview Park",
+      "nextLatitude": 53.2891651,
+      "nextLongitude": -6.341418099999999
+    },
+    {
+      "currentLatitude": 53.2891651,
+      "currentLongitude": -6.341418099999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2891537,
+      "nextLongitude": -6.341536000000001
+    },
+    {
+      "currentLatitude": 53.2891537,
+      "currentLongitude": -6.341536000000001,
+      "distance": "60 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2890683,
+      "nextLongitude": -6.34242
+    },
+    {
+      "currentLatitude": 53.2890683,
+      "currentLongitude": -6.34242,
+      "distance": "64 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2889669,
+      "nextLongitude": -6.343373199999999
+    },
+    {
+      "currentLatitude": 53.2889669,
+      "currentLongitude": -6.343373199999999,
+      "distance": "68 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2888789,
+      "nextLongitude": -6.344386099999999
+    },
+    {
+      "currentLatitude": 53.2888789,
+      "currentLongitude": -6.344386099999999,
+      "distance": "65 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2887754,
+      "nextLongitude": -6.3453462
+    },
+    {
+      "currentLatitude": 53.2887754,
+      "currentLongitude": -6.3453462,
+      "distance": "67 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2886748,
+      "nextLongitude": -6.346344900000001
+    },
+    {
+      "currentLatitude": 53.2886748,
+      "currentLongitude": -6.346344900000001,
+      "distance": "64 m",
+      "duration": "1 min",
+      "instruction": "Head west on Glenview Park",
+      "nextLatitude": 53.2885891,
+      "nextLongitude": -6.3472908
+    },
+    {
+      "currentLatitude": 53.2885891,
+      "currentLongitude": -6.3472908,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head on Glenview Park",
+      "nextLatitude": 53.2885891,
+      "nextLongitude": -6.3472908
+    },
+    {
+      "currentLatitude": 53.2885891,
+      "currentLongitude": -6.3472908,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park",
+      "nextLatitude": 53.2886726,
+      "nextLongitude": -6.3472971
+    },
+    {
+      "currentLatitude": 53.2886726,
+      "currentLongitude": -6.3472971,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park",
+      "nextLatitude": 53.288852,
+      "nextLongitude": -6.3473106
+    },
+    {
+      "currentLatitude": 53.288852,
+      "currentLongitude": -6.3473106,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park",
+      "nextLatitude": 53.2889026,
+      "nextLongitude": -6.3473144
+    },
+    {
+      "currentLatitude": 53.2889026,
+      "currentLongitude": -6.3473144,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park toward Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2889481,
+      "nextLongitude": -6.3473178
+    },
+    {
+      "currentLatitude": 53.2889481,
+      "currentLongitude": -6.3473178,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park toward Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28899329999999,
+      "nextLongitude": -6.3473213
+    },
+    {
+      "currentLatitude": 53.28899329999999,
+      "currentLongitude": -6.3473213,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head north on Glenview Park toward Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28901639999999,
+      "nextLongitude": -6.347322999999999
+    },
+    {
+      "currentLatitude": 53.28901639999999,
+      "currentLongitude": -6.347322999999999,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.288994,
+      "nextLongitude": -6.3475524
+    },
+    {
+      "currentLatitude": 53.288994,
+      "currentLongitude": -6.3475524,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.288981,
+      "nextLongitude": -6.3476861
+    },
+    {
+      "currentLatitude": 53.288981,
+      "currentLongitude": -6.3476861,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2889659,
+      "nextLongitude": -6.3478412
+    },
+    {
+      "currentLatitude": 53.2889659,
+      "currentLongitude": -6.3478412,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2889205,
+      "nextLongitude": -6.3482603
+    },
+    {
+      "currentLatitude": 53.2889205,
+      "currentLongitude": -6.3482603,
+      "distance": "35 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2888651,
+      "nextLongitude": -6.3487715
+    },
+    {
+      "currentLatitude": 53.2888651,
+      "currentLongitude": -6.3487715,
+      "distance": "24 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2888248,
+      "nextLongitude": -6.3491294
+    },
+    {
+      "currentLatitude": 53.2888248,
+      "currentLongitude": -6.3491294,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2887996,
+      "nextLongitude": -6.3493371
+    },
+    {
+      "currentLatitude": 53.2887996,
+      "currentLongitude": -6.3493371,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd toward Bancroft Rd",
+      "nextLatitude": 53.2887739,
+      "nextLongitude": -6.3495595
+    },
+    {
+      "currentLatitude": 53.2887739,
+      "currentLongitude": -6.3495595,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2887437,
+      "nextLongitude": -6.3499073
+    },
+    {
+      "currentLatitude": 53.2887437,
+      "currentLongitude": -6.3499073,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd toward Newtown Park/Newtown Park Cottages",
+      "nextLatitude": 53.288723,
+      "nextLongitude": -6.3501455
+    },
+    {
+      "currentLatitude": 53.288723,
+      "currentLongitude": -6.3501455,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28871960000001,
+      "nextLongitude": -6.3502049
+    },
+    {
+      "currentLatitude": 53.28871960000001,
+      "currentLongitude": -6.3502049,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2887061,
+      "nextLongitude": -6.3504384
+    },
+    {
+      "currentLatitude": 53.2887061,
+      "currentLongitude": -6.3504384,
+      "distance": "31 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2886781,
+      "nextLongitude": -6.3508951
+    },
+    {
+      "currentLatitude": 53.2886781,
+      "currentLongitude": -6.3508951,
+      "distance": "33 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2886541,
+      "nextLongitude": -6.3513929
+    },
+    {
+      "currentLatitude": 53.2886541,
+      "currentLongitude": -6.3513929,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28863380000001,
+      "nextLongitude": -6.351833399999999
+    },
+    {
+      "currentLatitude": 53.28863380000001,
+      "currentLongitude": -6.351833399999999,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2886229,
+      "nextLongitude": -6.3522289
+    },
+    {
+      "currentLatitude": 53.2886229,
+      "currentLongitude": -6.3522289,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.288614,
+      "nextLongitude": -6.352577699999999
+    },
+    {
+      "currentLatitude": 53.288614,
+      "currentLongitude": -6.352577699999999,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2885967,
+      "nextLongitude": -6.3528276
+    },
+    {
+      "currentLatitude": 53.2885967,
+      "currentLongitude": -6.3528276,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28858349999999,
+      "nextLongitude": -6.3530264
+    },
+    {
+      "currentLatitude": 53.28858349999999,
+      "currentLongitude": -6.3530264,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2885612,
+      "nextLongitude": -6.3532809
+    },
+    {
+      "currentLatitude": 53.2885612,
+      "currentLongitude": -6.3532809,
+      "distance": "5 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2885595,
+      "nextLongitude": -6.3533618
+    },
+    {
+      "currentLatitude": 53.2885595,
+      "currentLongitude": -6.3533618,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28852329999999,
+      "nextLongitude": -6.353619999999999
+    },
+    {
+      "currentLatitude": 53.28852329999999,
+      "currentLongitude": -6.353619999999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2885078,
+      "nextLongitude": -6.353730499999999
+    },
+    {
+      "currentLatitude": 53.2885078,
+      "currentLongitude": -6.353730499999999,
+      "distance": "13 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2884769,
+      "nextLongitude": -6.353916000000001
+    },
+    {
+      "currentLatitude": 53.2884769,
+      "currentLongitude": -6.353916000000001,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2884062,
+      "nextLongitude": -6.3543389
+    },
+    {
+      "currentLatitude": 53.2884062,
+      "currentLongitude": -6.3543389,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2883443,
+      "nextLongitude": -6.354707899999999
+    },
+    {
+      "currentLatitude": 53.2883443,
+      "currentLongitude": -6.354707899999999,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2883204,
+      "nextLongitude": -6.354849799999999
+    },
+    {
+      "currentLatitude": 53.2883204,
+      "currentLongitude": -6.354849799999999,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2883149,
+      "nextLongitude": -6.3549129
+    },
+    {
+      "currentLatitude": 53.2883149,
+      "currentLongitude": -6.3549129,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2882691,
+      "nextLongitude": -6.3551587
+    },
+    {
+      "currentLatitude": 53.2882691,
+      "currentLongitude": -6.3551587,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.28823209999999,
+      "nextLongitude": -6.355366699999999
+    },
+    {
+      "currentLatitude": 53.28823209999999,
+      "currentLongitude": -6.355366699999999,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2882052,
+      "nextLongitude": -6.355579199999999
+    },
+    {
+      "currentLatitude": 53.2882052,
+      "currentLongitude": -6.355579199999999,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2881928,
+      "nextLongitude": -6.3557115
+    },
+    {
+      "currentLatitude": 53.2881928,
+      "currentLongitude": -6.3557115,
+      "distance": "2 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2881892,
+      "nextLongitude": -6.355744
+    },
+    {
+      "currentLatitude": 53.2881892,
+      "currentLongitude": -6.355744,
+      "distance": "31 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2881709,
+      "nextLongitude": -6.3562167
+    },
+    {
+      "currentLatitude": 53.2881709,
+      "currentLongitude": -6.3562167,
+      "distance": "26 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.2881717,
+      "nextLongitude": -6.3566082
+    },
+    {
+      "currentLatitude": 53.2881717,
+      "currentLongitude": -6.3566082,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd",
+      "nextLatitude": 53.288172,
+      "nextLongitude": -6.356772899999999
+    },
+    {
+      "currentLatitude": 53.288172,
+      "currentLongitude": -6.356772899999999,
+      "distance": "48 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd toward Greenhills Rd/R819",
+      "nextLatitude": 53.28817979999999,
+      "nextLongitude": -6.357492799999999
+    },
+    {
+      "currentLatitude": 53.28817979999999,
+      "currentLongitude": -6.357492799999999,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head west on Main Rd/Old Blessington Rd toward Greenhills Rd/R819",
+      "nextLatitude": 53.28817830000001,
+      "nextLongitude": -6.3575934
+    },
+    {
+      "currentLatitude": 53.28817830000001,
+      "currentLongitude": -6.3575934,
+      "distance": "22 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.28837919999999,
+      "nextLongitude": -6.357621
+    },
+    {
+      "currentLatitude": 53.28837919999999,
+      "currentLongitude": -6.357621,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2885013,
+      "nextLongitude": -6.357626499999999
+    },
+    {
+      "currentLatitude": 53.2885013,
+      "currentLongitude": -6.357626499999999,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.28867520000001,
+      "nextLongitude": -6.357635699999999
+    },
+    {
+      "currentLatitude": 53.28867520000001,
+      "currentLongitude": -6.357635699999999,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2888516,
+      "nextLongitude": -6.3576372
+    },
+    {
+      "currentLatitude": 53.2888516,
+      "currentLongitude": -6.3576372,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2889199,
+      "nextLongitude": -6.357640099999999
+    },
+    {
+      "currentLatitude": 53.2889199,
+      "currentLongitude": -6.357640099999999,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2890108,
+      "nextLongitude": -6.3576194
+    },
+    {
+      "currentLatitude": 53.2890108,
+      "currentLongitude": -6.3576194,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2891852,
+      "nextLongitude": -6.357652
+    },
+    {
+      "currentLatitude": 53.2891852,
+      "currentLongitude": -6.357652,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2893099,
+      "nextLongitude": -6.357704
+    },
+    {
+      "currentLatitude": 53.2893099,
+      "currentLongitude": -6.357704,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2894055,
+      "nextLongitude": -6.3577395
+    },
+    {
+      "currentLatitude": 53.2894055,
+      "currentLongitude": -6.3577395,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2896498,
+      "nextLongitude": -6.357836
+    },
+    {
+      "currentLatitude": 53.2896498,
+      "currentLongitude": -6.357836,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819 toward Bancroft Park",
+      "nextLatitude": 53.2897921,
+      "nextLongitude": -6.3578839
+    },
+    {
+      "currentLatitude": 53.2897921,
+      "currentLongitude": -6.3578839,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.28992119999999,
+      "nextLongitude": -6.357935899999999
+    },
+    {
+      "currentLatitude": 53.28992119999999,
+      "currentLongitude": -6.357935899999999,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2900252,
+      "nextLongitude": -6.3579631
+    },
+    {
+      "currentLatitude": 53.2900252,
+      "currentLongitude": -6.3579631,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29019049999999,
+      "nextLongitude": -6.357987199999999
+    },
+    {
+      "currentLatitude": 53.29019049999999,
+      "currentLongitude": -6.357987199999999,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2903313,
+      "nextLongitude": -6.3579888
+    },
+    {
+      "currentLatitude": 53.2903313,
+      "currentLongitude": -6.3579888,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2904388,
+      "nextLongitude": -6.3579839
+    },
+    {
+      "currentLatitude": 53.2904388,
+      "currentLongitude": -6.3579839,
+      "distance": "24 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2906488,
+      "nextLongitude": -6.3579438
+    },
+    {
+      "currentLatitude": 53.2906488,
+      "currentLongitude": -6.3579438,
+      "distance": "6 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2906996,
+      "nextLongitude": -6.3579327
+    },
+    {
+      "currentLatitude": 53.2906996,
+      "currentLongitude": -6.3579327,
+      "distance": "10 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.290788,
+      "nextLongitude": -6.3579029
+    },
+    {
+      "currentLatitude": 53.290788,
+      "currentLongitude": -6.3579029,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2909426,
+      "nextLongitude": -6.3578351
+    },
+    {
+      "currentLatitude": 53.2909426,
+      "currentLongitude": -6.3578351,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2910398,
+      "nextLongitude": -6.357787900000001
+    },
+    {
+      "currentLatitude": 53.2910398,
+      "currentLongitude": -6.357787900000001,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.291063,
+      "nextLongitude": -6.3577722
+    },
+    {
+      "currentLatitude": 53.291063,
+      "currentLongitude": -6.3577722,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2912683,
+      "nextLongitude": -6.3576375
+    },
+    {
+      "currentLatitude": 53.2912683,
+      "currentLongitude": -6.3576375,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2913417,
+      "nextLongitude": -6.3575873
+    },
+    {
+      "currentLatitude": 53.2913417,
+      "currentLongitude": -6.3575873,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2914751,
+      "nextLongitude": -6.3574622
+    },
+    {
+      "currentLatitude": 53.2914751,
+      "currentLongitude": -6.3574622,
+      "distance": "19 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2916223,
+      "nextLongitude": -6.3573241
+    },
+    {
+      "currentLatitude": 53.2916223,
+      "currentLongitude": -6.3573241,
+      "distance": "27 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2918278,
+      "nextLongitude": -6.357117499999999
+    },
+    {
+      "currentLatitude": 53.2918278,
+      "currentLongitude": -6.357117499999999,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.291852,
+      "nextLongitude": -6.3570927
+    },
+    {
+      "currentLatitude": 53.291852,
+      "currentLongitude": -6.3570927,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.291974,
+      "nextLongitude": -6.356980999999999
+    },
+    {
+      "currentLatitude": 53.291974,
+      "currentLongitude": -6.356980999999999,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2919975,
+      "nextLongitude": -6.3569575
+    },
+    {
+      "currentLatitude": 53.2919975,
+      "currentLongitude": -6.3569575,
+      "distance": "21 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2921667,
+      "nextLongitude": -6.3568096
+    },
+    {
+      "currentLatitude": 53.2921667,
+      "currentLongitude": -6.3568096,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2922998,
+      "nextLongitude": -6.3566933
+    },
+    {
+      "currentLatitude": 53.2922998,
+      "currentLongitude": -6.3566933,
+      "distance": "18 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.29244389999999,
+      "nextLongitude": -6.3565865
+    },
+    {
+      "currentLatitude": 53.29244389999999,
+      "currentLongitude": -6.3565865,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2924804,
+      "nextLongitude": -6.356561699999999
+    },
+    {
+      "currentLatitude": 53.2924804,
+      "currentLongitude": -6.356561699999999,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head northeast on Greenhills Rd/R819",
+      "nextLatitude": 53.2925421,
+      "nextLongitude": -6.356511999999999
+    },
+    {
+      "currentLatitude": 53.2925421,
+      "currentLongitude": -6.356511999999999,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29265849999999,
+      "nextLongitude": -6.3564351
+    },
+    {
+      "currentLatitude": 53.29265849999999,
+      "currentLongitude": -6.3564351,
+      "distance": "14 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2927735,
+      "nextLongitude": -6.3563676
+    },
+    {
+      "currentLatitude": 53.2927735,
+      "currentLongitude": -6.3563676,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2929894,
+      "nextLongitude": -6.3562409
+    },
+    {
+      "currentLatitude": 53.2929894,
+      "currentLongitude": -6.3562409,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2932223,
+      "nextLongitude": -6.3560976
+    },
+    {
+      "currentLatitude": 53.2932223,
+      "currentLongitude": -6.3560976,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2933192,
+      "nextLongitude": -6.356038900000001
+    },
+    {
+      "currentLatitude": 53.2933192,
+      "currentLongitude": -6.356038900000001,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2935101,
+      "nextLongitude": -6.3559265
+    },
+    {
+      "currentLatitude": 53.2935101,
+      "currentLongitude": -6.3559265,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819 toward Airton Rd",
+      "nextLatitude": 53.2936561,
+      "nextLongitude": -6.3558394
+    },
+    {
+      "currentLatitude": 53.2936561,
+      "currentLongitude": -6.3558394,
+      "distance": "33 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2939353,
+      "nextLongitude": -6.355690699999999
+    },
+    {
+      "currentLatitude": 53.2939353,
+      "currentLongitude": -6.355690699999999,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2939726,
+      "nextLongitude": -6.3556694
+    },
+    {
+      "currentLatitude": 53.2939726,
+      "currentLongitude": -6.3556694,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2942084,
+      "nextLongitude": -6.355534899999999
+    },
+    {
+      "currentLatitude": 53.2942084,
+      "currentLongitude": -6.355534899999999,
+      "distance": "11 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.29430139999999,
+      "nextLongitude": -6.3554818
+    },
+    {
+      "currentLatitude": 53.29430139999999,
+      "currentLongitude": -6.3554818,
+      "distance": "33 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd/R819",
+      "nextLatitude": 53.2945812,
+      "nextLongitude": -6.355324
+    },
+    {
+      "currentLatitude": 53.2945812,
+      "currentLongitude": -6.355324,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2945726,
+      "nextLongitude": -6.3552597
+    },
+    {
+      "currentLatitude": 53.2945726,
+      "currentLongitude": -6.3552597,
+      "distance": "3 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.294569,
+      "nextLongitude": -6.3552081
+    },
+    {
+      "currentLatitude": 53.294569,
+      "currentLongitude": -6.3552081,
+      "distance": "4 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.29456800000001,
+      "nextLongitude": -6.355144900000001
+    },
+    {
+      "currentLatitude": 53.29456800000001,
+      "currentLongitude": -6.355144900000001,
+      "distance": "9 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2945715,
+      "nextLongitude": -6.3550121
+    },
+    {
+      "currentLatitude": 53.2945715,
+      "currentLongitude": -6.3550121,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2945815,
+      "nextLongitude": -6.3546301
+    },
+    {
+      "currentLatitude": 53.2945815,
+      "currentLongitude": -6.3546301,
+      "distance": "44 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2945986,
+      "nextLongitude": -6.3539749
+    },
+    {
+      "currentLatitude": 53.2945986,
+      "currentLongitude": -6.3539749,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2946051,
+      "nextLongitude": -6.353727999999999
+    },
+    {
+      "currentLatitude": 53.2946051,
+      "currentLongitude": -6.353727999999999,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2946117,
+      "nextLongitude": -6.3534757
+    },
+    {
+      "currentLatitude": 53.2946117,
+      "currentLongitude": -6.3534757,
+      "distance": "62 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.29463310000001,
+      "nextLongitude": -6.3525465
+    },
+    {
+      "currentLatitude": 53.29463310000001,
+      "currentLongitude": -6.3525465,
+      "distance": "49 m",
+      "duration": "1 min",
+      "instruction": "Head east on Greenhills Rd",
+      "nextLatitude": 53.2946446,
+      "nextLongitude": -6.351802999999999
+    },
+    {
+      "currentLatitude": 53.2946446,
+      "currentLongitude": -6.351802999999999,
+      "distance": "87 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd",
+      "nextLatitude": 53.2954253,
+      "nextLongitude": -6.3518772
+    },
+    {
+      "currentLatitude": 53.2954253,
+      "currentLongitude": -6.3518772,
+      "distance": "74 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd",
+      "nextLatitude": 53.2960903,
+      "nextLongitude": -6.3519103
+    },
+    {
+      "currentLatitude": 53.2960903,
+      "currentLongitude": -6.3519103,
+      "distance": "56 m",
+      "duration": "1 min",
+      "instruction": "Head north on Greenhills Rd",
+      "nextLatitude": 53.29659119999999,
+      "nextLongitude": -6.3519235
+    },
+    {
+      "currentLatitude": 53.29659119999999,
+      "currentLongitude": -6.3519235,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head west on Greenhills Rd",
+      "nextLatitude": 53.2965885,
+      "nextLongitude": -6.3520241
+    },
+    {
+      "currentLatitude": 53.2965885,
+      "currentLongitude": -6.3520241,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head west on Greenhills Rd",
+      "nextLatitude": 53.296582,
+      "nextLongitude": -6.3522663
+    },
+    {
+      "currentLatitude": 53.296582,
+      "currentLongitude": -6.3522663,
+      "distance": "54 m",
+      "duration": "1 min",
+      "instruction": "Head west on Greenhills Rd",
+      "nextLatitude": 53.2965604,
+      "nextLongitude": -6.353074899999999
+    },
+    {
+      "currentLatitude": 53.2965604,
+      "currentLongitude": -6.353074899999999,
+      "distance": "80 m",
+      "duration": "1 min",
+      "instruction": "Head west on Greenhills Rd toward R819",
+      "nextLatitude": 53.2965303,
+      "nextLongitude": -6.354278
+    },
+    {
+      "currentLatitude": 53.2965303,
+      "currentLongitude": -6.354278,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head south on Greenhills Rd/R819",
+      "nextLatitude": 53.2963587,
+      "nextLongitude": -6.354358
+    },
+    {
+      "currentLatitude": 53.2963587,
+      "currentLongitude": -6.354358,
+      "distance": "12 m",
+      "duration": "1 min",
+      "instruction": "Head south on Greenhills Rd/R819 toward Broomhill Rd",
+      "nextLatitude": 53.29625540000001,
+      "nextLongitude": -6.3544109
+    },
+    {
+      "currentLatitude": 53.29625540000001,
+      "currentLongitude": -6.3544109,
+      "distance": "15 m",
+      "duration": "1 min",
+      "instruction": "Head south on Greenhills Rd/R819 toward Broomhill Rd",
+      "nextLatitude": 53.29612119999999,
+      "nextLongitude": -6.354468799999999
+    },
+    {
+      "currentLatitude": 53.29612119999999,
+      "currentLongitude": -6.354468799999999,
+      "distance": "1 m",
+      "duration": "1 min",
+      "instruction": "Head on Greenhills Rd/R819",
+      "nextLatitude": 53.29612119999999,
+      "nextLongitude": -6.354468799999999
+    },
+    {
+      "currentLatitude": 53.29612119999999,
+      "currentLongitude": -6.354468799999999,
+      "distance": "17 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2961677,
+      "nextLongitude": -6.3547061
+    },
+    {
+      "currentLatitude": 53.2961677,
+      "currentLongitude": -6.3547061,
+      "distance": "85 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2964044,
+      "nextLongitude": -6.3559152
+    },
+    {
+      "currentLatitude": 53.2964044,
+      "currentLongitude": -6.3559152,
+      "distance": "29 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.296485,
+      "nextLongitude": -6.3563314
+    },
+    {
+      "currentLatitude": 53.296485,
+      "currentLongitude": -6.3563314,
+      "distance": "54 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2966334,
+      "nextLongitude": -6.3571069
+    },
+    {
+      "currentLatitude": 53.2966334,
+      "currentLongitude": -6.3571069,
+      "distance": "7 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.296653,
+      "nextLongitude": -6.3572096
+    },
+    {
+      "currentLatitude": 53.296653,
+      "currentLongitude": -6.3572096,
+      "distance": "69 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968284,
+      "nextLongitude": -6.3582019
+    },
+    {
+      "currentLatitude": 53.2968284,
+      "currentLongitude": -6.3582019,
+      "distance": "34 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968817,
+      "nextLongitude": -6.3587124
+    },
+    {
+      "currentLatitude": 53.2968817,
+      "currentLongitude": -6.3587124,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.296889,
+      "nextLongitude": -6.3588358
+    },
+    {
+      "currentLatitude": 53.296889,
+      "currentLongitude": -6.3588358,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968973,
+      "nextLongitude": -6.3592051
+    },
+    {
+      "currentLatitude": 53.2968973,
+      "currentLongitude": -6.3592051,
+      "distance": "25 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968869,
+      "nextLongitude": -6.3595806
+    },
+    {
+      "currentLatitude": 53.2968869,
+      "currentLongitude": -6.3595806,
+      "distance": "16 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968708,
+      "nextLongitude": -6.3598247
+    },
+    {
+      "currentLatitude": 53.2968708,
+      "currentLongitude": -6.3598247,
+      "distance": "20 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.29683929999999,
+      "nextLongitude": -6.3601177
+    },
+    {
+      "currentLatitude": 53.29683929999999,
+      "currentLongitude": -6.3601177,
+      "distance": "8 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2968268,
+      "nextLongitude": -6.3602339
+    },
+    {
+      "currentLatitude": 53.2968268,
+      "currentLongitude": -6.3602339,
+      "distance": "23 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2967993,
+      "nextLongitude": -6.3605778
+    },
+    {
+      "currentLatitude": 53.2967993,
+      "currentLongitude": -6.3605778,
+      "distance": "28 m",
+      "duration": "1 min",
+      "instruction": "Head west on Broomhill Rd",
+      "nextLatitude": 53.2967588,
+      "nextLongitude": -6.360988600000001
+    }
+  ]
+  
