@@ -7,7 +7,7 @@ export const routifyConstantsService = (function () {
     "Observation (over the shoulder)",
   ];
 
-  const MSM_REMINDERS = ["Check Mirrors", "Signal", "Manoeuvre/move"];
+  const MSM_REMINDERS = ["Check Mirrors", "Signal", "Manoeuvre"];
 
   const MANEUVERS_MAP = {
     HILLTOP: "Hill Start",

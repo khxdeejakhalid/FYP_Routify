@@ -177,9 +177,9 @@ const MapScreen = () => {
   };
 
   const clearJourneyInterval = () => {
-    if (journeyIntervalRef.current) {
-      clearInterval(journeyIntervalRef.current);
-      journeyIntervalRef.current = null;
+    if (JourneyIntervalRef.current) {
+      clearInterval(JourneyIntervalRef.current);
+      JourneyIntervalRef.current = null;
     }
   };
 
