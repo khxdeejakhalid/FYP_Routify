@@ -7,20 +7,23 @@ import {
   Text,
 } from "react-native";
 import MapView, { Marker, Polyline, AnimatedRegion } from "react-native-maps";
+import { useNavigation } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import * as Location from "expo-location";
 import * as Speech from "expo-speech";
 
+import CustomModal from "../components/CustomModal";
 import { fonts } from "../utils/fonts";
 import { colors } from "../utils/colors";
-import routeData from "../assets/json/Route1DetailedDirections.json";
+import { getWaypoints, getTurnsByRoute } from "../utils/api";
 import { routifyConstantsService } from "../services/routifyConstantsService";
 import {
   getDistance,
   animateToRegion,
   getCurrentLocation,
-  findNearestPoint,
-  calculateBearing,
+  transformRoute,
+  transformTurns,
 } from "../utils/mapUtils";
-import * as Location from "expo-location";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,10 +32,13 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const MapScreen = () => {
+  const routeId = 1;
+  const navigation = useNavigation();
+
   // * Refs
   const mapRef = useRef(null);
   const markerRef = useRef(null);
-  const journeyIntervalRef = useRef(null);
+  const JourneyIntervalRef = useRef(null);
   const userLocation = useRef(
     new AnimatedRegion({
       latitude: 53.296626,
@@ -44,32 +50,69 @@ const MapScreen = () => {
 
   // * State variables
   const [route, setRoute] = useState([]);
+  const [turns, setTurns] = useState([]);
+  const [isRouteLoaded, setIsRouteLoaded] = useState(false);
   const [currentInstruction, setCurrentInstruction] = useState(null);
   const [isJourneyStarted, setIsJourneyStarted] = useState(false);
   const [currentLocation, setCurrentLocation] = useState({
     latitude: 53.296626143012745,
     longitude: -6.361571573136808,
+    heading: 90,
   });
 
+  const [modalText, setModalText] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
+
   // * Constants
+  const msmReminders = routifyConstantsService.MSM_REMINDERS;
   const maneuvers = routifyConstantsService.MANEUVERS;
   const maneuversMap = routifyConstantsService.MANEUVERS_MAP;
+  const triggeredTurns = new Set();
+  const MSMDistanceThreshold = 30;
 
   // * Hooks
   useEffect(() => {
-    function transformRoute() {
-      return routeData.map((point) => ({
-        latitude: point.currentLatitude,
-        longitude: point.currentLongitude,
-      }));
+    async function fetchRoute() {
+      const response = await getWaypoints(routeId);
+      if (response.success) {
+        const transformedRoute = transformRoute(response.waypoints);
+        setRoute(transformedRoute);
+        setIsRouteLoaded(true);
+      } else {
+        setModalHeader("Failure");
+        setModalText(response.description);
+        setModalVisible(true);
+      }
     }
 
-    const transformedRoute = transformRoute();
-    setRoute(transformedRoute);
+    async function fetchTurns() {
+      const response = await getTurnsByRoute(routeId);
+      if (response.success) {
+        const transformedTurns = transformTurns(response.turns);
+        setTurns(transformedTurns);
+      } else {
+        setModalHeader("Failure");
+        setModalText(response.description);
+        setModalVisible(true);
+      }
+    }
+
+    fetchRoute();
+    fetchTurns();
+
     return () => clearJourneyInterval();
   }, []);
 
   // * Functions / Handlers
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
+
   const playRemindersWithDelay = async (reminders, delay = 2000) => {
     for (const reminder of reminders) {
       Speech.speak(reminder);
@@ -80,49 +123,29 @@ const MapScreen = () => {
   };
 
   const detectUpcomingTurn = (currentLat, currentLng) => {
-    const { nearestPoint, nearestIndex } = findNearestPoint(
-      currentLat,
-      currentLng,
-      routeData,
-    );
-    const msmReminders = routifyConstantsService.MSM_REMINDERS;
-
-    if (nearestPoint && nearestIndex < routeData.length - 1) {
-      const nextPoint = routeData[nearestIndex + 1];
-      const afterNextPoint = routeData[nearestIndex + 2];
-
-      const distanceToNextPoint = getDistance(
+    turns.forEach((turn) => {
+      const distanceToTurn = getDistance(
         currentLat,
         currentLng,
-        nextPoint.currentLatitude,
-        nextPoint.currentLongitude,
+        turn.latitude,
+        turn.longitude,
       );
 
-      const currentBearing = calculateBearing(
-        nearestPoint.currentLatitude,
-        nearestPoint.currentLongitude,
-        nextPoint.currentLatitude,
-        nextPoint.currentLongitude,
-      );
-
-      const nextBearing = calculateBearing(
-        nextPoint.currentLatitude,
-        nextPoint.currentLongitude,
-        afterNextPoint?.currentLatitude ?? nextPoint.currentLatitude,
-        afterNextPoint?.currentLongitude ?? nextPoint.currentLongitude,
-      );
-
-      const turnAngle = Math.abs(nextBearing - currentBearing);
-
-      if (distanceToNextPoint < 50 && turnAngle > 30) {
+      if (distanceToTurn <= MSMDistanceThreshold && !triggeredTurns.has(turn)) {
+        triggeredTurns.add(turn);
         playRemindersWithDelay(msmReminders, 2000);
+
+        setTimeout(() => triggeredTurns.delete(turn), 60000);
       }
-    } else {
-      setCurrentInstruction("Unable to find a valid route point.");
-    }
+    });
   };
 
-  const startJourney = () => {
+  const startJourney = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      return;
+    }
+
     const goshoReminders = routifyConstantsService.GOSHO_REMINDERS;
     setIsJourneyStarted(true);
     playRemindersWithDelay(goshoReminders, 2000);
@@ -130,25 +153,24 @@ const MapScreen = () => {
   };
 
   const stopJourney = () => {
+    const initialPosition = {
+      latitude: route[0].latitude,
+      longitude: route[0].longitude,
+      heading: 90,
+    };
     clearJourneyInterval();
     setIsJourneyStarted(false);
     setCurrentInstruction(null);
-    setCurrentLocation({
-      latitude: 53.296626143012745,
-      longitude: -6.361571573136808,
-    });
+    userLocation.timing(initialPosition).start();
+    setCurrentLocation(initialPosition);
+    animateToRegion(mapRef, userLocation, initialPosition);
     Speech.stop();
   };
 
   const simulateJourney = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      return;
-    }
-
-    journeyIntervalRef.current = setInterval(async () => {
+    JourneyIntervalRef.current = setInterval(async () => {
       const { latitude, longitude, heading } = await getCurrentLocation();
-      setCurrentLocation({ latitude, longitude });
+      setCurrentLocation({ latitude, longitude, heading });
       detectUpcomingTurn(latitude, longitude);
       animateToRegion(mapRef, userLocation, { latitude, longitude });
     }, 3000);
@@ -163,58 +185,84 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        style={styles.map}
-        initialRegion={{
-          ...currentLocation,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}>
-        {route.length > 0 && (
-          <Polyline
-            coordinates={route}
-            strokeColor={colors.primary}
-            strokeWidth={4}
-          />
-        )}
-        <Marker.Animated
-          ref={markerRef}
-          coordinate={userLocation}
-          title="You are here"
-          pinColor={colors.primary}
+      <TouchableOpacity style={styles.backButtonWrapper} onPress={handleGoBack}>
+        <Ionicons
+          name={"arrow-back-outline"}
+          color={colors.primary}
+          size={25}
         />
-        {/* Maneuvers Markers  */}
-        {Object.values(maneuversMap).map((maneuverKey, index) => {
-          return (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: maneuvers[maneuverKey].startPos.lat,
-                longitude: maneuvers[maneuverKey].startPos.lng,
-              }}
-              title={`${maneuverKey} Maneuver`}
-              description={maneuverKey}
-              pinColor={colors.primary}
-            />
-          );
-        })}
-      </MapView>
+      </TouchableOpacity>
+      {isRouteLoaded && (
+        <>
+          <MapView
+            ref={mapRef}
+            style={styles.map}
+            initialRegion={{
+              ...currentLocation,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            }}>
+            {route.length > 0 && (
+              <Polyline
+                coordinates={route}
+                strokeColor={colors.primary}
+                strokeWidth={4}
+              />
+            )}
 
-      {currentInstruction && (
-        <View style={styles.instructionContainer}>
-          <Text style={styles.instructionText}>{currentInstruction}</Text>
-        </View>
+            <Marker.Animated
+              ref={markerRef}
+              coordinate={userLocation}
+              title="Your Location"
+              image={require("../assets/icons/navigator.png")}
+              anchor={{ x: 0.5, y: 0.5 }}
+              style={{
+                transform: [{ rotate: `${currentLocation.heading}deg` }],
+              }}
+            />
+
+            {/* Maneuvers Markers  */}
+            {Object.values(maneuversMap).map((maneuverKey, index) => {
+              return (
+                <Marker
+                  key={index}
+                  coordinate={{
+                    latitude: maneuvers[maneuverKey].startPos.lat,
+                    longitude: maneuvers[maneuverKey].startPos.lng,
+                  }}
+                  title={`${maneuverKey} Maneuver`}
+                  description={maneuverKey}
+                  pinColor={colors.primary}
+                />
+              );
+            })}
+          </MapView>
+
+          {currentInstruction && (
+            <View style={styles.instructionContainer}>
+              <Text style={styles.instructionText}>{currentInstruction}</Text>
+            </View>
+          )}
+          {isJourneyStarted ? (
+            <TouchableOpacity style={styles.startButton} onPress={stopJourney}>
+              <Text style={styles.startButtonText}>Stop Journey</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.startButton} onPress={startJourney}>
+              <Text style={styles.startButtonText}>Start Journey</Text>
+            </TouchableOpacity>
+          )}
+        </>
       )}
-      {isJourneyStarted ? (
-        <TouchableOpacity style={styles.startButton} onPress={stopJourney}>
-          <Text style={styles.startButtonText}>Stop </Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.startButton} onPress={startJourney}>
-          <Text style={styles.startButtonText}>Start Journey</Text>
-        </TouchableOpacity>
-      )}
+
+      <CustomModal
+        visible={isModalVisible}
+        title={modalHeader}
+        message={modalText}
+        singleButton={true}
+        buttonOneText="Close"
+        onButtonOnePress={handleModalClose}
+      />
     </View>
   );
 };
@@ -226,6 +274,17 @@ const styles = StyleSheet.create({
   map: {
     width: width,
     height: height,
+  },
+  backButtonWrapper: {
+    position: "absolute",
+    top: 50,
+    left: 10,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
   },
   instructionContainer: {
     position: "absolute",

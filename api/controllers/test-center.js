@@ -17,7 +17,15 @@ export const addTestCenter = async (req, res) => {
   const city = req.body.city;
   const country = req.body.country;
 
+  if (!name || !city || !country) {
+    return res.status(400).json({
+      status: "failure",
+      description: "Missing required fields: name, city, or country",
+    });
+  }
+  
   const testCenter = new TestCenter(name, city, country);
+
   testCenter
     .save()
     .then(() => {

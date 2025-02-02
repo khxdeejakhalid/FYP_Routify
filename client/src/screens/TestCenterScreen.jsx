@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
+  Platform
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
@@ -76,18 +77,20 @@ const TestCenterScreen = () => {
       {/* Picker Content */}
       <View style={styles.contentWrapper}>
         <Text style={styles.title}>Select a Test Center</Text>
-        <Picker
-          selectedValue={selectedCenter}
-          style={styles.picker}
-          onValueChange={(itemValue) => setSelectedCenter(itemValue)}>
-          {testCenters.map((center) => (
-            <Picker.Item
-              key={center.NAME}
-              label={center.NAME}
-              value={center.NAME}
-            />
-          ))}
-        </Picker>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={selectedCenter}
+            style={styles.picker}
+            onValueChange={(itemValue) => setSelectedCenter(itemValue)}>
+            {testCenters.map((center) => (
+              <Picker.Item
+                key={center.NAME}
+                label={center.NAME}
+                value={center.NAME}
+              />
+            ))}
+          </Picker>
+        </View>
       </View>
 
       <Button
@@ -143,10 +146,17 @@ const styles = StyleSheet.create({
     color: colors.primary,
     marginBottom: 20,
   },
-  picker: {
-    height: 50,
+  pickerWrapper: {
+    borderRadius: 10,
+    overflow: Platform.OS === "android" ? "hidden" : "", 
+    backgroundColor: Platform.OS === "android" ? `${colors.primary}` : "", 
     width: "80%",
-    color: colors.primary,
+    height: 60,
+  },
+  picker: {
+    width: "100%",
+    height: "100%",
+    color: Platform.OS === "android" ? `${colors.white}` : `${colors.primary}`,
   },
 });
 

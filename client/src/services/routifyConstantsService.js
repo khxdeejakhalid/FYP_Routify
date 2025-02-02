@@ -12,7 +12,7 @@ export const routifyConstantsService = (function () {
   const MANEUVERS_MAP = {
     HILLTOP: "Hill Start",
     REVERSE_PARKING: "Reverse Around the Corner",
-    PARALLEL_PARKING: "Turnabout",
+    TURN_ABOUT: "Turnabout",
   };
 
   const MANEUVERS = {
@@ -37,7 +37,7 @@ export const routifyConstantsService = (function () {
         lng: -6.0,
       },
     },
-    [MANEUVERS_MAP.PARALLEL_PARKING]: {
+    [MANEUVERS_MAP.TURN_ABOUT]: {
       startPos: {
         lat: 53.296234,
         lng: -6.341734,

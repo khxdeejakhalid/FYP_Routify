@@ -121,7 +121,7 @@ const SignupScreen = () => {
           <Text style={styles.label}>Username</Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
-              name={"screen-smartphone"} 
+              name={"screen-smartphone"}
               size={20}
               color={colors.secondary}
             />

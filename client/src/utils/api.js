@@ -192,6 +192,7 @@ export const checkEmail = async (email) => {
     };
   }
 };
+
 export const fetchDirections = async (origin, destination, waypoints) => {
   const apiKey = "API_KEY";
   const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
@@ -222,4 +223,34 @@ export const fetchDirections = async (origin, destination, waypoints) => {
   } catch (error) {
     console.error("Error fetching directions:", error);
   }
-}
+};
+
+export const getWaypoints = async (routeId) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/waypoints/${routeId}`);
+
+    if (response.data.status === "success") {
+      return { success: true, waypoints: response.data.waypoints };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const getTurnsByRoute = async (routeId) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/turns/${routeId}`);
+
+    if (response.data.status === "success") {
+      return { success: true, turns: response.data.turns };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};

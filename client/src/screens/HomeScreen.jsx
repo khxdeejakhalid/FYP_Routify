@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     width: "45%",
     height: height * 0.15,
     backgroundColor: colors.primary,
+    boxShadow: "4px 4px black",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: height * 0.02,

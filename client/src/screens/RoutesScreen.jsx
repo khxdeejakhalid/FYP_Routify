@@ -20,21 +20,13 @@ const { width, height } = Dimensions.get("window");
 
 const RoutesScreen = () => {
   const navigation = useNavigation();
-  const [selectedRoute, setSelectedRoute] = useState(null);
+  const [selectedRoute, setSelectedRoute] = useState("route1");
 
   const routes = [
     { label: "Route 1", value: "route1" },
     { label: "Route 2", value: "route2" },
     { label: "Route 3", value: "route3" },
     { label: "Route 4", value: "route4" },
-    { label: "Route 5", value: "route5" },
-    { label: "Route 6", value: "route6" },
-    { label: "Route 7", value: "route7" },
-    { label: "Route 8", value: "route8" },
-    { label: "Route 9", value: "route9" },
-    { label: "Route 10", value: "route10" },
-    { label: "Route 11", value: "route11" },
-    { label: "Route 12", value: "route12" },
   ];
 
   const handleGoBack = () => {

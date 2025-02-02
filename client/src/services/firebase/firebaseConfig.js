@@ -14,9 +14,8 @@ export const firebaseConfig = (function () {
     projectId: "routify-19d15",
     storageBucket: "routify-19d15.appspot.com",
     messagingSenderId: "900992434227",
-    appId: "1:900992434227:web:16455c0acf8d11dc9d2346"
+    appId: "1:900992434227:web:16455c0acf8d11dc9d2346",
   };
-  
   const app = initializeApp(firebaseConfig);
   const auth = initializeAuth(app, {
     persistence: getReactNativePersistence(AsyncStorage),
