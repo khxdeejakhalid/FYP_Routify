@@ -9,37 +9,67 @@ import {
 import MapView, { Marker, Polyline, AnimatedRegion } from "react-native-maps";
 import * as Speech from "expo-speech";
 
-import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
-import { getSnappedRoutes } from "../utils/api";
-import route1 from "../assets/json/Route1Accurate.json";
+import { colors } from "../utils/colors";
+import routeData from "../assets/json/Route1DetailedDirections.json";
 import { routifyConstantsService } from "../services/routifyConstantsService";
+import {
+  getDistance,
+  animateToRegion,
+  getCurrentLocation,
+  findNearestPoint,
+  calculateBearing,
+} from "../utils/mapUtils";
+import * as Location from "expo-location";
 
 const { width, height } = Dimensions.get("window");
 
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.04;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const MapScreen = () => {
-  const [route, setRoute] = useState([]);
-
-  const [currentInstruction, setCurrentInstruction] = useState(null);
-
-  const [userLocation, setUserLocation] = useState(
+  // * Refs
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const journeyIntervalRef = useRef(null);
+  const userLocation = useRef(
     new AnimatedRegion({
       latitude: 53.296626,
       longitude: -6.361573,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
     }),
-  );
-  const mapRef = useRef(null);
-  const markerRef = useRef(null);
+  ).current;
 
-  // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
-  // const [snappedRoute, setSnappedRoute] = useState([]);
+  // * State variables
+  const [route, setRoute] = useState([]);
+  const [currentInstruction, setCurrentInstruction] = useState(null);
+  const [isJourneyStarted, setIsJourneyStarted] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState({
+    latitude: 53.296626143012745,
+    longitude: -6.361571573136808,
+  });
 
+  // * Constants
+  const maneuvers = routifyConstantsService.MANEUVERS;
+  const maneuversMap = routifyConstantsService.MANEUVERS_MAP;
+
+  // * Hooks
   useEffect(() => {
-    setRoute(route1);
+    function transformRoute() {
+      return routeData.map((point) => ({
+        latitude: point.currentLatitude,
+        longitude: point.currentLongitude,
+      }));
+    }
+
+    const transformedRoute = transformRoute();
+    setRoute(transformedRoute);
+    return () => clearJourneyInterval();
   }, []);
 
+  // * Functions / Handlers
   const playRemindersWithDelay = async (reminders, delay = 2000) => {
     for (const reminder of reminders) {
       Speech.speak(reminder);
@@ -49,19 +79,86 @@ const MapScreen = () => {
     setCurrentInstruction(null);
   };
 
-  // ? This will be uncommented if mapping route lat long to roads api and fetching accurate route
-  // useEffect(() => {
-  //   async function fetchRoute() {
-  //     const route = await getSnappedRoutes(route1);
-  //     console.log(route);
-  //     setSnappedRoute(route);
-  //   }
-  //   fetchRoute();
-  // }, []);
+  const detectUpcomingTurn = (currentLat, currentLng) => {
+    const { nearestPoint, nearestIndex } = findNearestPoint(
+      currentLat,
+      currentLng,
+      routeData,
+    );
+    const msmReminders = routifyConstantsService.MSM_REMINDERS;
+
+    if (nearestPoint && nearestIndex < routeData.length - 1) {
+      const nextPoint = routeData[nearestIndex + 1];
+      const afterNextPoint = routeData[nearestIndex + 2];
+
+      const distanceToNextPoint = getDistance(
+        currentLat,
+        currentLng,
+        nextPoint.currentLatitude,
+        nextPoint.currentLongitude,
+      );
+
+      const currentBearing = calculateBearing(
+        nearestPoint.currentLatitude,
+        nearestPoint.currentLongitude,
+        nextPoint.currentLatitude,
+        nextPoint.currentLongitude,
+      );
+
+      const nextBearing = calculateBearing(
+        nextPoint.currentLatitude,
+        nextPoint.currentLongitude,
+        afterNextPoint?.currentLatitude ?? nextPoint.currentLatitude,
+        afterNextPoint?.currentLongitude ?? nextPoint.currentLongitude,
+      );
+
+      const turnAngle = Math.abs(nextBearing - currentBearing);
+
+      if (distanceToNextPoint < 50 && turnAngle > 30) {
+        playRemindersWithDelay(msmReminders, 2000);
+      }
+    } else {
+      setCurrentInstruction("Unable to find a valid route point.");
+    }
+  };
 
   const startJourney = () => {
-    const goshoReminders = routifyConstantsService.goshoReminders;
+    const goshoReminders = routifyConstantsService.GOSHO_REMINDERS;
+    setIsJourneyStarted(true);
     playRemindersWithDelay(goshoReminders, 2000);
+    simulateJourney();
+  };
+
+  const stopJourney = () => {
+    clearJourneyInterval();
+    setIsJourneyStarted(false);
+    setCurrentInstruction(null);
+    setCurrentLocation({
+      latitude: 53.296626143012745,
+      longitude: -6.361571573136808,
+    });
+    Speech.stop();
+  };
+
+  const simulateJourney = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      return;
+    }
+
+    journeyIntervalRef.current = setInterval(async () => {
+      const { latitude, longitude, heading } = await getCurrentLocation();
+      setCurrentLocation({ latitude, longitude });
+      detectUpcomingTurn(latitude, longitude);
+      animateToRegion(mapRef, userLocation, { latitude, longitude });
+    }, 3000);
+  };
+
+  const clearJourneyInterval = () => {
+    if (journeyIntervalRef.current) {
+      clearInterval(journeyIntervalRef.current);
+      journeyIntervalRef.current = null;
+    }
   };
 
   return (
@@ -70,10 +167,9 @@ const MapScreen = () => {
         ref={mapRef}
         style={styles.map}
         initialRegion={{
-          latitude: 53.2904,
-          longitude: -6.3646,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
+          ...currentLocation,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
         }}>
         {route.length > 0 && (
           <Polyline
@@ -88,6 +184,21 @@ const MapScreen = () => {
           title="You are here"
           pinColor={colors.primary}
         />
+        {/* Maneuvers Markers  */}
+        {Object.values(maneuversMap).map((maneuverKey, index) => {
+          return (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: maneuvers[maneuverKey].startPos.lat,
+                longitude: maneuvers[maneuverKey].startPos.lng,
+              }}
+              title={`${maneuverKey} Maneuver`}
+              description={maneuverKey}
+              pinColor={colors.primary}
+            />
+          );
+        })}
       </MapView>
 
       {currentInstruction && (
@@ -95,10 +206,15 @@ const MapScreen = () => {
           <Text style={styles.instructionText}>{currentInstruction}</Text>
         </View>
       )}
-
-      <TouchableOpacity style={styles.startButton} onPress={startJourney}>
-        <Text style={styles.startButtonText}>Start Journey</Text>
-      </TouchableOpacity>
+      {isJourneyStarted ? (
+        <TouchableOpacity style={styles.startButton} onPress={stopJourney}>
+          <Text style={styles.startButtonText}>Stop </Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.startButton} onPress={startJourney}>
+          <Text style={styles.startButtonText}>Start Journey</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
