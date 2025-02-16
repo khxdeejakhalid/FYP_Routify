@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = `http://192.168.0.94:8080/api`;
+const BACKEND_URL = `http://172.20.10.13:8080/api`;
 
 export const signIn = async (email, password) => {
   try {
@@ -155,7 +155,7 @@ export const updateUserInformation = async (email, userInfo) => {
   }
 };
 
-export const getSnappedRoutes = async (coordinates) => {
+export const getDataFromRoadsAPI = async (coordinates) => {
   const apiKey = "API_KEY";
   const path = coordinates
     .map((coord) => `${coord.latitude},${coord.longitude}`)
@@ -193,7 +193,7 @@ export const checkEmail = async (email) => {
   }
 };
 
-export const fetchDirections = async (origin, destination, waypoints) => {
+export const getDataFromDirectionsAPI = async (origin, destination, waypoints) => {
   const apiKey = "API_KEY";
   const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
     origin,

@@ -1,4 +1,9 @@
 export const routifyConstantsService = (function () {
+
+  const MANEUVERS_PROXIMITY_THRESHOLD = 10;
+
+  const MSM_REMINDERS = ["Check Mirrors", "Signal", "Manoeuvre/move"];
+
   const GOSHO_REMINDERS = [
     "Select gear",
     "Observe surroundings",
@@ -7,16 +12,26 @@ export const routifyConstantsService = (function () {
     "Observation (over the shoulder)",
   ];
 
-  const MSM_REMINDERS = ["Check Mirrors", "Signal", "Manoeuvre"];
+  const REVERSE_AROUND_CORNER_REMINDERS = {
+    STARTING_POINT: "Reverse Around Corner Manoeuvre Started",
+    ENDING_POINT: "Reverse Around Corner Manoeuvre Completed",
+    KERB_TOO_CLOSE: "Too Close To The Kerb, Steer Away",
+    KERB_TOO_FAR: "Too Far From The Kerb, Steer Closer To The Kerb",
+  };
 
-  const MANEUVERS_MAP = {
+  const HILL_TOP_REMINDERS = {
+    STARTING_POINT: "Hill Top Manoeuvre Started",
+    ENDING_POINT: "Hill Top Manoeuvre Completed",
+  };
+
+  const MANEUVERS_TYPE = {
     HILLTOP: "Hill Start",
     REVERSE_PARKING: "Reverse Around the Corner",
     TURN_ABOUT: "Turnabout",
   };
 
   const MANEUVERS = {
-    [MANEUVERS_MAP.HILLTOP]: {
+    [MANEUVERS_TYPE.HILLTOP]: {
       startPos: {
         lat: 53.2992462,
         lng: -6.3492096,
@@ -26,18 +41,51 @@ export const routifyConstantsService = (function () {
         lng: -6.3492096,
       },
     },
-    [MANEUVERS_MAP.REVERSE_PARKING]: {
+    [MANEUVERS_TYPE.REVERSE_PARKING]: {
       startPos: {
-        lat: 53.295606,
-        lng: -6.343768,
+        lat: 53.2956114562911,
+        lng: -6.343770754479805,
       },
-      // @TODO: Needs to be figured out
+      kerbs: [
+        {
+          lat: 53.29551,
+          lng: -6.3436,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34361,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34361,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34361,
+        },
+        {
+          lat: 53.2955,
+          lng: -6.34362,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34362,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34363,
+        },
+        {
+          lat: 53.29551,
+          lng: -6.34363,
+        },
+      ],
       endPos: {
-        lat: 0,
-        lng: -6.0,
+        lat: 53.29551,
+        lng: -6.34363,
       },
     },
-    [MANEUVERS_MAP.TURN_ABOUT]: {
+    [MANEUVERS_TYPE.TURN_ABOUT]: {
       startPos: {
         lat: 53.296234,
         lng: -6.341734,
@@ -51,8 +99,11 @@ export const routifyConstantsService = (function () {
   };
   return {
     GOSHO_REMINDERS,
+    REVERSE_AROUND_CORNER_REMINDERS,
     MSM_REMINDERS,
-    MANEUVERS_MAP,
+    MANEUVERS_TYPE,
     MANEUVERS,
+    MANEUVERS_PROXIMITY_THRESHOLD,
+    HILL_TOP_REMINDERS
   };
 })();

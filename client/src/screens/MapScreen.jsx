@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -12,18 +12,16 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import * as Speech from "expo-speech";
 
-import CustomModal from "../components/CustomModal";
 import { fonts } from "../utils/fonts";
 import { colors } from "../utils/colors";
 import { getWaypoints, getTurnsByRoute } from "../utils/api";
 import { routifyConstantsService } from "../services/routifyConstantsService";
-import {
-  getDistance,
-  animateToRegion,
-  getCurrentLocation,
-  transformRoute,
-  transformTurns,
-} from "../utils/mapUtils";
+import { processRoute } from "../utils/routesProcessing.js";
+import { mapUtils } from "../utils/mapUtils";
+import { maneuverUtils } from "../utils/maneueverUtilityService";
+
+import routeData from "../assets/json/Route1.json";
+import CustomModal from "../components/CustomModal";
 
 const { width, height } = Dimensions.get("window");
 
@@ -39,6 +37,7 @@ const MapScreen = () => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const JourneyIntervalRef = useRef(null);
+  const isReverseAroundCornerManeuverActiveRef = useRef(false);
   const userLocation = useRef(
     new AnimatedRegion({
       latitude: 53.296626,
@@ -59,15 +58,29 @@ const MapScreen = () => {
     longitude: -6.361571573136808,
     heading: 90,
   });
+  const [maneuverFeedback, setManeuverFeedback] = useState(null);
+
+  // * Reverse Around Corner State Variables
+  const [reverseAroundCornerTouchedKerb, setReverseAroundCornerTouchedKerb] =
+    useState(false);
 
   const [modalText, setModalText] = useState("");
   const [modalHeader, setModalHeader] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
 
   // * Constants
+  let totalDeviations = [];
+  let totalSpeed = [];
+  let manueverStartTime = null;
+  let manueverEndTime = null;
+  let isManeueverActive = false;
+  let speedHistory = [];
+  let carIdleStateCount = 0;
+  let startTime = 0;
+
   const msmReminders = routifyConstantsService.MSM_REMINDERS;
   const maneuvers = routifyConstantsService.MANEUVERS;
-  const maneuversMap = routifyConstantsService.MANEUVERS_MAP;
+  const maneuversMap = routifyConstantsService.MANEUVERS_TYPE;
   const triggeredTurns = new Set();
   const MSMDistanceThreshold = 30;
 
@@ -76,7 +89,7 @@ const MapScreen = () => {
     async function fetchRoute() {
       const response = await getWaypoints(routeId);
       if (response.success) {
-        const transformedRoute = transformRoute(response.waypoints);
+        const transformedRoute = mapUtils.transformRoute(response.waypoints);
         setRoute(transformedRoute);
         setIsRouteLoaded(true);
       } else {
@@ -89,7 +102,7 @@ const MapScreen = () => {
     async function fetchTurns() {
       const response = await getTurnsByRoute(routeId);
       if (response.success) {
-        const transformedTurns = transformTurns(response.turns);
+        const transformedTurns = mapUtils.transformTurns(response.turns);
         setTurns(transformedTurns);
       } else {
         setModalHeader("Failure");
@@ -98,7 +111,14 @@ const MapScreen = () => {
       }
     }
 
+    async function fetchRouteFromJSON() {
+      const response = await processRoute(routeData);
+      setRoute(response);
+      setIsRouteLoaded(true);
+    }
+
     fetchRoute();
+    // fetchRouteFromJSON();
     fetchTurns();
 
     return () => clearJourneyInterval();
@@ -113,10 +133,16 @@ const MapScreen = () => {
     setModalVisible(false);
   };
 
-  const playRemindersWithDelay = async (reminders, delay = 2000) => {
+  const playRemindersWithDelay = async (
+    reminders,
+    delay = 2000,
+    showInstruction = true,
+  ) => {
     for (const reminder of reminders) {
       Speech.speak(reminder);
-      setCurrentInstruction(reminder);
+      if (showInstruction) {
+        setCurrentInstruction(reminder);
+      }
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
     setCurrentInstruction(null);
@@ -124,7 +150,7 @@ const MapScreen = () => {
 
   const detectUpcomingTurn = (currentLat, currentLng) => {
     turns.forEach((turn) => {
-      const distanceToTurn = getDistance(
+      const distanceToTurn = mapUtils.getDistance(
         currentLat,
         currentLng,
         turn.latitude,
@@ -133,11 +159,180 @@ const MapScreen = () => {
 
       if (distanceToTurn <= MSMDistanceThreshold && !triggeredTurns.has(turn)) {
         triggeredTurns.add(turn);
-        playRemindersWithDelay(msmReminders, 2000);
+        playRemindersWithDelay(msmReminders, 1000);
 
         setTimeout(() => triggeredTurns.delete(turn), 60000);
       }
     });
+  };
+
+  const isReverseAroundCornerManeuver = (currLocation) => {
+    const distanceToManouvere = mapUtils.getDistance(
+      maneuvers[maneuversMap.REVERSE_PARKING].startPos.lat,
+      maneuvers[maneuversMap.REVERSE_PARKING].startPos.lng,
+      currLocation.latitude,
+      currLocation.longitude,
+    );
+
+    // ? Reverse Around Corner Maneuver Has Started
+    if (
+      distanceToManouvere < 5 &&
+      !isReverseAroundCornerManeuverActiveRef.current
+    ) {
+      manueverStartTime = new Date();
+      isReverseAroundCornerManeuverActiveRef.current = true;
+      playRemindersWithDelay(
+        [
+          routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+            .STARTING_POINT,
+        ],
+        1000,
+        false,
+      );
+      return true;
+    }
+    // ? Reverse Around Corner Maneuver Is In Progress
+    else if (isReverseAroundCornerManeuverActiveRef.current) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const hasReverseAroundCornerManeueverEnded = (currLocation) => {
+    if (isReverseAroundCornerManeuverActiveRef.current) {
+      const distanceToEnd = mapUtils.getDistance(
+        currLocation.latitude,
+        currLocation.longitude,
+        maneuvers[maneuversMap.REVERSE_PARKING].endPos.lat,
+        maneuvers[maneuversMap.REVERSE_PARKING].endPos.lng,
+      );
+
+      if (distanceToEnd < 5) {
+        playRemindersWithDelay(
+          [
+            routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+              .ENDING_POINT,
+          ],
+          1000,
+          false,
+        );
+        isReverseAroundCornerManeuverActiveRef.current = false;
+        manueverEndTime = new Date();
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  const evaluateReverseAroundCornerManeuver = (
+    currLocation,
+    speed,
+    timestamp,
+  ) => {
+    const kerbCoordinates = maneuvers[maneuversMap.REVERSE_PARKING].kerbs;
+
+    if (isReverseAroundCornerManeuver(currLocation)) {
+      // If Reverse around corner maneuver has started
+      const { deviations, touchedKerb } =
+        maneuverUtils.calculateDeviationsFromKerbs(
+          kerbCoordinates,
+          currLocation,
+        );
+
+      if (touchedKerb) {
+        setReverseAroundCornerTouchedKerb(touchedKerb);
+      }
+
+      const minDeviation = maneuverUtils.getMinimumDeviation(deviations);
+
+      if (minDeviation <= 1.5 && minDeviation > 1) {
+        playRemindersWithDelay(
+          [
+            routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+              .KERB_TOO_CLOSE,
+          ],
+          1000,
+          false,
+        );
+      } else if (minDeviation > 3) {
+        playRemindersWithDelay(
+          [
+            routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+              .KERB_TOO_FAR,
+          ],
+          1000,
+          false,
+        );
+      }
+
+      totalDeviations.push(minDeviation);
+      totalSpeed.push(speed);
+    }
+
+    if (hasReverseAroundCornerManeueverEnded(currLocation)) {
+      const averageDeviation = maneuverUtils.getAverage(totalDeviations);
+      const averageSpeed = maneuverUtils.getAverage(totalSpeed);
+
+      // Reset total deviations & total speed
+      totalDeviations = [];
+      totalSpeed = [];
+
+      if (reverseAroundCornerTouchedKerb) {
+        console.log("Maneuver failed: You touched the kerb. Score: 0/5");
+        setManeuverFeedback(
+          "Maneuver failed: You touched the kerb. Score: 0/5",
+        );
+        return;
+      }
+
+      const timeTaken = (manueverEndTime - manueverStartTime) / (1000 * 60); // Convert to minutes
+
+      // Calculate scores for each criterion
+      const distanceScore = maneuverUtils.calculateReverseAroundCornerScore(
+        averageDeviation,
+        10,
+        15,
+      );
+      const speedScore = maneuverUtils.calculateReverseAroundCornerScore(
+        averageSpeed,
+        1,
+        2,
+      );
+      const timeScore = maneuverUtils.calculateReverseAroundCornerScore(
+        timeTaken,
+        0.5,
+        1.5,
+      );
+
+      console.log("REVERSE AROUND CORNER MANUEVER STATS: ");
+      console.log(`Average deviation: ${averageDeviation}`);
+      console.log(`Average speed: ${averageSpeed}`);
+      console.log(`Touched Kerb: ${reverseAroundCornerTouchedKerb}`);
+      console.log(`Time Taken: ${timeTaken}`);
+      console.log(`Distance Score: ${distanceScore}`);
+      console.log(`Speed Score: ${speedScore}`);
+      console.log(`Time Score: ${timeScore}`);
+
+      // Calculate overall score
+      const overallScore = maneuverUtils.calculateOverallScore(
+        distanceScore,
+        speedScore,
+        timeScore,
+      );
+
+      console.log(`Overall Score: ${overallScore}`);
+
+      // Provide feedback based on the overall score
+      if (overallScore >= 4) {
+        setManeuverFeedback(`Excellent! Your score: ${overallScore}/5`);
+      } else if (overallScore >= 2) {
+        setManeuverFeedback(`Good job! Your score: ${overallScore}/5`);
+      } else {
+        setManeuverFeedback(`Needs improvement. Your score: ${overallScore}/5`);
+      }
+    }
   };
 
   const startJourney = async () => {
@@ -161,18 +356,25 @@ const MapScreen = () => {
     clearJourneyInterval();
     setIsJourneyStarted(false);
     setCurrentInstruction(null);
-    userLocation.timing(initialPosition).start();
     setCurrentLocation(initialPosition);
-    animateToRegion(mapRef, userLocation, initialPosition);
+    userLocation.timing(initialPosition).start();
+    mapUtils.animateToRegion(mapRef, userLocation, initialPosition);
     Speech.stop();
+    isReverseAroundCornerManeuverActiveRef.current = false;
   };
 
   const simulateJourney = async () => {
     JourneyIntervalRef.current = setInterval(async () => {
-      const { latitude, longitude, heading } = await getCurrentLocation();
+      const { latitude, longitude, heading, speed, timestamp } =
+        await mapUtils.getCurrentLocation();
       setCurrentLocation({ latitude, longitude, heading });
+      evaluateReverseAroundCornerManeuver(
+        { latitude, longitude, heading },
+        speed,
+        timestamp,
+      );
       detectUpcomingTurn(latitude, longitude);
-      animateToRegion(mapRef, userLocation, { latitude, longitude });
+      mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
     }, 3000);
   };
 
