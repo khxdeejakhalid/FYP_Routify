@@ -15,7 +15,7 @@ export const maneuverUtils = (function () {
           );
     
           if (distance < 1) {
-            touchedKerb(true);
+            touchedKerb = true;
           }
     
           deviations.push(parseFloat(distance));

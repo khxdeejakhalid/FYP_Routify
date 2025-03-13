@@ -43,8 +43,8 @@ export const routifyConstantsService = (function () {
     },
     [MANEUVERS_TYPE.REVERSE_PARKING]: {
       startPos: {
-        lat: 53.2956114562911,
-        lng: -6.343770754479805,
+        lat: 53.29561146,
+        lng:  -6.34377075,
       },
       kerbs: [
         {
@@ -89,8 +89,8 @@ export const routifyConstantsService = (function () {
         },
       ],
       endPos: {
-        lat: 53.29551,
-        lng: -6.34363,
+        lat: 53.29551000,
+        lng: -6.34363000,
       },
     },
     [MANEUVERS_TYPE.TURN_ABOUT]: {

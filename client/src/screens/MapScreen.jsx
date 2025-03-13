@@ -364,18 +364,36 @@ const MapScreen = () => {
   };
 
   const simulateJourney = async () => {
-    JourneyIntervalRef.current = setInterval(async () => {
-      const { latitude, longitude, heading, speed, timestamp } =
-        await mapUtils.getCurrentLocation();
-      setCurrentLocation({ latitude, longitude, heading });
-      evaluateReverseAroundCornerManeuver(
-        { latitude, longitude, heading },
-        speed,
-        timestamp,
-      );
-      detectUpcomingTurn(latitude, longitude);
-      mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
-    }, 3000);
+    // JourneyIntervalRef.current = setInterval(async () => {
+    //   const { latitude, longitude, heading, speed, timestamp } =
+    //     await mapUtils.getCurrentLocation();
+    //   setCurrentLocation({ latitude, longitude, heading });
+    //   evaluateReverseAroundCornerManeuver(
+    //     { latitude, longitude, heading },
+    //     speed,
+    //     timestamp,
+    //   );
+    //   detectUpcomingTurn(latitude, longitude);
+    //   mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
+    // }, 3000);
+    const locationSubscription = await Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.BestForNavigation,
+        timeInterval: 1000,
+        distanceInterval: 1,
+      },
+      ({ coords: { latitude, longitude, heading, speed }, timestamp }) => {
+        setCurrentLocation({ latitude, longitude, heading });
+        detectUpcomingTurn(latitude, longitude);
+        evaluateReverseAroundCornerManeuver(
+          { latitude, longitude, heading },
+          speed,
+          timestamp,
+        );
+        mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
+      },
+    );
+    JourneyIntervalRef.current = locationSubscription;
   };
 
   const clearJourneyInterval = () => {
