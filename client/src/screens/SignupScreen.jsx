@@ -122,13 +122,13 @@ const SignupScreen = () => {
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"screen-smartphone"}
-              size={20}
-              color={colors.secondary}
+              size={Platform.OS === "android" ? 18 : 20}
+              color={colors.gray}
             />
             <TextInput
               style={styles.textInput}
               placeholder="Enter username"
-              placeholderTextColor={colors.secondary}
+              placeholderTextColor={colors.gray}
               keyboardType="default"
               onChangeText={(username) => setUsername(username)}
               value={username}
@@ -138,13 +138,13 @@ const SignupScreen = () => {
           <View style={styles.inputContainer}>
             <Ionicons
               name={"mail-outline"}
-              size={20}
-              color={colors.secondary}
+              size={Platform.OS === "android" ? 18 : 20}
+              color={colors.gray}
             />
             <TextInput
               style={styles.textInput}
               placeholder="Enter your email"
-              placeholderTextColor={colors.secondary}
+              placeholderTextColor={colors.gray}
               keyboardType="email-address"
               onChangeText={(email) => setEmail(email)}
               value={email}
@@ -152,11 +152,11 @@ const SignupScreen = () => {
           </View>
           <Text style={styles.label}>Password</Text>
           <View style={styles.inputContainer}>
-            <SimpleLineIcons name={"lock"} size={20} color={colors.secondary} />
+            <SimpleLineIcons name={"lock"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
             <TextInput
               style={styles.textInput}
               placeholder="Enter your password"
-              placeholderTextColor={colors.secondary}
+              placeholderTextColor={colors.gray}
               secureTextEntry={secureEntry}
               onChangeText={(pass) => setPassword(pass)}
               value={password}
@@ -166,9 +166,9 @@ const SignupScreen = () => {
                 setSecureEntry((prev) => !prev);
               }}>
               {secureEntry ? (
-                <Ionicons name={"eye-off"} size={20} color={colors.secondary} />
+                <Ionicons name={"eye-off"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
               ) : (
-                <Ionicons name={"eye"} size={20} color={colors.secondary} />
+                <Ionicons name={"eye"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
               )}
             </TouchableOpacity>
           </View>
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: 20,
+    marginTop: Platform.OS === "android" ? "10" : "20",
   },
   label: {
     fontSize: 14,
@@ -251,11 +251,12 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderWidth: 1,
-    borderColor: colors.secondary,
+    borderColor: colors.gray,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
-    padding: Platform.OS === "android" ? "2%" : "3%",
+    padding: Platform.OS === "android" ? "0%" : "3%",
+    paddingHorizontal: "3%",
     marginBottom: 15,
   },
   textInput: {
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   authenticationButtonContainer: {
-    marginTop: "7%",
+    marginTop: Platform.OS === "android" ? "3%" : "7%",
   },
   footerContainer: {
     flexDirection: "row",

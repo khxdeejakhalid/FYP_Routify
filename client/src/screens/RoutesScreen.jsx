@@ -32,7 +32,7 @@ const RoutesScreen = () => {
   const handleGoBack = () => {
     navigation.goBack();
   };
-
+  
   const handleNext = () => {
     if (selectedRoute) {
       navigation.navigate("Map", { selectedRoute });
@@ -85,7 +85,7 @@ const RoutesScreen = () => {
 
       <Button
         clickHandler={handleNext}
-        disabled={false}
+        disabled={!selectedRoute}
         buttonType="BottomButton">
         Next
       </Button>

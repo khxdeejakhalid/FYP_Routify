@@ -14,7 +14,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import { AuthProvider, AuthContext } from "./src/context/AuthContext";
 import HomeScreen from "./src/screens/HomeScreen";
-import ProgressScreen from "./src/screens/ProgressScreen";
+import FeedbackScreen from "./src/screens/FeedbackScreen";
 import HelpScreen from "./src/screens/HelpScreen";
 import UserProfileScreen from "./src/screens/UserProfileScreen";
 import TestCenterScreen from "./src/screens/TestCenterScreen";
@@ -53,7 +53,7 @@ const App = () => {
           {isLogin ? (
             <>
               <Stack.Screen name={"Home"} component={HomeScreen} />
-              <Stack.Screen name={"Progress"} component={ProgressScreen} />
+              <Stack.Screen name={"Progress"} component={FeedbackScreen} />
               <Stack.Screen
                 name={"TestCenteres"}
                 component={TestCenterScreen}
