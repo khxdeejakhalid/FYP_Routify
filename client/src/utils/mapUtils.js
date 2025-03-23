@@ -118,6 +118,28 @@ export const mapUtils = (function () {
     }));
   };
 
+  const transformManeuvers = (maneuvers) => {
+    const transformedData = {};
+
+    maneuvers.forEach(({ TYPE, CORD_TYPE, LATITUDE, LONGITUDE }) => {
+      if (!transformedData[TYPE]) {
+        transformedData[TYPE] = { start: null, end: null, kerb: [] };
+      }
+
+      const coord = { latitude: parseFloat(LATITUDE), longitude: parseFloat(LONGITUDE) };
+
+      if (CORD_TYPE === "START") {
+        transformedData[TYPE].start = coord;
+      } else if (CORD_TYPE === "END") {
+        transformedData[TYPE].end = coord;
+      } else if (CORD_TYPE === "KERB") {
+        transformedData[TYPE].kerb.push(coord);
+      }
+    });
+
+    return transformedData;
+  };
+
   return {
     getCurrentLocation,
     cleanCoordinates,
@@ -126,6 +148,7 @@ export const mapUtils = (function () {
     animateToRegion,
     findNearestPoint,
     transformRoute,
-    transformTurns
+    transformTurns,
+    transformManeuvers,
   };
 })();

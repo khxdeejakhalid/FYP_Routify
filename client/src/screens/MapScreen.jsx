@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -14,7 +14,12 @@ import * as Speech from "expo-speech";
 
 import { fonts } from "../utils/fonts";
 import { colors } from "../utils/colors";
-import { getWaypoints, getTurnsByRoute } from "../utils/api";
+import {
+  getWaypoints,
+  getTurnsByRoute,
+  getManeuversByRoute,
+  saveManueverFeedbackScore,
+} from "../utils/api";
 import { routifyConstantsService } from "../services/routifyConstantsService";
 import { processRoute } from "../utils/routesProcessing.js";
 import { mapUtils } from "../utils/mapUtils";
@@ -22,6 +27,8 @@ import { maneuverUtils } from "../utils/maneueverUtilityService";
 
 import routeData from "../assets/json/Route1.json";
 import CustomModal from "../components/CustomModal";
+import FeedbackModal from "../components/FeedbackModal";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,12 +39,13 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const MapScreen = () => {
   const routeId = 1;
   const navigation = useNavigation();
-
+  const { user } = useContext(AuthContext);
   // * Refs
   const mapRef = useRef(null);
   const markerRef = useRef(null);
-  const JourneyIntervalRef = useRef(null);
+  const journeyIntervalRef = useRef(null);
   const isReverseAroundCornerManeuverActiveRef = useRef(false);
+  const isManeuverActiveRef = useRef(false);
   const userLocation = useRef(
     new AnimatedRegion({
       latitude: 53.296626,
@@ -50,6 +58,7 @@ const MapScreen = () => {
   // * State variables
   const [route, setRoute] = useState([]);
   const [turns, setTurns] = useState([]);
+  const [maneuvers, setManeuvers] = useState([]);
   const [isRouteLoaded, setIsRouteLoaded] = useState(false);
   const [currentInstruction, setCurrentInstruction] = useState(null);
   const [isJourneyStarted, setIsJourneyStarted] = useState(false);
@@ -58,17 +67,20 @@ const MapScreen = () => {
     longitude: -6.361571573136808,
     heading: 90,
   });
-  const [maneuverFeedback, setManeuverFeedback] = useState(null);
+  const [maneuverFeedback, setManeuverFeedback] = useState(4);
 
-  // * Reverse Around Corner State Variables
+  // * Maneuver State Variables
+  const [turnAboutTouchedKerb, setTurnAboutTouchedKerb] = useState(false);
   const [reverseAroundCornerTouchedKerb, setReverseAroundCornerTouchedKerb] =
     useState(false);
 
   const [modalText, setModalText] = useState("");
   const [modalHeader, setModalHeader] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
+  const [feedbackManeuverType, setFeedbackManeuverType] = useState(null);
+  const [isFeedbackModalVisible, setFeedbackModalVisible] = useState(false);
 
-  // * Constants
+  // * Constants & Variables
   let totalDeviations = [];
   let totalSpeed = [];
   let manueverStartTime = null;
@@ -78,51 +90,62 @@ const MapScreen = () => {
   let carIdleStateCount = 0;
   let startTime = 0;
 
-  const msmReminders = routifyConstantsService.MSM_REMINDERS;
-  const maneuvers = routifyConstantsService.MANEUVERS;
-  const maneuversMap = routifyConstantsService.MANEUVERS_TYPE;
+  const MSM_PROXIMITY_THRESHOLD =
+    routifyConstantsService.MSM_PROXIMITY_THRESHOLD;
+  const MSM_REMINDERS = routifyConstantsService.MSM_REMINDERS;
+  const MANEUVERS_TYPE = routifyConstantsService.MANEUVERS_TYPE;
   const triggeredTurns = new Set();
-  const MSMDistanceThreshold = 30;
 
   // * Hooks
-  useEffect(() => {
-    async function fetchRoute() {
-      const response = await getWaypoints(routeId);
-      if (response.success) {
-        const transformedRoute = mapUtils.transformRoute(response.waypoints);
-        setRoute(transformedRoute);
-        setIsRouteLoaded(true);
-      } else {
-        setModalHeader("Failure");
-        setModalText(response.description);
-        setModalVisible(true);
-      }
-    }
+  const fetchRouteData = useCallback(async () => {
+    const [waypointsResponse, turnsResponse, maneuversResponse] =
+      await Promise.all([
+        getWaypoints(routeId),
+        getTurnsByRoute(routeId),
+        getManeuversByRoute(routeId),
+      ]);
 
-    async function fetchTurns() {
-      const response = await getTurnsByRoute(routeId);
-      if (response.success) {
-        const transformedTurns = mapUtils.transformTurns(response.turns);
-        setTurns(transformedTurns);
-      } else {
-        setModalHeader("Failure");
-        setModalText(response.description);
-        setModalVisible(true);
-      }
-    }
-
-    async function fetchRouteFromJSON() {
-      const response = await processRoute(routeData);
-      setRoute(response);
+    if (waypointsResponse.success) {
+      const transformedRoute = mapUtils.transformRoute(
+        waypointsResponse.waypoints,
+      );
+      setRoute(transformedRoute);
       setIsRouteLoaded(true);
     }
 
-    fetchRoute();
-    // fetchRouteFromJSON();
-    fetchTurns();
+    if (turnsResponse.success) {
+      const transformedTurns = mapUtils.transformTurns(turnsResponse.turns);
+      setTurns(transformedTurns);
+    }
 
-    return () => clearJourneyInterval();
-  }, []);
+    if (maneuversResponse.success) {
+      const transformedManeuvers = mapUtils.transformManeuvers(
+        maneuversResponse.maneuvers,
+      );
+      setManeuvers(transformedManeuvers);
+    }
+
+    if (
+      !waypointsResponse.success ||
+      !turnsResponse.success ||
+      !maneuversResponse.success
+    ) {
+      setModalHeader("Failure");
+      setModalText(response.description);
+      setModalVisible(true);
+    }
+  }, [routeId]);
+
+  async function fetchRouteFromJSON() {
+    const response = await processRoute(routeData);
+    setRoute(response);
+    setIsRouteLoaded(true);
+  }
+
+  useEffect(() => {
+    // fetchRouteFromJSON();
+    fetchRouteData();
+  }, [fetchRouteData]);
 
   // * Functions / Handlers
   const handleGoBack = () => {
@@ -131,6 +154,7 @@ const MapScreen = () => {
 
   const handleModalClose = () => {
     setModalVisible(false);
+    setFeedbackModalVisible(false);
   };
 
   const playRemindersWithDelay = async (
@@ -157,9 +181,12 @@ const MapScreen = () => {
         turn.longitude,
       );
 
-      if (distanceToTurn <= MSMDistanceThreshold && !triggeredTurns.has(turn)) {
+      if (
+        distanceToTurn <= MSM_PROXIMITY_THRESHOLD &&
+        !triggeredTurns.has(turn)
+      ) {
         triggeredTurns.add(turn);
-        playRemindersWithDelay(msmReminders, 1000);
+        playRemindersWithDelay(MSM_REMINDERS, 1000);
 
         setTimeout(() => triggeredTurns.delete(turn), 60000);
       }
@@ -168,8 +195,8 @@ const MapScreen = () => {
 
   const isReverseAroundCornerManeuver = (currLocation) => {
     const distanceToManouvere = mapUtils.getDistance(
-      maneuvers[maneuversMap.REVERSE_PARKING].startPos.lat,
-      maneuvers[maneuversMap.REVERSE_PARKING].startPos.lng,
+      maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].start.latitude,
+      maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].start.longitude,
       currLocation.latitude,
       currLocation.longitude,
     );
@@ -199,13 +226,63 @@ const MapScreen = () => {
     return false;
   };
 
+  const isManeuver = (manueverLoc, currLocation) => {
+    const distanceToManouvere = mapUtils.getDistance(
+      manueverLoc.start.latitude,
+      manueverLoc.start.longitude,
+      currLocation.latitude,
+      currLocation.longitude,
+    );
+
+    if (distanceToManouvere < 5 && !isManeuverActiveRef.current) {
+      manueverStartTime = new Date();
+      isManeuverActiveRef.current = true;
+      playRemindersWithDelay(
+        [routifyConstantsService.TURN_ABOUT_REMINDERS.STARTING_POINT],
+        1000,
+        false,
+      );
+      return true;
+    }
+    // ? Reverse Around Corner Maneuver Is In Progress
+    else if (isManeuverActiveRef.current) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const hasManeueverEnded = (manueverLoc, currLocation) => {
+    if (isManeuverActiveRef.current) {
+      const distanceToEnd = mapUtils.getDistance(
+        currLocation.latitude,
+        currLocation.longitude,
+        manueverLoc.end.latitude,
+        manueverLoc.end.longitude,
+      );
+
+      if (distanceToEnd < 5) {
+        playRemindersWithDelay(
+          [routifyConstantsService.TURN_ABOUT_REMINDERS.ENDING_POINT],
+          1000,
+          false,
+        );
+        isManeuverActiveRef.current = false;
+        manueverEndTime = new Date();
+        return true;
+      }
+
+      return false;
+    }
+  };
+
   const hasReverseAroundCornerManeueverEnded = (currLocation) => {
     if (isReverseAroundCornerManeuverActiveRef.current) {
       const distanceToEnd = mapUtils.getDistance(
         currLocation.latitude,
         currLocation.longitude,
-        maneuvers[maneuversMap.REVERSE_PARKING].endPos.lat,
-        maneuvers[maneuversMap.REVERSE_PARKING].endPos.lng,
+        maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].end.latitude,
+        maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].end.longitude,
       );
 
       if (distanceToEnd < 5) {
@@ -226,12 +303,99 @@ const MapScreen = () => {
     }
   };
 
+  const testHilltopManuever = (
+    currentLat,
+    currentLng,
+    direction,
+    speed,
+    timestamp,
+  ) => {
+    if (
+      !isManeueverActive &&
+      maneuverUtils.isManueverInProgress(
+        currentLat,
+        currentLng,
+        maneuvers[MANEUVERS_TYPE.HILLTOP.ID].start.latitude,
+        maneuvers[MANEUVERS_TYPE.HILLTOP.ID].start.longitude,
+      )
+    ) {
+      isManeueverActive = true;
+      startTime = Date.now();
+      speedHistory.push({ speed, timestamp });
+      playRemindersWithDelay(
+        [routifyConstantsService.HILL_TOP_REMINDERS.STARTING_POINT],
+        1000,
+        false,
+      );
+    }
+
+    if (isManeueverActive) {
+      // Once the user is out of the range of hilltop, Calculate parameters to judge how well he has performed
+      if (
+        maneuverUtils.isManueverInProgress(
+          currentLat,
+          currentLng,
+          maneuvers[MANEUVERS_TYPE.HILLTOP.ID].end.latitude,
+          maneuvers[MANEUVERS_TYPE.HILLTOP.ID].end.longitude,
+        )
+      ) {
+        playRemindersWithDelay(
+          [routifyConstantsService.HILL_TOP_REMINDERS.ENDING_POINT],
+          1000,
+          false,
+        );
+        isManeueverActive = false;
+        const manueverEvaluationCriteria = [
+          {
+            evaluate: maneuverUtils.trackStationaryTime(carIdleStateCount),
+            weight: 1,
+          },
+          {
+            evaluate: maneuverUtils.trackTimeTakenToCompleteManuever(
+              startTime,
+              {
+                startLat: maneuvers[MANEUVERS_TYPE.HILLTOP.ID].start.latitude,
+                startLng: maneuvers[MANEUVERS_TYPE.HILLTOP.ID].start.longitude,
+                endLat: maneuvers[MANEUVERS_TYPE.HILLTOP.ID].end.latitude,
+                endLng: maneuvers[MANEUVERS_TYPE.HILLTOP.ID].end.longitude,
+              },
+            ),
+            weight: 2,
+          },
+          {
+            evaluate: maneuverUtils.evaluateSmoothness(speedHistory),
+            weight: 2,
+          },
+        ];
+
+        const overallScore = maneuverUtils.scoreManuever(
+          manueverEvaluationCriteria,
+        );
+
+        setManeuverFeedback(parseInt(overallScore));
+        saveManueverFeedbackScore({
+          routeId,
+          score: overallScore,
+          manueverType: MANEUVERS_TYPE.HILLTOP.ID,
+          userEmail: user.email,
+        });
+        setFeedbackManeuverType("HILL TOP");
+        setFeedbackModalVisible(true);
+      } else {
+        if (speed === 0) {
+          carIdleStateCount++;
+        }
+        speedHistory.push({ speed, timestamp });
+      }
+    }
+  };
+
   const evaluateReverseAroundCornerManeuver = (
     currLocation,
     speed,
     timestamp,
   ) => {
-    const kerbCoordinates = maneuvers[maneuversMap.REVERSE_PARKING].kerbs;
+    const kerbCoordinates = maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].kerb;
 
     if (isReverseAroundCornerManeuver(currLocation)) {
       // If Reverse around corner maneuver has started
@@ -280,58 +444,141 @@ const MapScreen = () => {
       totalSpeed = [];
 
       if (reverseAroundCornerTouchedKerb) {
-        console.log("Maneuver failed: You touched the kerb. Score: 0/5");
-        setManeuverFeedback(
-          "Maneuver failed: You touched the kerb. Score: 0/5",
-        );
-        return;
-      }
-
-      const timeTaken = (manueverEndTime - manueverStartTime) / (1000 * 60); // Convert to minutes
-
-      // Calculate scores for each criterion
-      const distanceScore = maneuverUtils.calculateReverseAroundCornerScore(
-        averageDeviation,
-        10,
-        15,
-      );
-      const speedScore = maneuverUtils.calculateReverseAroundCornerScore(
-        averageSpeed,
-        1,
-        2,
-      );
-      const timeScore = maneuverUtils.calculateReverseAroundCornerScore(
-        timeTaken,
-        0.5,
-        1.5,
-      );
-
-      console.log("REVERSE AROUND CORNER MANUEVER STATS: ");
-      console.log(`Average deviation: ${averageDeviation}`);
-      console.log(`Average speed: ${averageSpeed}`);
-      console.log(`Touched Kerb: ${reverseAroundCornerTouchedKerb}`);
-      console.log(`Time Taken: ${timeTaken}`);
-      console.log(`Distance Score: ${distanceScore}`);
-      console.log(`Speed Score: ${speedScore}`);
-      console.log(`Time Score: ${timeScore}`);
-
-      // Calculate overall score
-      const overallScore = maneuverUtils.calculateOverallScore(
-        distanceScore,
-        speedScore,
-        timeScore,
-      );
-
-      console.log(`Overall Score: ${overallScore}`);
-
-      // Provide feedback based on the overall score
-      if (overallScore >= 4) {
-        setManeuverFeedback(`Excellent! Your score: ${overallScore}/5`);
-      } else if (overallScore >= 2) {
-        setManeuverFeedback(`Good job! Your score: ${overallScore}/5`);
+        setManeuverFeedback(0);
+        console.log("REVERSE AROUND CORNER MANUEVER STATS: ");
+        console.log(`Average deviation: ${averageDeviation}`);
+        console.log(`Average speed: ${averageSpeed}`);
+        console.log(`Touched Kerb: ${reverseAroundCornerTouchedKerb}`);
       } else {
-        setManeuverFeedback(`Needs improvement. Your score: ${overallScore}/5`);
+        const timeTaken = maneuverUtils.getTimeDifferenceInMinutes(
+          manueverStartTime,
+          manueverEndTime,
+        );
+
+        // Calculate scores for each criterion
+        const distanceScore = maneuverUtils.calculateReverseAroundCornerScore(
+          averageDeviation,
+          10,
+          15,
+        );
+
+        const speedScore = maneuverUtils.calculateReverseAroundCornerScore(
+          averageSpeed,
+          1,
+          2,
+        );
+
+        const timeScore = maneuverUtils.calculateReverseAroundCornerScore(
+          timeTaken,
+          0.5,
+          1.5,
+        );
+
+        console.log("REVERSE AROUND CORNER MANUEVER STATS: ");
+        console.log(`Average deviation: ${averageDeviation}`);
+        console.log(`Average speed: ${averageSpeed}`);
+        console.log(`Touched Kerb: ${reverseAroundCornerTouchedKerb}`);
+        console.log(`Time Taken: ${timeTaken}`);
+        console.log(`Distance Score: ${distanceScore}`);
+        console.log(`Speed Score: ${speedScore}`);
+        console.log(`Time Score: ${timeScore}`);
+
+        // Calculate overall score
+        const overallScore = maneuverUtils.calculateOverallScore(
+          distanceScore,
+          speedScore,
+          timeScore,
+        );
+
+        console.log(`Overall Score: ${overallScore}`);
+        setManeuverFeedback(parseInt(overallScore));
       }
+
+      setFeedbackManeuverType("REVERSE AROUND CORNER");
+      saveManueverFeedbackScore({
+        routeId,
+        score: overallScore,
+        manueverType: MANEUVERS_TYPE.REVERSE_PARKING.ID,
+        userEmail: user.email,
+      });
+      setFeedbackModalVisible(true);
+    }
+  };
+
+  const evaluateTurnAboutManeuver = (currentLoc) => {
+    const maneuverCoordinates = maneuvers[MANEUVERS_TYPE.TURN_ABOUT.ID];
+    const kerbCoordinates = maneuverCoordinates.kerb;
+
+    if (isManeuver(maneuverCoordinates, currentLoc)) {
+      const { deviations, touchedKerb } =
+        maneuverUtils.calculateDeviationsFromKerbs(kerbCoordinates, currentLoc);
+
+      if (touchedKerb) {
+        setTurnAboutTouchedKerb(touchedKerb);
+      }
+
+      totalSpeed.push(currentLoc.speed);
+    }
+
+    if (hasManeueverEnded(maneuverCoordinates, currentLoc)) {
+      const averageSpeed = maneuverUtils.getAverage(totalSpeed);
+
+      // Reset total deviations & total speed
+      totalDeviations = [];
+      totalSpeed = [];
+
+      if (turnAboutTouchedKerb) {
+        setManeuverFeedback(0);
+        console.log("TURN ABOUT MANUEVER STATS: ");
+        console.log(`Average speed: ${averageSpeed}`);
+        console.log(`Touched Kerb: ${turnAboutTouchedKerb}`);
+      } else {
+        const timeTaken = maneuverUtils.getTimeDifferenceInMinutes(
+          manueverStartTime,
+          manueverEndTime,
+        );
+
+        // Calculate scores for each criterion
+        const speedScore = maneuverUtils.calculateReverseAroundCornerScore(
+          averageSpeed,
+          1,
+          1.5,
+        );
+
+        const timeScore = maneuverUtils.calculateReverseAroundCornerScore(
+          timeTaken,
+          0.5,
+          1.5,
+        );
+
+        console.log("TURN ABOUT MANUEVER STATS: ");
+        console.log(`Average speed: ${averageSpeed}`);
+        console.log(`Touched Kerb: ${turnAboutTouchedKerb}`);
+        console.log(`Time Taken: ${timeTaken} minutes`);
+        console.log(`Speed Score: ${speedScore}`);
+        console.log(`Time Score: ${timeScore}`);
+
+        // Calculate overall score
+        const overallScore = maneuverUtils.calculateReverseAroundCornerScore(
+          speedScore,
+          timeScore,
+          turnAboutTouchedKerb
+            ? 0
+            : maneuverUtils.normalizeScoreOutOf5(2, 0, 2),
+        );
+
+        console.log(`Overall Score: ${overallScore}`);
+        setManeuverFeedback(parseInt(overallScore));
+      }
+
+      setFeedbackManeuverType("TURN ABOUT");
+      saveManueverFeedbackScore({
+        routeId,
+        score: overallScore,
+        manueverType: MANEUVERS_TYPE.TURN_ABOUT.ID,
+        userEmail: user.email,
+      });
+      setFeedbackModalVisible(true);
     }
   };
 
@@ -364,18 +611,29 @@ const MapScreen = () => {
   };
 
   const simulateJourney = async () => {
-    // JourneyIntervalRef.current = setInterval(async () => {
+    // journeyIntervalRef.current = setInterval(async () => {
     //   const { latitude, longitude, heading, speed, timestamp } =
     //     await mapUtils.getCurrentLocation();
+
     //   setCurrentLocation({ latitude, longitude, heading });
+    //   detectUpcomingTurn(latitude, longitude);
+    //   testHilltopManuever(latitude, longitude, heading, speed, timestamp);
     //   evaluateReverseAroundCornerManeuver(
     //     { latitude, longitude, heading },
     //     speed,
     //     timestamp,
     //   );
-    //   detectUpcomingTurn(latitude, longitude);
+    //   evaluateTurnAboutManeuver({
+    //     latitude,
+    //     longitude,
+    //     heading,
+    //     speed,
+    //     timestamp,
+    //   });
+
     //   mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
     // }, 3000);
+
     const locationSubscription = await Location.watchPositionAsync(
       {
         accuracy: Location.Accuracy.BestForNavigation,
@@ -385,21 +643,31 @@ const MapScreen = () => {
       ({ coords: { latitude, longitude, heading, speed }, timestamp }) => {
         setCurrentLocation({ latitude, longitude, heading });
         detectUpcomingTurn(latitude, longitude);
+        testHilltopManuever(latitude, longitude, heading, speed, timestamp);
         evaluateReverseAroundCornerManeuver(
           { latitude, longitude, heading },
           speed,
           timestamp,
         );
+        evaluateTurnAboutManeuver({
+          latitude,
+          longitude,
+          heading,
+          speed,
+          timestamp,
+        });
+
         mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
       },
     );
-    JourneyIntervalRef.current = locationSubscription;
+
+    journeyIntervalRef.current = locationSubscription;
   };
 
   const clearJourneyInterval = () => {
-    if (JourneyIntervalRef.current) {
-      clearInterval(JourneyIntervalRef.current);
-      JourneyIntervalRef.current = null;
+    if (journeyIntervalRef.current) {
+      clearInterval(journeyIntervalRef.current);
+      journeyIntervalRef.current = null;
     }
   };
 
@@ -442,17 +710,18 @@ const MapScreen = () => {
             />
 
             {/* Maneuvers Markers  */}
-            {Object.values(maneuversMap).map((maneuverKey, index) => {
+            {Object.values(MANEUVERS_TYPE).map((manuever, index) => {
               return (
                 <Marker
                   key={index}
                   coordinate={{
-                    latitude: maneuvers[maneuverKey].startPos.lat,
-                    longitude: maneuvers[maneuverKey].startPos.lng,
+                    latitude: maneuvers[manuever.ID].start.latitude,
+                    longitude: maneuvers[manuever.ID].start.longitude,
                   }}
-                  title={`${maneuverKey} Maneuver`}
-                  description={maneuverKey}
+                  title={`${manuever.DISPLAY_NAME} Maneuver`}
+                  description={manuever.DISPLAY_NAME}
                   pinColor={colors.primary}
+                  icon={require("../assets/icons/markers/manuever_marker.png")}
                 />
               );
             })}
@@ -482,6 +751,13 @@ const MapScreen = () => {
         singleButton={true}
         buttonOneText="Close"
         onButtonOnePress={handleModalClose}
+      />
+
+      <FeedbackModal
+        visible={isFeedbackModalVisible}
+        maneuverType={feedbackManeuverType}
+        closeHandler={handleModalClose}
+        rating={maneuverFeedback}
       />
     </View>
   );

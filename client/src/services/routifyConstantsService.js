@@ -1,6 +1,6 @@
 export const routifyConstantsService = (function () {
-
   const MANEUVERS_PROXIMITY_THRESHOLD = 10;
+  const MSM_PROXIMITY_THRESHOLD = 30;
 
   const MSM_REMINDERS = ["Check Mirrors", "Signal", "Manoeuvre/move"];
 
@@ -24,94 +24,34 @@ export const routifyConstantsService = (function () {
     ENDING_POINT: "Hill Top Manoeuvre Completed",
   };
 
+  const TURN_ABOUT_REMINDERS = {
+    STARTING_POINT: "Turn About Manoeuvre Started",
+    ENDING_POINT: "Turn About Manoeuvre Completed",
+  };
+  // @TODO: MIGHT NEED TO CHANGE THIS CONSTANT NAME
   const MANEUVERS_TYPE = {
-    HILLTOP: "Hill Start",
-    REVERSE_PARKING: "Reverse Around the Corner",
-    TURN_ABOUT: "Turnabout",
+    REVERSE_PARKING: {
+      ID: "REVERSE_AROUND_CORNER",
+      DISPLAY_NAME: "Reverse Around Corner",
+    },
+    TURN_ABOUT: {
+      ID: "TURN_ABOUT",
+      DISPLAY_NAME: "Turnabout",
+    },
+    HILLTOP: {
+      ID: "HILL_TOP",
+      DISPLAY_NAME: "Hillstart",
+    },
   };
 
-  const MANEUVERS = {
-    [MANEUVERS_TYPE.HILLTOP]: {
-      startPos: {
-        lat: 53.2992462,
-        lng: -6.3492096,
-      },
-      endPos: {
-        lat: 53.2992462,
-        lng: -6.3492096,
-      },
-    },
-    [MANEUVERS_TYPE.REVERSE_PARKING]: {
-      startPos: {
-        lat: 53.29561146,
-        lng:  -6.34377075,
-      },
-      kerbs: [
-        {
-          lat: 53.29561790,
-          lng: -6.34345250,
-        },
-        {
-          lat: 53.29557340,
-          lng: -6.34351650,
-        },
-        {
-          lat: 53.29555080,
-          lng: -6.34353430,
-        },
-        {
-          lat: 53.29552870,
-          lng: -6.34360200,
-        },
-        {
-          lat: 53.29553230,
-          lng: -6.34362620,
-        },
-        {
-          lat: 53.29554780,
-          lng: -6.34363020,
-        },
-        {
-          lat: 53.29555580,
-          lng: -6.34366270,
-        },
-        {
-          lat: 53.29556140,
-          lng: -6.34367780,
-        },
-        {
-          lat: 53.29559630,
-          lng: -6.34369350,
-        },
-        {
-          lat: 53.29560890,
-          lng: -6.34373850,
-        },
-      ],
-      endPos: {
-        lat: 53.29551000,
-        lng: -6.34363000,
-      },
-    },
-    [MANEUVERS_TYPE.TURN_ABOUT]: {
-      startPos: {
-        lat: 53.296234,
-        lng: -6.341734,
-      },
-      // @TODO: Needs to be figured out
-      endPos: {
-        lat: 53.0,
-        lng: -6.0,
-      },
-    },
-  };
   return {
     GOSHO_REMINDERS,
     REVERSE_AROUND_CORNER_REMINDERS,
     MSM_REMINDERS,
     MANEUVERS_TYPE,
-    MANEUVERS,
     MANEUVERS_PROXIMITY_THRESHOLD,
-    HILL_TOP_REMINDERS
+    MSM_PROXIMITY_THRESHOLD,
+    HILL_TOP_REMINDERS,
+    TURN_ABOUT_REMINDERS,
   };
 })();
