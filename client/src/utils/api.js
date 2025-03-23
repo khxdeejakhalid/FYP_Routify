@@ -193,7 +193,11 @@ export const checkEmail = async (email) => {
   }
 };
 
-export const getDataFromDirectionsAPI = async (origin, destination, waypoints) => {
+export const getDataFromDirectionsAPI = async (
+  origin,
+  destination,
+  waypoints,
+) => {
   const apiKey = "API_KEY";
   const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
     origin,
@@ -215,11 +219,10 @@ export const getDataFromDirectionsAPI = async (origin, destination, waypoints) =
         currentLongitude: step.start_location.lng,
         nextLatitude: step.end_location.lat,
         nextLongitude: step.end_location.lng,
-      }
+      };
     });
 
     return filteredResponse;
-
   } catch (error) {
     console.error("Error fetching directions:", error);
   }
@@ -247,6 +250,62 @@ export const getTurnsByRoute = async (routeId) => {
     if (response.data.status === "success") {
       return { success: true, turns: response.data.turns };
     }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const getManeuversByRoute = async (routeId) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/maneuver/${routeId}`);
+
+    if (response.data.status === "success") {
+      return { success: true, maneuvers: response.data.maneuvers };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+// Feedback related APIs
+export const getManeuverFeedback = async (userEmail) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_URL}/feedback?userEmail=${userEmail}`,
+    );
+    if (response.data.status === "success") {
+      return { success: true, feedback: response.data.feedback };
+    }
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const saveManueverFeedbackScore = async (reqParams) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/feedback`,
+      { reqParams },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true };
+    }
+    return response.data;
   } catch (error) {
     return {
       success: false,

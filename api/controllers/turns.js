@@ -3,7 +3,7 @@ import Turn from "../models/turn.js";
 export const getTurns = async (req, res) => {
     Turn.fetchAll()
     .then(([rows, fieldData]) => {
-      res.status(200).json({ status: "success", waypoints: rows });
+      res.status(200).json({ status: "success", turns: rows });
     })
     .catch((error) => {
       res.status(400).json({ status: "failure", description: error });
@@ -22,9 +22,7 @@ export const getTurnsByRoute = async (req, res) => {
 };
 
 export const addTurn = async (req, res) => {
-  const routeId = req.body.routeId;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
+  const { routeId, latitude, longitude } = req.body || {};
 
   if (
     !routeId ||
