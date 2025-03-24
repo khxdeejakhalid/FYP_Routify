@@ -10,16 +10,16 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import CustomModal from "../components/CustomModal";
+import CustomModal from "../../components/CustomModal";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import Button from "../components/Button";
-import { colors } from "../utils/colors";
-import { fonts } from "../utils/fonts";
+import Button from "../../components/Button";
+import { colors } from "../../utils/colors";
+import { fonts } from "../../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const { height } = Dimensions.get("window");
 

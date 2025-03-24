@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { routifyConstantsService } from "../services/routifyConstantsService";
-import { getManeuverFeedback } from "../utils/api";
+import { routifyConstantsService } from "../../services/routifyConstantsService";
+import { getManeuverFeedback } from "../../utils/api";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-import RatingScale from "../components/RatingScale";
-import { colors } from "../utils/colors";
-import { fonts } from "../utils/fonts";
-import { AuthContext } from "../context/AuthContext";
+import RatingScale from "../../components/RatingScale";
+import { colors } from "../../utils/colors";
+import { fonts } from "../../utils/fonts";
+import { AuthContext } from "../../context/AuthContext";
 
 const { width, height } = Dimensions.get("window");
 
@@ -58,7 +58,7 @@ const FeedbackScreen = () => {
 
       {/* Logo */}
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../../assets/logo.png")}
         style={styles.logo}
         alt="Logo"
       />

@@ -14,14 +14,14 @@ import LoginScreen from "./src/screens/LoginScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import { AuthProvider, AuthContext } from "./src/context/AuthContext";
 import HomeScreen from "./src/screens/HomeScreen";
-import FeedbackScreen from "./src/screens/FeedbackScreen";
-import HelpScreen from "./src/screens/HelpScreen";
-import UserProfileScreen from "./src/screens/UserProfileScreen";
-import TestCenterScreen from "./src/screens/TestCenterScreen";
-import RouteScreen from "./src/screens/RoutesScreen";
-import MapScreen from "./src/screens/MapScreen";
-import UserInformationScreen from "./src/screens/UserInformationScreen";
-
+import FeedbackScreen from "./src/screens/Progress/FeedbackScreen";
+import HelpScreen from "./src/screens/Resources/HelpScreen";
+import UserProfileScreen from "./src/screens/Profile/ProfileScreen";
+import TestCenterScreen from "./src/screens/Maps/TestCentersScreen";
+import RouteScreen from "./src/screens/Maps/RoutesScreen";
+import MapScreen from "./src/screens/Maps/MapsScreen";
+import UserInformationScreen from "./src/screens/Profile/UserInformationScreen";
+import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -65,6 +65,7 @@ const App = () => {
                 component={UserProfileScreen}
               />
               <Stack.Screen name={"Map"} component={MapScreen} />
+              <Stack.Screen name={"Tutorials"} component={TutorialsScreen} />
             </>
           ) : (
             <>

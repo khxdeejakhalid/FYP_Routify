@@ -9,12 +9,12 @@ import {
   FlatList,
   View,
 } from "react-native";
-import { colors } from "../utils/colors";
-import { fonts } from "../utils/fonts";
+import { colors } from "../../utils/colors";
+import { fonts } from "../../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import RouteCard from "../components/RouteCard";
-import Button from "../components/Button";
+import RouteCard from "../../components/RouteCard";
+import Button from "../../components/Button";
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,7 +32,7 @@ const RoutesScreen = () => {
   const handleGoBack = () => {
     navigation.goBack();
   };
-  
+
   const handleNext = () => {
     if (selectedRoute) {
       navigation.navigate("Map", { selectedRoute });
@@ -66,7 +66,7 @@ const RoutesScreen = () => {
       </TouchableOpacity>
 
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../../assets/logo.png")}
         style={styles.logo}
         alt="Logo"
       />

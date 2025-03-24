@@ -12,23 +12,23 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import * as Speech from "expo-speech";
 
-import { fonts } from "../utils/fonts";
-import { colors } from "../utils/colors";
+import { fonts } from "../../utils/fonts";
+import { colors } from "../../utils/colors";
 import {
   getWaypoints,
   getTurnsByRoute,
   getManeuversByRoute,
   saveManueverFeedbackScore,
-} from "../utils/api";
-import { routifyConstantsService } from "../services/routifyConstantsService";
-import { processRoute } from "../utils/routesProcessing.js";
-import { mapUtils } from "../utils/mapUtils";
-import { maneuverUtils } from "../utils/maneueverUtilityService";
+} from "../../utils/api";
+import { routifyConstantsService } from "../../services/routifyConstantsService";
+import { processRoute } from "../../utils/routesProcessing.js";
+import { mapUtils } from "../../utils/mapUtils";
+import { maneuverUtils } from "../../utils/maneueverUtilityService";
 
-import routeData from "../assets/json/Route1.json";
-import CustomModal from "../components/CustomModal";
-import FeedbackModal from "../components/FeedbackModal";
-import { AuthContext } from "../context/AuthContext.jsx";
+import routeData from "../../assets/json/Route1.json";
+import CustomModal from "../../components/CustomModal";
+import FeedbackModal from "../../components/FeedbackModal";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 const { width, height } = Dimensions.get("window");
 
@@ -183,9 +183,9 @@ const MapScreen = () => {
 
       if (
         distanceToTurn <= MSM_PROXIMITY_THRESHOLD &&
-        !triggeredTurns.has(turn.id || turn)
+        !triggeredTurns.has(turn)
       ) {
-        triggeredTurns.add(turn.id || turn);
+        triggeredTurns.add(turn);
         playRemindersWithDelay(MSM_REMINDERS, 1000);
 
         setTimeout(() => triggeredTurns.delete(turn), 60000);
@@ -330,7 +330,7 @@ const MapScreen = () => {
     }
 
     if (isManeueverActive) {
-      // Once the user is out of the range of hilltop, Calculate parameters to judge how well he has performed
+      // Once the user is out of the range of hilltop/hillstart, Calculate parameters to judge how well he has performed
       if (
         maneuverUtils.isManueverInProgress(
           currentLat,
@@ -442,7 +442,6 @@ const MapScreen = () => {
       // Reset total deviations & total speed
       totalDeviations = [];
       totalSpeed = [];
-      let overallScore = 0;
 
       if (reverseAroundCornerTouchedKerb) {
         setManeuverFeedback(0);
@@ -485,7 +484,7 @@ const MapScreen = () => {
         console.log(`Time Score: ${timeScore}`);
 
         // Calculate overall score
-        overallScore = maneuverUtils.calculateOverallScore(
+        const overallScore = maneuverUtils.calculateOverallScore(
           distanceScore,
           speedScore,
           timeScore,
@@ -527,7 +526,6 @@ const MapScreen = () => {
       // Reset total deviations & total speed
       totalDeviations = [];
       totalSpeed = [];
-      let overallScore = 0;
 
       if (turnAboutTouchedKerb) {
         setManeuverFeedback(0);
@@ -561,7 +559,7 @@ const MapScreen = () => {
         console.log(`Time Score: ${timeScore}`);
 
         // Calculate overall score
-        overallScore = maneuverUtils.calculateReverseAroundCornerScore(
+        const overallScore = maneuverUtils.calculateReverseAroundCornerScore(
           speedScore,
           timeScore,
           turnAboutTouchedKerb
@@ -704,7 +702,7 @@ const MapScreen = () => {
               ref={markerRef}
               coordinate={userLocation}
               title="Your Location"
-              image={require("../assets/icons/navigator.png")}
+              image={require("../../assets/icons/navigator.png")}
               anchor={{ x: 0.5, y: 0.5 }}
               style={{
                 transform: [{ rotate: `${currentLocation.heading}deg` }],
@@ -723,7 +721,7 @@ const MapScreen = () => {
                   title={`${manuever.DISPLAY_NAME} Maneuver`}
                   description={manuever.DISPLAY_NAME}
                   pinColor={colors.primary}
-                  icon={require("../assets/icons/markers/manuever_marker.png")}
+                  icon={require("../../assets/icons/markers/manuever_marker.png")}
                 />
               );
             })}

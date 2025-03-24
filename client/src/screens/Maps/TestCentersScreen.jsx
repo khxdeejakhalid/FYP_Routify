@@ -7,16 +7,16 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
-  Platform
+  Platform,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../components/Button";
-import { colors } from "../utils/colors";
-import { fonts } from "../utils/fonts";
-import CustomModal from "../components/CustomModal";
-import { getTestCenters } from "../utils/api";
+import Button from "../../components/Button";
+import { colors } from "../../utils/colors";
+import { fonts } from "../../utils/fonts";
+import CustomModal from "../../components/CustomModal";
+import { getTestCenters } from "../../utils/api";
 
 const { width, height } = Dimensions.get("window");
 
@@ -69,7 +69,7 @@ const TestCenterScreen = () => {
 
       {/* Logo */}
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../../assets/logo.png")}
         style={styles.logo}
         alt="Logo"
       />
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
   },
   pickerWrapper: {
     borderRadius: 10,
-    overflow: Platform.OS === "android" ? "hidden" : "", 
-    backgroundColor: Platform.OS === "android" ? `${colors.primary}` : "", 
+    overflow: Platform.OS === "android" ? "hidden" : "",
+    backgroundColor: Platform.OS === "android" ? `${colors.primary}` : "",
     width: "80%",
     height: 60,
   },

@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 const Header = () => {
   const navigation = useNavigation();
-  // @TODO: add header
   return (
     <View>
       <Text>Header</Text>

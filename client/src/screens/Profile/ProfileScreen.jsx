@@ -11,14 +11,14 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
-import { colors } from "../utils/colors";
-import { fonts } from "../utils/fonts";
-import { getUserInformation, updateUserInformation } from "../utils/api";
-import CustomModal from "../components/CustomModal";
+import { colors } from "../../utils/colors";
+import { fonts } from "../../utils/fonts";
+import { getUserInformation, updateUserInformation } from "../../utils/api";
+import CustomModal from "../../components/CustomModal";
 
 const { width, height } = Dimensions.get("window");
 

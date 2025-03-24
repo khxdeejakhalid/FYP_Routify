@@ -38,7 +38,7 @@ const HomeScreen = () => {
     },
     {
       id: 3,
-      title: "Help",
+      title: "Resources",
       route: "Help",
       iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
     },
