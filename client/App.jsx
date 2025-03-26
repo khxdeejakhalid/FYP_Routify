@@ -22,6 +22,9 @@ import RouteScreen from "./src/screens/Maps/RoutesScreen";
 import MapScreen from "./src/screens/Maps/MapsScreen";
 import UserInformationScreen from "./src/screens/Profile/UserInformationScreen";
 import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
+import LinksScreen from "./src/screens/Resources/LinksScreen";
+// import PreTestChecklist from "./src/screens/Resources/PretestChecklistScreen";
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -55,17 +58,21 @@ const App = () => {
               <Stack.Screen name={"Home"} component={HomeScreen} />
               <Stack.Screen name={"Progress"} component={FeedbackScreen} />
               <Stack.Screen
-                name={"TestCenteres"}
-                component={TestCenterScreen}
-              />
-              <Stack.Screen name={"Routes"} component={RouteScreen} />
-              <Stack.Screen name={"Help"} component={HelpScreen} />
-              <Stack.Screen
                 name={"UserProfile"}
                 component={UserProfileScreen}
               />
+              {/* Manuever's screen */}
+              <Stack.Screen name={"Routes"} component={RouteScreen} />
+              <Stack.Screen
+                name={"TestCenteres"}
+                component={TestCenterScreen}
+              />
               <Stack.Screen name={"Map"} component={MapScreen} />
+              {/* Resources Screens */}
+              <Stack.Screen name={"Help"} component={HelpScreen} />
               <Stack.Screen name={"Tutorials"} component={TutorialsScreen} />
+              <Stack.Screen name={"Links"} component={LinksScreen} />
+              {/* <Stack.Screen name={"PreTestChecklist"} component={PreTestChecklist} /> */}
             </>
           ) : (
             <>
