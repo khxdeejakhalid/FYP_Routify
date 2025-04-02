@@ -12,8 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
+import List from "./List";
 
-import List from "./List"; // Import your List component
 const { width, height } = Dimensions.get("window");
 
 const ScreenWithList = ({ title, navItems, onGoBack }) => {

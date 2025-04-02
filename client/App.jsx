@@ -23,7 +23,7 @@ import MapScreen from "./src/screens/Maps/MapsScreen";
 import UserInformationScreen from "./src/screens/Profile/UserInformationScreen";
 import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
 import LinksScreen from "./src/screens/Resources/LinksScreen";
-// import PreTestChecklist from "./src/screens/Resources/PretestChecklistScreen";
+import PreTestChecklist from "./src/screens/Resources/PretestChecklistScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,7 +72,10 @@ const App = () => {
               <Stack.Screen name={"Help"} component={HelpScreen} />
               <Stack.Screen name={"Tutorials"} component={TutorialsScreen} />
               <Stack.Screen name={"Links"} component={LinksScreen} />
-              {/* <Stack.Screen name={"PreTestChecklist"} component={PreTestChecklist} /> */}
+              <Stack.Screen
+                name={"PreTestChecklist"}
+                component={PreTestChecklist}
+              />
             </>
           ) : (
             <>

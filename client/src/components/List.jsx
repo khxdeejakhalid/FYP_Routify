@@ -3,12 +3,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
   View,
   FlatList,
-  Dimensions,
   Linking,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -19,9 +15,10 @@ import { colors } from "../utils/colors";
 import { useNavigation } from "@react-navigation/native";
 import { fonts } from "../utils/fonts";
 
-const { width, height } = Dimensions.get("window");
 const List = ({ navItems }) => {
   const navigation = useNavigation();
+
+  // * Functions
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
