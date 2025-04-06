@@ -1,27 +1,10 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-  View,
-  FlatList,
-  Dimensions,
-  Linking,
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import ScreenWithList from "../../components/SectionWithList";
 
 import React from "react";
-import { colors } from "../../utils/colors";
 
 import { useNavigation } from "@react-navigation/native";
-import { fonts } from "../../utils/fonts";
-import List from "../../components/List";
 
-const { width, height } = Dimensions.get("window");
+
 const LinksScreen = () => {
   const navigation = useNavigation();
   const linkNavItems = [
