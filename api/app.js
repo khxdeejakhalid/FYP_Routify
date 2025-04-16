@@ -8,6 +8,7 @@ import waypointRoutes from "./routes/waypoint.js";
 import feedbackRoutes from "./routes/feedback.js";
 import turnRoutes from "./routes/turns.js";
 import maneuverRoutes from "./routes/maneuver.js";
+import quizRoutes from "./routes/quiz.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/waypoints", waypointRoutes);
 app.use("/api/turns", turnRoutes);
 app.use("/api/maneuver", maneuverRoutes);
+app.use("/api/quiz", quizRoutes);
 
 app.listen(8080, () => {
   console.log("Running on localhost 8080");

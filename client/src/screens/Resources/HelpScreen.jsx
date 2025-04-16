@@ -19,7 +19,7 @@ const HelpScreen = () => {
     {
       id: 3,
       title: "Q&A",
-      route: "Help",
+      route: "QuizScreen",
     },
     {
       id: 4,

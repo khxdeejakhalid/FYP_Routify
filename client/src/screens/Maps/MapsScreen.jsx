@@ -183,9 +183,9 @@ const MapScreen = () => {
 
       if (
         distanceToTurn <= MSM_PROXIMITY_THRESHOLD &&
-        !triggeredTurns.has(turn)
+        !triggeredTurns.has(turn.id || turn)
       ) {
-        triggeredTurns.add(turn);
+        triggeredTurns.add(turn.id || turn);
         playRemindersWithDelay(MSM_REMINDERS, 1000);
 
         setTimeout(() => triggeredTurns.delete(turn), 60000);
@@ -330,7 +330,7 @@ const MapScreen = () => {
     }
 
     if (isManeueverActive) {
-      // Once the user is out of the range of hilltop/hillstart, Calculate parameters to judge how well he has performed
+      // Once the user is out of the range of hilltop, Calculate parameters to judge how well he has performed
       if (
         maneuverUtils.isManueverInProgress(
           currentLat,
@@ -442,6 +442,7 @@ const MapScreen = () => {
       // Reset total deviations & total speed
       totalDeviations = [];
       totalSpeed = [];
+      let overallScore = 0;
 
       if (reverseAroundCornerTouchedKerb) {
         setManeuverFeedback(0);
@@ -484,7 +485,7 @@ const MapScreen = () => {
         console.log(`Time Score: ${timeScore}`);
 
         // Calculate overall score
-        const overallScore = maneuverUtils.calculateOverallScore(
+        overallScore = maneuverUtils.calculateOverallScore(
           distanceScore,
           speedScore,
           timeScore,
@@ -526,6 +527,7 @@ const MapScreen = () => {
       // Reset total deviations & total speed
       totalDeviations = [];
       totalSpeed = [];
+      let overallScore = 0;
 
       if (turnAboutTouchedKerb) {
         setManeuverFeedback(0);
@@ -559,7 +561,7 @@ const MapScreen = () => {
         console.log(`Time Score: ${timeScore}`);
 
         // Calculate overall score
-        const overallScore = maneuverUtils.calculateReverseAroundCornerScore(
+        overallScore = maneuverUtils.calculateReverseAroundCornerScore(
           speedScore,
           timeScore,
           turnAboutTouchedKerb

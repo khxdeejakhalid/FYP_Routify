@@ -313,3 +313,17 @@ export const saveManueverFeedbackScore = async (reqParams) => {
     };
   }
 };
+
+export const getQuizById = async (quizId) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/quiz/${quizId}`);
+    if (response.data.status === "success") {
+      return { success: true, quiz: response.data.quiz };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
