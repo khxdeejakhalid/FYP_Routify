@@ -109,27 +109,27 @@ INSERT INTO
 VALUES
     (
         3,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz03/Question01.png'
     ),
     (
         3,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz03/Question02.png'
     ),
     (
         3,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz03/Question03.png'
     ),
     (
         3,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz03/Question04.png'
     ),
     (
         3,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz03/Question05.png'
     );
 
@@ -139,27 +139,27 @@ INSERT INTO
 VALUES
     (
         4,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz04/Question01.png'
     ),
     (
         4,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz04/Question02.png'
     ),
     (
         4,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz04/Question03.png'
     ),
     (
         4,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz04/Question04.png'
     ),
     (
         4,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz04/Question05.png'
     );
 
@@ -169,27 +169,27 @@ INSERT INTO
 VALUES
     (
         5,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz05/Question01.png'
     ),
     (
         5,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz05/Question02.png'
     ),
     (
         5,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz05/Question03.png'
     ),
     (
         5,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz05/Question04.png'
     ),
     (
         5,
-        'What does this hand signal mean?',
+        'What does this road sign mean?',
         'quiz05/Question05.png'
     );
 
