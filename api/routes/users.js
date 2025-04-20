@@ -6,7 +6,8 @@ import {
   addUser,
   deleteUser,
   updateUser,
-  checkEmail
+  checkEmail,
+  fetchProfile,
 } from "../controllers/users.js";
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.get("/:email", isAuth, getUser);
 router.post("/", isAuth, addUser);
 router.delete("/:email", isAuth, deleteUser);
 router.put("/:email", isAuth, updateUser);
+router.get("/profile/:email", isAuth, fetchProfile);
 
 export default router;

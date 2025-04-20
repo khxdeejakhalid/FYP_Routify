@@ -1,5 +1,5 @@
+import InstructorLearner from "../models/instructor_learner.js";
 import User from "../models/user.js";
-
 export const getUsers = async (req, res) => {
   User.fetchAll()
     .then(([rows, fieldData]) => {
@@ -32,6 +32,7 @@ export const addUser = async (req, res) => {
   const username = req.body.username;
   const fullName = req.body.fullName;
   const email = req.body.email;
+  const role = req.body.role;
   const password = req.body.password;
   const dateOfPermit = req.body.dateOfPermit;
   const dateOfBirth = req.body.dateOfBirth;
@@ -42,25 +43,39 @@ export const addUser = async (req, res) => {
     email,
     password,
     dateOfPermit,
-    dateOfBirth
+    dateOfBirth,
+    role
   );
-  user
-    .save()
-    .then(() => {
-      res.status(201).json({
-        status: "success",
-        description: "User has been added successfully",
+  try {
+    const createdUser = await user.save();
+
+    if (role === "learner") {
+      const [instructors] = await User.findUserByRole("instructor");
+
+      // * Randomly assign an instructor
+      const randomInstructor =
+        instructors[Math.floor(Math.random() * instructors.length)];
+
+      const instructorLearnerRelation = new InstructorLearner({
+        instructorEmail: randomInstructor.email,
+        learnerEmail: email,
       });
-    })
-    .catch((error) =>
-      res.status(400).json({ status: "failure", description: error.message })
-    );
+
+      await instructorLearnerRelation.save();
+    }
+    res.status(201).json({
+      status: "success",
+      description: "User has been added successfully",
+      user: createdUser,
+    });
+  } catch (error) {
+    res.status(400).json({ status: "failure", description: error.message });
+  }
 };
 
 export const deleteUser = async (req, res) => {};
 export const updateUser = async (req, res) => {
   const { email } = req.params;
-  console.log(req.body);
   const { name, password } = req.body;
 
   const updatedData = { name, password };
@@ -101,4 +116,29 @@ export const checkEmail = async (req, res) => {
     .catch((error) => {
       res.status(400).json({ status: "failure", description: error });
     });
+};
+
+export const fetchProfile = async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    const [user] = await User.fetchUser(email);
+    let userProfile = {
+      ...user[0],
+    };
+
+    if (user[0].role === "instructor") {
+      const [instructorLearnerRows] =
+        await InstructorLearner.fetchAssignedLearners(email);
+      userProfile.assignedLearners = instructorLearnerRows;
+    } else {
+      const [instructorLearnerRows] =
+        await InstructorLearner.fetchAssignedInstructor(email);
+      userProfile.assignedInstructors = instructorLearnerRows[0];
+    }
+
+    res.status(200).json({ status: "success", profile: userProfile });
+  } catch (error) {
+    res.status(400).json({ status: "failure", description: error });
+  }
 };

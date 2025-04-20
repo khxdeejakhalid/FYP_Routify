@@ -26,7 +26,7 @@ const { height } = Dimensions.get("window");
 const UserInformationScreen = ({ route }) => {
   const navigation = useNavigation();
   const { handleSignUp } = useContext(AuthContext);
-  const { email, username, password } = route.params;
+  const { email, username, password, role } = route.params;
 
   const [fullName, setFullName] = useState("");
   const [dateOfPermit, setDateOfPermit] = useState(new Date());
@@ -78,7 +78,7 @@ const UserInformationScreen = ({ route }) => {
       username &&
       fullName &&
       dateOfBirth &&
-      dateOfPermit
+      role
     ) {
       const response = await handleSignUp(
         email,
@@ -87,6 +87,7 @@ const UserInformationScreen = ({ route }) => {
         fullName,
         dateOfPermit,
         dateOfBirth,
+        role.value,
       );
       if (!response.success) {
         setModalHeader("Failure");
@@ -132,24 +133,27 @@ const UserInformationScreen = ({ route }) => {
               required={true}
             />
           </View>
-
-          <Text style={styles.label}>
-            Permit Issue Date <Text style={styles.required}>*</Text>
-          </Text>
-          <TouchableOpacity
-            style={styles.inputContainer}
-            onPress={showPermitPicker}>
-            <SimpleLineIcons
-              name={"calendar"}
-              size={20}
-              color={colors.secondary}
-            />
-            <Text style={styles.textInput}>
-              {isDateConfirmed.permit
-                ? dateOfPermit.toDateString()
-                : "Select date of permit"}
-            </Text>
-          </TouchableOpacity>
+          {role.value === "learner" && (
+            <>
+              <Text style={styles.label}>
+                Permit Issue Date <Text style={styles.required}>*</Text>
+              </Text>
+              <TouchableOpacity
+                style={styles.inputContainer}
+                onPress={showPermitPicker}>
+                <SimpleLineIcons
+                  name={"calendar"}
+                  size={20}
+                  color={colors.secondary}
+                />
+                <Text style={styles.textInput}>
+                  {isDateConfirmed.permit
+                    ? dateOfPermit.toDateString()
+                    : "Select date of permit"}
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
 
           {showDatePickerForPermit && (
             <DateTimePicker

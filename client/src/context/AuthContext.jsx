@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { signIn, signUp, logout } from "../utils/api";
+import { signIn, signUp, logout, fetchProfile } from "../utils/api";
 
 export const AuthContext = createContext();
 
@@ -8,12 +8,33 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
 
   const handleSignIn = async (email, password) => {
-    const response = await signIn(email, password);
-    if (response.success) {
+    try {
+      const response = await signIn(email, password);
+
+      if (!response.success) return response;
+
       setUser(response.user);
       setIsLogin(true);
+
+      const { success, profile } = await fetchProfile(email);
+
+      if (success) {
+        setUser((prev) => ({
+          ...prev,
+          ...profile,
+        }));
+      } else {
+        alert("Error fetching user profile");
+      }
+
+      return response;
+    } catch (error) {
+      console.error("Sign-in failed:", error);
+      return {
+        success: false,
+        message: "An unexpected error occurred during sign-in.",
+      };
     }
-    return response;
   };
 
   const handleSignUp = async (
@@ -23,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     firstName,
     lastName,
     dateOfBirth,
+    role,
   ) => {
     const response = await signUp(
       email,
@@ -31,6 +53,7 @@ export const AuthProvider = ({ children }) => {
       firstName,
       lastName,
       dateOfBirth,
+      role,
     );
     if (response.success) {
       setUser(response.user);

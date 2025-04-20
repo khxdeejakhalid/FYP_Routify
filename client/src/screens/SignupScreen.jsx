@@ -9,6 +9,7 @@ import {
   Dimensions,
   Platform,
 } from "react-native";
+import { Dropdown } from "react-native-element-dropdown";
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
@@ -28,7 +29,7 @@ const SignupScreen = () => {
   const [username, setUsername] = useState(true);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+  const [selectedRole, setSelectedRole] = useState("User");
   const [modalText, setModalText] = useState("");
   const [modalHeader, setModalHeader] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
@@ -87,6 +88,7 @@ const SignupScreen = () => {
               email,
               password,
               username,
+              role: selectedRole,
             });
           }
         }
@@ -152,7 +154,11 @@ const SignupScreen = () => {
           </View>
           <Text style={styles.label}>Password</Text>
           <View style={styles.inputContainer}>
-            <SimpleLineIcons name={"lock"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
+            <SimpleLineIcons
+              name={"lock"}
+              size={Platform.OS === "android" ? 18 : 20}
+              color={colors.gray}
+            />
             <TextInput
               style={styles.textInput}
               placeholder="Enter your password"
@@ -166,13 +172,50 @@ const SignupScreen = () => {
                 setSecureEntry((prev) => !prev);
               }}>
               {secureEntry ? (
-                <Ionicons name={"eye-off"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
+                <Ionicons
+                  name={"eye-off"}
+                  size={Platform.OS === "android" ? 18 : 20}
+                  color={colors.gray}
+                />
               ) : (
-                <Ionicons name={"eye"} size={Platform.OS === "android" ? 18 : 20} color={colors.gray} />
+                <Ionicons
+                  name={"eye"}
+                  size={Platform.OS === "android" ? 18 : 20}
+                  color={colors.gray}
+                />
               )}
             </TouchableOpacity>
           </View>
 
+          {/* Select Role */}
+          <Text style={styles.label}>Role</Text>
+          <Dropdown
+            data={[
+              {
+                label: "Instructor",
+                value: "instructor",
+              },
+              {
+                label: "Learner",
+                value: "learner",
+              },
+            ]}
+            placeholder="Select Role"
+            labelField="label"
+            valueField="value"
+            style={styles.dropdown}
+            value={selectedRole}
+            renderLeftIcon={() => (
+              <Ionicons
+                color={colors.gray}
+                name={"person-outline"}
+                size={Platform.OS === "android" ? 18 : 20}
+              />
+            )}
+            placeholderStyle={styles.placeholderStyle}
+            onChange={(item) => setSelectedRole(item)}></Dropdown>
+
+          {/* Action btns */}
           <View style={styles.authenticationButtonContainer}>
             <Button
               clickHandler={signupHandler}
@@ -234,6 +277,20 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginTop: height * 0.12,
+  },
+  placeholderStyle: {
+    fontSize: 14,
+    color: colors.gray,
+    paddingHorizontal: 10,
+  },
+  dropdown: {
+    height: 50,
+    borderRadius: 8,
+    width: "100%",
+    paddingHorizontal: 8,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    borderRadius: 10,
   },
   headingText: {
     fontSize: 24,
