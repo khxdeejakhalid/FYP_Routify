@@ -20,7 +20,7 @@ export const signIn = async (email, password) => {
     );
 
     if (response.data.status === "success") {
-      return { success: true, user: { email } };
+      return { success: true, user: response.data.user };
     } else if (response.data.status === "failure") {
       return {
         success: false,
@@ -28,7 +28,6 @@ export const signIn = async (email, password) => {
       };
     }
   } catch (error) {
-    console.log(error);
     return {
       success: false,
       description: "System Cannot Process. Please try again.",
@@ -43,6 +42,7 @@ export const signUp = async (
   fullName,
   dateOfPermit,
   dateOfBirth,
+  role,
 ) => {
   const requestBody = {
     email,
@@ -51,6 +51,7 @@ export const signUp = async (
     fullName,
     dateOfPermit: dateOfPermit.toISOString().split("T")[0],
     dateOfBirth: dateOfBirth.toISOString().split("T")[0],
+    role,
   };
   try {
     const response = await axios.post(`${BACKEND_URL}/users`, requestBody, {
@@ -58,9 +59,8 @@ export const signUp = async (
         "Content-Type": "application/json",
       },
     });
-
     if (response.data.status === "success") {
-      return { success: true, user: { email } };
+      return { success: true, user: response.data.user };
     } else if (response.data.status === "failure") {
       return {
         success: false,
@@ -306,6 +306,124 @@ export const saveManueverFeedbackScore = async (reqParams) => {
       return { success: true };
     }
     return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const fetchLessons = async ({ learnerEmail, instructorEmail }) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/lessons/learner_lessons`, {
+      params: {
+        instructorEmail,
+        learnerEmail,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.data.status === "success") {
+      const mappedData = response.data.lessons.map((lesson) => {
+        return {
+          ...lesson,
+          checked: lesson.status === "completed" ? true : false,
+          disabled: lesson.status !== "completed" ? true : false,
+        };
+      });
+      return {
+        success: true,
+        lessons: mappedData,
+      };
+    } else if (response.data.status === "failure") {
+      return {
+        success: false,
+        description: response.data.description,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      description: err.message,
+    };
+  }
+};
+
+export const updateLessonFeedback = async (lessonId, feedback) => {
+  try {
+    const reqBody = {
+      lessonId,
+      feedback,
+    };
+    const response = await axios.post(
+      `${BACKEND_URL}/lessons_feedback/updateFeedback`,
+      reqBody,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (response.data.status === "success") {
+      return {
+        success: true,
+      };
+    } else if (response.data.status === "failure") {
+      return {
+        success: false,
+        description: response.data.description,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      description: err.message,
+    };
+  }
+};
+
+export const addLessonFeedback = async (lessonFeedback) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/lessons_feedback`,
+      lessonFeedback,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (response.data.status === "success") {
+      return {
+        success: true,
+      };
+    } else if (response.data.status === "failure") {
+      return {
+        success: false,
+        description: response.data.description,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      description: err.message,
+    };
+  }
+};
+
+export const fetchProfile = async (email) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/users/profile/${email}`);
+    if (response.data.status === "success") {
+      return { success: true, profile: response.data.profile };
+    } else {
+      return { success: false, profile: response.data.description };
+    }
   } catch (error) {
     return {
       success: false,

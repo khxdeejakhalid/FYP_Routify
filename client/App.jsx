@@ -25,6 +25,8 @@ import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
 import LinksScreen from "./src/screens/Resources/LinksScreen";
 import PreTestChecklist from "./src/screens/Resources/PretestChecklistScreen";
 import Calendar from "./src/screens/SessionsCalendar/Calender";
+import ViewLearnersScreen from "./src/screens/Instructor/ViewLearnersScreen";
+import LessonsFeedback from "./src/screens/LessonsFeedback/LessonsFeedback";
 import QuizScreen from "./src/screens/Resources/QuizScreen";
 
 const Stack = createNativeStackNavigator();
@@ -78,8 +80,16 @@ const App = () => {
                 name={"PreTestChecklist"}
                 component={PreTestChecklist}
               />
+              <Stack.Screen
+                name={"ViewLearnersScreen"}
+                component={ViewLearnersScreen}
+              />
               <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
               <Stack.Screen name={"Calendar"} component={Calendar} />
+              <Stack.Screen
+                name={"LessonsFeedback"}
+                component={LessonsFeedback}
+              />
             </>
           ) : (
             <>

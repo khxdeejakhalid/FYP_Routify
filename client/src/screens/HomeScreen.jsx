@@ -15,33 +15,55 @@ import { AuthContext } from "../context/AuthContext";
 
 const { width, height } = Dimensions.get("window");
 const HomeScreen = () => {
-  const { handleSignOut } = useContext(AuthContext);
+  const { handleSignOut, user } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const handleLogout = async () => {
     await handleSignOut();
     navigation.navigate("Welcome");
   };
-
   const homeNavItems = [
-    {
-      id: 1,
-      title: "Routes",
-      route: "TestCenteres",
-      iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
-    },
-    {
-      id: 2,
-      title: "Progress",
-      route: "Progress",
-      iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
-    },
-    {
-      id: 3,
-      title: "Resources",
-      route: "Help",
-      iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
-    },
+    ...(user.role === "instructor"
+      ? [
+          {
+            id: 1,
+            title: "View Learners",
+            route: "ViewLearnersScreen",
+            iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
+          },
+          {
+            id: 2,
+            title: "Calendar",
+            route: "Calendar",
+            iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
+          },
+        ]
+      : [
+          {
+            id: 1,
+            title: "Routes",
+            route: "TestCenteres",
+            iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
+          },
+          {
+            id: 2,
+            title: "Progress",
+            route: "Progress",
+            iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
+          },
+          {
+            id: 3,
+            title: "Resources",
+            route: "Help",
+            iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
+          },
+          {
+            id: 7,
+            title: "Lesson Feedback",
+            route: "LessonsFeedback",
+            iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
+          },
+        ]),
     {
       id: 4,
       title: "Profile",
@@ -132,6 +154,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
     fontFamily: fonts.SemiBold,
+    textAlign: "center",
   },
   boxIcon: {
     width: width * 0.15,

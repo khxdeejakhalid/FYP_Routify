@@ -24,7 +24,7 @@ const FeedbackScreen = () => {
   const { user } = useContext(AuthContext);
   const MANEUVERS_TYPE = routifyConstantsService.MANEUVERS_TYPE;
   // @TODO: implement
-  const [noOfRoutesCompleted, setNoOfRoutesCompleted] = useState(8);
+  const [noOfRoutesCompleted, setNoOfRoutesCompleted] = useState(0);
   const [feedback, setFeedback] = useState([]);
 
   const handleGoBack = () => {
@@ -33,12 +33,12 @@ const FeedbackScreen = () => {
 
   const fetchManeueverFeedback = async () => {
     const response = (await getManeuverFeedback(user.email)) || [];
-    setFeedback(response.feedback);
+    setFeedback(response.feedback || []);
   };
   const getManeuverRating = (manueverType) => {
     const manueverFeedback = feedback.find(
       (feedback) => feedback.MANUEVER_TYPE === manueverType,
-    );
+    ) || {};
     return manueverFeedback ? manueverFeedback.AVG_SCORE : 0;
   };
   useEffect(() => {
