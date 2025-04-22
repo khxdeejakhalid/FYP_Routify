@@ -41,7 +41,7 @@ const UserProfileScreen = () => {
 
   const handleModalClose = () => {
     setModalVisible(false);
-    navigation.navigate('Home');
+    navigation.navigate("Home");
   };
 
   useEffect(() => {
@@ -71,7 +71,10 @@ const UserProfileScreen = () => {
   };
 
   const isChanged = () => {
-    if (userInfo.name !== newName || userInfo.password !== newPassword && newPassword !== "") {
+    if (
+      userInfo.name !== newName ||
+      (userInfo.password !== newPassword && newPassword !== "")
+    ) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -192,7 +195,9 @@ const UserProfileScreen = () => {
                   </TouchableOpacity>
                 </View>
               ) : (
-                <Text style={styles.fieldValue}>{"•".repeat(userInfo.password?.length)}</Text>
+                <Text style={styles.fieldValue}>
+                  {"•".repeat(userInfo.password?.length)}
+                </Text>
               )}
             </View>
 
@@ -202,13 +207,14 @@ const UserProfileScreen = () => {
                 {new Date(userInfo.date_of_birth).toLocaleDateString()}
               </Text>
             </View>
-
-            <View style={styles.fieldContainer}>
-              <Text style={styles.fieldLabel}>Permit Issue Date:</Text>
-              <Text style={styles.fieldValue}>
-                {new Date(userInfo.date_of_permit).toLocaleDateString()}
-              </Text>
-            </View>
+            {userInfo.role === "learner" && (
+              <View style={styles.fieldContainer}>
+                <Text style={styles.fieldLabel}>Permit Issue Date:</Text>
+                <Text style={styles.fieldValue}>
+                  {new Date(userInfo.date_of_permit).toLocaleDateString()}
+                </Text>
+              </View>
+            )}
           </View>
 
           <CustomModal

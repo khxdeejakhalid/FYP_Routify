@@ -12,7 +12,7 @@ import instructorLearnerRoutes from "./routes/instructor_learner.js";
 import lessonsRoutes from "./routes/lessons.js";
 import lessonsFeedbackRoutes from "./routes/lessons_feedback.js";
 import quizRoutes from "./routes/quiz.js";
-
+import checkListRoutes from "./routes/checklist.js";
 const app = express();
 
 app.use(express.json());
@@ -41,6 +41,7 @@ app.use("/api/instructor_learner", instructorLearnerRoutes);
 app.use("/api/lessons", lessonsRoutes);
 app.use("/api/lessons_feedback", lessonsFeedbackRoutes);
 app.use("/api/quiz", quizRoutes);
+app.use("/api/checklist", checkListRoutes)
 
 app.listen(8080, () => {
   console.log("Running on localhost 8080");

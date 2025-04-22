@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -16,61 +16,44 @@ import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
+import { getChecklist, saveChecklistItems } from "../../utils/api";
+import { AuthContext } from "../../context/AuthContext";
 
 const { width, height } = Dimensions.get("window");
 
-const checklistItems = [
-  { id: 1, task: "Valid NCT", checked: false },
-  { id: 2, task: "Valid Motor Tax Disc", checked: false },
-  { id: 3, task: "Valid Insurance", checked: false },
-  { id: 4, task: "Valid Learner Permit", checked: false },
-  { id: 5, task: "L-plates displayed on front and rear", checked: false },
-  { id: 6, task: "All lights working", checked: false },
-  { id: 7, task: "Bonnet Check", checked: false },
-  { id: 8, task: "Seatbelts functioning correctly", checked: false },
-  { id: 9, task: "Windows functioning correctly", checked: false },
-  { id: 10, task: "Tyres are in suitable condition", checked: false },
-];
-
 const PreTestChecklist = () => {
   const navigation = useNavigation();
+  const { user } = useContext(AuthContext);
 
   // * States
-  const [tasks, setTasks] = useState(checklistItems);
+  const [tasks, setTasks] = useState([]);
   const [progress, setProgress] = useState(0);
 
   // * Functions
   const handleToggle = (id) => {
     const updatedTasks = tasks.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item,
+      item.id === id ? { ...item, status: !item.status } : item,
     );
     setTasks(updatedTasks);
     calculateProgress(updatedTasks);
-
-    if (updatedTasks.every((item) => item.checked)) {
-      Alert.alert(
-        "Congratulations!",
-        "You are all set to take your driving test!",
-      );
-    }
   };
 
   const calculateProgress = (updatedTasks) => {
-    const completedTasks = updatedTasks.filter((item) => item.checked).length;
+    const completedTasks = updatedTasks.filter((item) => item.status).length;
     setProgress(completedTasks / updatedTasks.length);
   };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      style={[styles.item, item.checked && styles.itemChecked]}
+      style={[styles.item, item.status && styles.itemChecked]}
       onPress={() => handleToggle(item.id)}>
       <Ionicons
-        name={item.checked ? "checkbox-outline" : "square-outline"}
+        name={item.status ? "checkbox-outline" : "square-outline"}
         size={24}
-        color={item.checked ? "green" : "gray"}
+        color={item.status ? "green" : "gray"}
       />
-      <Text style={[styles.itemText, item.checked && styles.itemTextChecked]}>
-        {item.task}
+      <Text style={[styles.itemText, item.status && styles.itemTextChecked]}>
+        {item.checklist_name}
       </Text>
     </TouchableOpacity>
   );
@@ -78,6 +61,46 @@ const PreTestChecklist = () => {
   const handleGoBack = () => {
     navigation.goBack();
   };
+
+  const getChecklistItems = async () => {
+    try {
+      const { checklist = [] } = await getChecklist(user.email);
+
+      setTasks(checklist);
+      calculateProgress(checklist);
+    } catch (error) {
+      console.error("Error fetching checklist data:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const allTasks = tasks.map((item) => ({
+        id: item.id,
+        status: item.status,
+      }));
+      await saveChecklistItems(allTasks, user.email);
+
+      if (tasks.every((item) => item.status)) {
+        Alert.alert(
+          "Congratulations!",
+          "You are all set to take your driving test!",
+        );
+      } else {
+        Alert.alert(
+          "Set Reminder",
+          "Please complete all pre-test tasks before the test.",
+        );
+        navigation.navigate("Home");
+      }
+    } catch (error) {
+      console.error("Error fetching checklist data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getChecklistItems();
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -116,6 +139,10 @@ const PreTestChecklist = () => {
             contentContainerStyle={styles.list}
             keyExtractor={(item) => item.id.toString()}
           />
+
+          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -123,6 +150,18 @@ const PreTestChecklist = () => {
 };
 
 const styles = StyleSheet.create({
+  submitButton: {
+    backgroundColor: colors.primary,
+    padding: 12,
+    alignItems: "center",
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  submitButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   logo: {
     width: width * 0.8,
     height: height * 0.1,

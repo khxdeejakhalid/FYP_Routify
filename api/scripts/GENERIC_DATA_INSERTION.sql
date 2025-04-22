@@ -21,7 +21,7 @@ VALUES
         'Admin123',
         'George the Instructor',
         'admin@gmail.com',
-        NULL,
+         NULL,
         '2025-04-02',
         'instructor'
     );
@@ -106,3 +106,16 @@ VALUES
     (11, 'learner@gmail.com', 'admin@gmail.com', NULL, 'pending'),
     (12, 'learner@gmail.com', 'admin@gmail.com', NULL, 'pending');
 
+-- Pre-test Checklist Values
+INSERT INTO CHECKLIST (CHECKLIST_NAME, CHECKLIST_STATUS, USER_EMAIL)
+    VALUES
+    ('Valid NCT', false, 'khadeeja@gmail.com'),
+    ('Valid Motor Tax Disc', false, 'khadeeja@gmail.com'),
+    ('Valid Insurance', false, 'khadeeja@gmail.com'),
+    ('Valid Learner Permit', false, 'khadeeja@gmail.com'),
+    ('L-plates displayed on front and rear', false, 'khadeeja@gmail.com'),
+    ('All lights working', false, 'khadeeja@gmail.com'),
+    ('Bonnet Check ', false, 'khadeeja@gmail.com'),
+    ('Seatbelts functioning correctly ', false, 'khadeeja@gmail.com'),
+    ('Windows functioning correctly ', false, 'khadeeja@gmail.com'),
+    ('Tyres are in suitable condition ', false, 'khadeeja@gmail.com');

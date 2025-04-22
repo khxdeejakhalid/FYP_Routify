@@ -445,3 +445,45 @@ export const getQuizById = async (quizId) => {
     };
   }
 };
+
+// Checklist related APIs
+export const getChecklist = async (userEmail) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/checklist`, {
+      params: { userEmail },
+    });
+
+    if (response.data.status === "success") {
+      return { success: true, checklist: response.data.checklists };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const saveChecklistItems = async (checklistIds, userEmail) => {
+  try {
+    const requestBody = {
+      checklistItems: checklistIds,
+      userEmail,
+    };
+
+    const response = await axios.post(`${BACKEND_URL}/checklist`, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.data.status === "success") {
+      return { success: true };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};

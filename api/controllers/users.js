@@ -1,5 +1,8 @@
 import InstructorLearner from "../models/instructor_learner.js";
 import User from "../models/user.js";
+import Checklist from "../models/checklist.js";
+import { getChecklistItems } from "../util/constants.js";
+
 export const getUsers = async (req, res) => {
   User.fetchAll()
     .then(([rows, fieldData]) => {
@@ -62,6 +65,10 @@ export const addUser = async (req, res) => {
       });
 
       await instructorLearnerRelation.save();
+
+      const checkListItems = getChecklistItems(email);
+      // Insert checklist Items for each new user.
+      await Checklist.insertMany(checkListItems);
     }
     res.status(201).json({
       status: "success",
@@ -69,6 +76,7 @@ export const addUser = async (req, res) => {
       user: createdUser,
     });
   } catch (error) {
+    console.log("🚀 ~ addUser ~ error:", error);
     res.status(400).json({ status: "failure", description: error.message });
   }
 };
