@@ -19,7 +19,6 @@ export const getQuizById = async (req, res) => {
     const quizId = req.params.id;
 
     const [quizRows] = await Quiz.fetchById(quizId);
-    console.log("rows:", quizRows); //db rows for quiz
 
     if (quizRows.length === 0) {
       return res
@@ -30,7 +29,6 @@ export const getQuizById = async (req, res) => {
     const quiz = quizRows[0];
 
     const [questionsRows] = await Questions.fetchByQuizId(quizId);
-    console.log("Q rows:", questionsRows); //db rows for q
 
     const questions = [];
 

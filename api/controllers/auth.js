@@ -1,24 +1,33 @@
 import User from "../models/user.js";
 
 export const login = async (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   User.login(email)
     .then(([rows, fieldData]) => {
       if (rows.length > 0) {
         if (rows[0].password === password) {
+          const { password: excludedPass, ...userDetails } = rows[0];
           req.session.isLoggedIn = true;
           req.session.user = rows[0].username;
           res
             .status(200)
-            .json({ status: "success", description: "Login successful" });
-        }
-        else {
-            res.status(200).json({ status: "failure", description: "Invalid Username or Password" });
+            .json({
+              status: "success",
+              description: "Login successful",
+              user: userDetails,
+            });
+        } else {
+          res.status(200).json({
+            status: "failure",
+            description: "Invalid Username or Password",
+          });
         }
       } else {
-        res.status(200).json({ status: "failure", description: "Invalid Username or Password" });
+        res.status(200).json({
+          status: "failure",
+          description: "Invalid Username or Password",
+        });
       }
     })
     .catch((error) => {
@@ -59,6 +68,8 @@ export const signup = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   req.session.destroy((err) => {
-    res.status(200).json({status: "success", description: 'Logout successful'})
+    res
+      .status(200)
+      .json({ status: "success", description: "Logout successful" });
   });
 };

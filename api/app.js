@@ -8,6 +8,9 @@ import waypointRoutes from "./routes/waypoint.js";
 import feedbackRoutes from "./routes/feedback.js";
 import turnRoutes from "./routes/turns.js";
 import maneuverRoutes from "./routes/maneuver.js";
+import instructorLearnerRoutes from "./routes/instructor_learner.js";
+import lessonsRoutes from "./routes/lessons.js";
+import lessonsFeedbackRoutes from "./routes/lessons_feedback.js";
 import quizRoutes from "./routes/quiz.js";
 
 const app = express();
@@ -34,6 +37,9 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/waypoints", waypointRoutes);
 app.use("/api/turns", turnRoutes);
 app.use("/api/maneuver", maneuverRoutes);
+app.use("/api/instructor_learner", instructorLearnerRoutes);
+app.use("/api/lessons", lessonsRoutes);
+app.use("/api/lessons_feedback", lessonsFeedbackRoutes);
 app.use("/api/quiz", quizRoutes);
 
 app.listen(8080, () => {
