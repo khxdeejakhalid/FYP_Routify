@@ -36,6 +36,7 @@ const QuizScreen = () => {
   const [modalHeader, setModalHeader] = useState("");
   const [modalText, setModalText] = useState("");
   const [modalBtnText, setmodalBtnText] = useState("Close");
+  const [correctAnswer, setCorrectAnswer] = useState(null);
 
   // * Handlers
   const handleGoBack = () => {
@@ -47,14 +48,24 @@ const QuizScreen = () => {
   };
 
   const handleNext = () => {
+    // Set the correct answer for the current question to show green radio.
+    const currentQuestion = quizData.questions[currentQuestionIndex];
+    const correctOptionIndex = currentQuestion.options.findIndex(
+      (option) => option.is_correct === 1,
+    );
+    setCorrectAnswer(correctOptionIndex);
+
     const quiz = quizData.questions;
     const newResponses = [...userResponses];
     newResponses[currentQuestionIndex] = selectedOption;
     setUserResponses(newResponses);
 
     if (currentQuestionIndex < quiz.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(null);
+      setTimeout(() => {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedOption(null);
+        setCorrectAnswer(null);
+      }, 1000); // Optional delay for feedback
     } else {
       setQuizCompleted(true);
       handleQuizCompletion(newResponses);
@@ -150,7 +161,9 @@ const QuizScreen = () => {
                   style={[
                     styles.optionButton,
                     selectedOption === index && styles.selectedOptionButton,
+                    correctAnswer === index && styles.correctOptionButton,
                   ]}
+                  disabled={correctAnswer !== null}
                   onPress={() => handleOptionSelect(index)}>
                   <View style={styles.radioContainer}>
                     <View
@@ -166,6 +179,7 @@ const QuizScreen = () => {
                   <Text
                     style={[
                       styles.optionText,
+                      correctAnswer === index && styles.correctOptionText,
                       selectedOption === index && styles.selectedOptionText,
                     ]}>
                     {option.option_text}
@@ -271,6 +285,9 @@ const styles = StyleSheet.create({
   selectedOptionButton: {
     backgroundColor: colors.primary,
   },
+  correctOptionButton: {
+    backgroundColor: "green",
+  },
   radioContainer: {
     marginRight: 10,
   },
@@ -298,6 +315,10 @@ const styles = StyleSheet.create({
     color: colors.secondary,
   },
   selectedOptionText: {
+    color: colors.white,
+    fontFamily: fonts.Medium,
+  },
+  correctOptionText: {
     color: colors.white,
     fontFamily: fonts.Medium,
   },
