@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -12,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   Keyboard,
+  Platform,
 } from "react-native";
 import DateSelector from "../../components/DateSelector";
 import TimeSelector from "../../components/TimeSelector";
@@ -20,16 +20,48 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
-const { width, height } = Dimensions.get("window");
+import { AuthContext } from "../../context/AuthContext";
+import { bookSession } from "../../utils/api";
 
+const { width, height } = Dimensions.get("window");
+const startTimes = [
+  "8:00 AM",
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "1:00 PM",
+  "2:00 PM",
+  "3:00 PM",
+  "4:00 PM",
+  "5:00 PM",
+  "6:00 PM",
+  "7:00 PM",
+];
+const endTimes = [
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "1:00 PM",
+  "2:00 PM",
+  "3:00 PM",
+  "4:00 PM",
+  "5:00 PM",
+  "6:00 PM",
+  "7:00 PM",
+  "8:00 PM",
+];
 const Calendar = () => {
   const navigation = useNavigation();
+  const { user } = useContext(AuthContext);
+
   const [dates, setDates] = useState([]);
-  const [times, setTimes] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
+  const [disabledEndTimes, setDisabledEndTimes] = useState([]);
+
   // * Functions
   const onGoBack = () => {
     navigation.goBack();
@@ -43,25 +75,67 @@ const Calendar = () => {
     }
     setDates(_dates);
   };
-  const getTimesForDate = (selectedDate) => {
-    const times = [];
-    const startOfEvening = moment(selectedDate).startOf("day").add(13, "hours");
-    const endOfEvening = moment(selectedDate).startOf("day").add(19, "hours");
 
-    for (
-      let time = moment(startOfEvening);
-      time.isBefore(endOfEvening);
-      time.add(1, "hours")
-    ) {
-      times.push(time.format("h:mm A"));
+  const handleStartTimeSelect = (time) => {
+    setStartTime(time);
+    // Reset end time when start time changes
+    setEndTime(null);
+
+    // Disable end times that are before or equal to selected start time
+    const disabledTimes = [];
+    const startTimeIndex = startTimes.indexOf(time);
+
+    endTimes.forEach((endTime) => {
+      const endTimeIndex = startTimes.indexOf(endTime);
+      if (endTimeIndex <= startTimeIndex) {
+        disabledTimes.push(endTime);
+      }
+    });
+
+    setDisabledEndTimes(disabledTimes);
+  };
+
+  const handleSubmit = async () => {
+    if (!startTime || !endTime) {
+      alert("Please select both start and end times.");
+      return;
     }
-    setTimes(times);
+
+    try {
+      const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
+      const formattedStartTime = moment(
+        `${formattedDate} ${startTime}`,
+        "YYYY-MM-DD h:mm A",
+      ).format("YYYY-MM-DD HH:mm:ss");
+      const formattedEndTime = moment(
+        `${formattedDate} ${endTime}`,
+        "YYYY-MM-DD h:mm A",
+      ).format("YYYY-MM-DD HH:mm:ss");
+
+      const sessionPayload = {
+        learnerEmail: user.email,
+        sessionDate: formattedDate,
+        instructorEmail: user.assignedInstructor.instructorEmail,
+        sessionStartTime: formattedStartTime,
+        sessionEndTime: formattedEndTime,
+        status: "SCHEDULED",
+      };
+
+      const response = await bookSession(sessionPayload);
+      if (response.success) {
+        alert("Session booked successfully!");
+        navigation.navigate("Home");
+      }
+    } catch (error) {
+      console.error("Error booking session:", error);
+      alert("Failed to book session. Please try again.");
+    }
   };
 
   useEffect(() => {
     getDates();
-    getTimesForDate(selectedDate);
   }, []);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -100,27 +174,31 @@ const Calendar = () => {
           {/* Time Picker */}
           <Text style={styles.title}>Select Time</Text>
 
-          <View style={{ marginTop: 20 }}>
+          <View style={{ marginTop: Platform.OS === "android" ? 10 : 20 }}>
             <Text style={styles.subtitle}>Start Time</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <TimeSelector
-                times={times}
                 selected={startTime}
-                onSelectTime={setStartTime}
+                sessionTimeSlots={startTimes}
+                onSelectTime={handleStartTimeSelect}
               />
             </ScrollView>
           </View>
 
-          <View style={{ marginTop: 20 }}>
+          <View style={{ marginTop: Platform.OS === "android" ? 10 : 20 }}>
             <Text style={styles.subtitle}>End Time</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <TimeSelector
-                times={times}
                 selected={endTime}
                 onSelectTime={setEndTime}
+                sessionTimeSlots={endTimes}
+                disabledTimes={disabledEndTimes}
               />
             </ScrollView>
           </View>
+          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -131,6 +209,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     padding: 20,
+  },
+  submitButton: {
+    backgroundColor: colors.primary,
+    padding: 12,
+    alignItems: "center",
+    borderRadius: 8,
+    marginTop: 16,
+  },
+  submitButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   backButtonWrapper: {
     position: "absolute",
@@ -153,15 +243,15 @@ const styles = StyleSheet.create({
     marginTop: "10%",
   },
   title: {
-    fontSize: 32,
+    fontSize: Platform.OS === "android" ? 28 : 32,
     textTransform: "uppercase",
     fontFamily: fonts.SemiBold,
     color: colors.primary,
-    marginBottom: 10,
+    marginBottom: Platform.OS === "android" ? 5 : 10,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: Platform.OS === "android" ? 14 : 16,
     fontFamily: fonts.SemiBold,
     color: colors.black,
     paddingLeft: 5,

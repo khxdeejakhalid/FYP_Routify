@@ -28,6 +28,8 @@ import Calendar from "./src/screens/SessionsCalendar/Calender";
 import ViewLearnersScreen from "./src/screens/Instructor/ViewLearnersScreen";
 import LessonsFeedback from "./src/screens/LessonsFeedback/LessonsFeedback";
 import QuizScreen from "./src/screens/Resources/QuizScreen";
+import SessionsInfo from "./src/screens/SessionsCalendar/SessionsInfo";
+import BookedSessions from "./src/screens/SessionsCalendar/BookedSessions";
 
 const Stack = createNativeStackNavigator();
 
@@ -86,6 +88,8 @@ const App = () => {
               />
               <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
               <Stack.Screen name={"Calendar"} component={Calendar} />
+              <Stack.Screen name={"SessionsInfo"} component={SessionsInfo} />
+              <Stack.Screen name={"BookedSessions"} component={BookedSessions} />
               <Stack.Screen
                 name={"LessonsFeedback"}
                 component={LessonsFeedback}

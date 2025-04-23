@@ -487,3 +487,38 @@ export const saveChecklistItems = async (checklistIds, userEmail) => {
     };
   }
 };
+
+// Sessions related APIs
+export const getSessionsByEmail = async (userEmail) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_URL}/sessions/booked?email=${userEmail}`,
+    );
+    if (response.data.status === "success") {
+      return { success: true, sessions: response.data.sessions };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const bookSession = async (payload) => {
+  try {
+    const response = await axios.post(`${BACKEND_URL}/sessions`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.data.status === "success") {
+      return { success: true, session: response.data.session };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};

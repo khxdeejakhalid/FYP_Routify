@@ -8,8 +8,7 @@ const HelpScreen = () => {
     {
       id: 1,
       title: "Tutorials",
-      // @TODO: Revert to Tutorials route
-      route: "Calendar",
+      route: "Tutorials",
     },
     {
       id: 2,

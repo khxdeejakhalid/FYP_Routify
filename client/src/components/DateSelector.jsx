@@ -20,24 +20,34 @@ const Date = ({ date, onSelectDate, selected }) => {
         styles.card,
         selected === fullDate && { backgroundColor: colors.primary },
       ]}>
-      <Text style={[styles.medium, selected === fullDate && { color: "#fff" }]}>
-        {day}
-      </Text>
-      <View style={{ height: 5 }} />
-      <Text
-        style={[
-          styles.big,
-          selected === fullDate && {
-            color: "#fff",
-            fontFamily: fonts.Bold,
-            fontSize: 24,
-          },
-        ]}>
-        {dayNumber}
-      </Text>
-      <Text style={[styles.small, selected === fullDate && { color: "#fff" }]}>
-        {month}
-      </Text>
+      <View style={styles.mainContainer}>
+        <Text
+          style={[
+            styles.medium,
+            selected === fullDate && { color: colors.white },
+          ]}>
+          {day}
+        </Text>
+        {/* <View style={{ height: 5 }} /> */}
+        <Text
+          style={[
+            styles.big,
+            selected === fullDate && {
+              color: colors.white,
+              fontFamily: fonts.Bold,
+              fontSize: 24,
+            },
+          ]}>
+          {dayNumber}
+        </Text>
+        <Text
+          style={[
+            styles.small,
+            selected === fullDate && { color: colors.white },
+          ]}>
+          {month}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -55,6 +65,11 @@ const styles = StyleSheet.create({
     height: 95,
     width: 80,
     marginHorizontal: 5,
+  },
+  mainContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   big: {
     fontFamily: fonts.SemiBold,

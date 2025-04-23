@@ -4,9 +4,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform,
   Dimensions,
 } from "react-native";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
@@ -15,13 +16,13 @@ import { AuthContext } from "../context/AuthContext";
 
 const { width, height } = Dimensions.get("window");
 const HomeScreen = () => {
-  const { handleSignOut, user } = useContext(AuthContext);
+  const { handleSignOut, user, isLogin } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const handleLogout = async () => {
     await handleSignOut();
-    navigation.navigate("Welcome");
   };
+
   const homeNavItems = [
     ...(user.role === "instructor"
       ? [
@@ -29,13 +30,13 @@ const HomeScreen = () => {
             id: 1,
             title: "View Learners",
             route: "ViewLearnersScreen",
-            iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
+            iconSrc: require("../assets/icons/dashboard/learners.png"),
           },
           {
             id: 2,
-            title: "Calendar",
-            route: "Calendar",
-            iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
+            title: "Booked Sessions",
+            route: "BookedSessions",
+            iconSrc: require("../assets/icons/dashboard/calendar.png"),
           },
         ]
       : [
@@ -61,7 +62,13 @@ const HomeScreen = () => {
             id: 7,
             title: "Lesson Feedback",
             route: "LessonsFeedback",
-            iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
+            iconSrc: require("../assets/icons/dashboard/feedback.png"),
+          },
+          {
+            id: 9,
+            title: "Calendar",
+            route: "SessionsInfo",
+            iconSrc: require("../assets/icons/dashboard/calendar.png"),
           },
         ]),
     {
@@ -71,6 +78,12 @@ const HomeScreen = () => {
       iconSrc: require("../assets/icons/dashboard/profile-home-icon.png"),
     },
   ];
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigation.navigate("Welcome");
+    }
+  }, [isLogin]);
 
   return (
     <View style={styles.container}>
@@ -157,8 +170,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   boxIcon: {
-    width: width * 0.15,
-    height: width * 0.15,
+    width: Platform.OS === "android" ? width * 0.1 : width * 0.1,
+    height: Platform.OS === "android" ? width * 0.1 : width * 0.1,
     marginBottom: height * 0.01,
   },
 });

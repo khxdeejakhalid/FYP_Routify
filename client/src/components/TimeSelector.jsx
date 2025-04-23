@@ -4,40 +4,52 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Platform,
+  Dimensions,
 } from "react-native";
 
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 
-const Time = ({ times, onSelectTime, selected }) => {
+const TimeSelector = ({ sessionTimeSlots, onSelectTime, selected, disabledTimes = [] }) => {
   const renderItem = ({ item }) => {
     const [time, period] = item.split(" ");
+    const isDisabled = disabledTimes.includes(item);
 
     return (
       <TouchableOpacity
-        onPress={() => onSelectTime(item)}
+        onPress={() => !isDisabled && onSelectTime(item)}
         style={[
           styles.timeSlot,
           selected === item && { backgroundColor: colors.primary },
+          isDisabled && styles.disabledTimeSlot,
         ]}>
-        <Text
-          style={[
-            styles.timeText,
-            selected === item && { color: "#fff", fontFamily: fonts.Bold },
-          ]}>
-          {time}
-        </Text>
-        <Text
-          style={[styles.periodText, selected === item && { color: "#fff" }]}>
-          {period}
-        </Text>
+        <View style={styles.mainContainer}>
+          <Text
+            style={[
+              styles.timeText,
+              selected === item && {
+                color: colors.white,
+                fontFamily: fonts.Bold,
+              },
+            ]}>
+            {time}
+          </Text>
+          <Text
+            style={[
+              styles.periodText,
+              selected === item && { color: colors.white },
+            ]}>
+            {period}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   };
 
   return (
     <FlatList
-      data={times}
+      data={sessionTimeSlots}
       renderItem={renderItem}
       numColumns={12}
       keyExtractor={(item, index) => index.toString()}
@@ -46,7 +58,7 @@ const Time = ({ times, onSelectTime, selected }) => {
   );
 };
 
-export default Time;
+export default TimeSelector;
 
 const styles = StyleSheet.create({
   gridContainer: {
@@ -57,15 +69,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     borderRadius: 10,
     borderColor: "#ddd",
-    padding: 10,
-    marginVertical: 10,
     alignItems: "center",
-    height: 70,
+    height: Platform.OS === "android" ? 70 : 70,
     width: 100,
     marginHorizontal: 5,
   },
+  mainContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   timeText: {
     fontFamily: fonts.SemiBold,
-    fontSize: 24,
+    fontSize: Platform.OS === "android" ? 16 : 24,
+  },
+  periodText: {
+    fontFamily: fonts.Regular,
+    fontSize: Platform.OS === "android" ? 14 : 16,
+  },
+  disabledTimeSlot: {
+    backgroundColor: "#E0E0E0",
+    opacity: 0.6,
+  },
+  disabledText: {
+    color: "#A0A0A0",
   },
 });
