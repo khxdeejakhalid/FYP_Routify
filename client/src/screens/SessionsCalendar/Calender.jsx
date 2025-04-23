@@ -87,6 +87,7 @@ const Calendar = () => {
 
     endTimes.forEach((endTime) => {
       const endTimeIndex = startTimes.indexOf(endTime);
+
       if (endTimeIndex <= startTimeIndex) {
         disabledTimes.push(endTime);
       }
@@ -107,6 +108,7 @@ const Calendar = () => {
         `${formattedDate} ${startTime}`,
         "YYYY-MM-DD h:mm A",
       ).format("YYYY-MM-DD HH:mm:ss");
+      // Format end time to match the format in the database
       const formattedEndTime = moment(
         `${formattedDate} ${endTime}`,
         "YYYY-MM-DD h:mm A",

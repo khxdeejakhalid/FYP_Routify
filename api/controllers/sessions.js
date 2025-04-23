@@ -65,7 +65,25 @@ export const getSessionByUser = async (req, res) => {
     const userEmail = req.query.email;
     const [sessionRows] = await Session.fetchByEmail(userEmail);
 
-    res.status(200).json({ status: "success", sessions: sessionRows });
+    const formattedRows = sessionRows.map((row) => ({
+      ...row,
+      startTime: new Date(row.startTime).toLocaleString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short",
+      }),
+      endTime: new Date(row.endTime).toLocaleString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short",
+      }),
+    }));
+
+    res.status(200).json({ status: "success", sessions: formattedRows });
   } catch (error) {
     res.status(500).json({ status: "failure", description: error });
   }

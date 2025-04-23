@@ -37,6 +37,16 @@ const BookedSessions = () => {
   //   * API Calls
   const getBookedSessions = async () => {
     const response = await getSessionsByEmail(user.email);
+
+    response.sessions.forEach((session) => {
+      const startTime = session.startTime.replace("GMT+5", "+05:00");
+      const endTime = session.endTime.replace("GMT+5", "+05:00");
+      session.startTime = moment(startTime, "HH:mm:ssZ")
+        .local()
+        .format("hh:mm A");
+      session.endTime = moment(endTime, "HH:mm:ssZ").local().format("hh:mm A");
+    });
+
     setSessions(response.sessions || []);
   };
 
@@ -70,12 +80,9 @@ const BookedSessions = () => {
             {sessions.map((session, index) => (
               <View key={index} style={styles.card}>
                 <Text style={styles.dateTimeText}>
-                  {`${moment(session.date).format("DD, MMM")} ${moment(
-                    session.SESSION_START_TIME,
-                  ).format(
-                    "hh:mm A",
-                  )} - ${moment(session.SESSION_END_TIME).format("hh:mm A")}`}
+                  {`${moment(session.date).format("DD, MMM")} ${session.startTime} - ${session.endTime}`}
                 </Text>
+
                 <View style={styles.row}>
                   <View style={styles.divider} />
                   <View style={styles.content}>
