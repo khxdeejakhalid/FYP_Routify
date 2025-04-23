@@ -139,11 +139,11 @@ const UserInformationScreen = ({ route }) => {
                 Permit Issue Date <Text style={styles.required}>*</Text>
               </Text>
               <TouchableOpacity
-                style={styles.inputContainer}
+                style={[styles.inputContainer, styles.dateContainer]}
                 onPress={showPermitPicker}>
                 <SimpleLineIcons
                   name={"calendar"}
-                  size={20}
+                  size={Platform.OS === "android" ? 18 : 20}
                   color={colors.secondary}
                 />
                 <Text style={styles.textInput}>
@@ -168,11 +168,11 @@ const UserInformationScreen = ({ route }) => {
             Date Of Birth <Text style={styles.required}>*</Text>
           </Text>
           <TouchableOpacity
-            style={styles.inputContainer}
+            style={[styles.inputContainer, styles.dateContainer]}
             onPress={showDOBPicker}>
             <SimpleLineIcons
               name={"calendar"}
-              size={20}
+              size={Platform.OS === "android" ? 18 : 20}
               color={colors.secondary}
             />
             <Text style={styles.textInput}>
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: "10%",
+    marginTop: Platform.OS === "android" ? "10" : "20",
   },
   label: {
     fontSize: 14,
@@ -260,13 +260,17 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Light,
   },
   inputContainer: {
+    borderWidth: 1,
+    borderColor: colors.gray,
+    borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: colors.secondary,
-    borderRadius: 10,
-    padding: Platform.OS === "android" ? "2%" : "3%",
+    padding: Platform.OS === "android" ? "0%" : "3%",
+    paddingHorizontal: "3%",
     marginBottom: 15,
+  },
+  dateContainer: {
+    padding: "3%",
   },
   checkboxContainer: {
     flexDirection: "row",

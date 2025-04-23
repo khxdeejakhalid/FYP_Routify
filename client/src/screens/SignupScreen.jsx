@@ -210,6 +210,7 @@ const SignupScreen = () => {
                 color={colors.gray}
                 name={"person-outline"}
                 size={Platform.OS === "android" ? 18 : 20}
+                style={{ marginRight: 8 }}
               />
             )}
             placeholderStyle={styles.placeholderStyle}
@@ -281,7 +282,7 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 14,
     color: colors.gray,
-    paddingHorizontal: 10,
+    paddingHorizontal: 8,
   },
   dropdown: {
     height: 50,

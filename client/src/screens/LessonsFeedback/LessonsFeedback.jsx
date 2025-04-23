@@ -42,12 +42,12 @@ const LessonsFeedback = ({ route }) => {
     const payload = {
       learnerEmail:
         user.role === "instructor"
-          ? route.params.learner.learnerEmail
+          ? route?.params?.learner?.learnerEmail
           : user.email,
       instructorEmail:
         user.role === "instructor"
           ? user.email
-          : user.assignedInstructors.instructorEmail,
+          : user.assignedInstructor.instructorEmail,
     };
     const response = await fetchLessons(payload);
     setLessons(response.lessons);

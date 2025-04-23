@@ -142,7 +142,7 @@ export const fetchProfile = async (req, res) => {
     } else {
       const [instructorLearnerRows] =
         await InstructorLearner.fetchAssignedInstructor(email);
-      userProfile.assignedInstructors = instructorLearnerRows[0];
+      userProfile.assignedInstructor = instructorLearnerRows[0];
     }
 
     res.status(200).json({ status: "success", profile: userProfile });
