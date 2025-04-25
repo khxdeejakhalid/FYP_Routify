@@ -10,7 +10,7 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import CustomModal from "../components/CustomModal";
@@ -18,18 +18,18 @@ import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
-import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
-import { AuthContext } from "../context/AuthContext";
+import { resetPassword } from "../utils/api";
 
 const { height } = Dimensions.get("window");
 
-const LoginScreen = () => {
+const ResetPassword = () => {
   const navigation = useNavigation();
-  const { handleSignIn } = useContext(AuthContext);
-  const [secureEntry, setSecureEntry] = useState(true);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [passwordSecureEntry, setPasswordSecureEntry] = useState(true);
+  const [newPasswordSecureEntry, setNewPasswordSecureEntry] = useState(true);
 
+  const [newPassword, setNewPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [email, setEmail] = useState();
   const [modalText, setModalText] = useState("");
   const [modalHeader, setModalHeader] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
@@ -37,43 +37,35 @@ const LoginScreen = () => {
   const handleGoBack = () => {
     navigation.goBack();
   };
-  const redirectToSignupPage = () => {
-    navigation.navigate("Signup");
-  };
 
   const handleModalClose = () => {
     setModalVisible(false);
   };
 
-  const loginHandler = async () => {
-    if (email && password) {
-      const response = await handleSignIn(email, password);
+  const onResetPassword = async () => {
+    if (!email) {
+      setModalHeader("Failure");
+      setModalText("Email is required");
+      setModalVisible(true);
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setModalHeader("Failure");
+      setModalText("Passwords do not match");
+      setModalVisible(true);
+      return;
+    } else {
+      const response = await resetPassword(newPassword, email);
       if (!response.success) {
         setModalHeader("Failure");
         setModalText(response.description);
         setModalVisible(true);
+      } else {
+        navigation.navigate("Login");
       }
     }
   };
 
-  const googleSigninHandler = () => {
-    if (email && password) {
-      firebaseUtilService
-        .signInUser({ email, password })
-        .then((response) => {
-          // Firebase Success Response
-        })
-        .catch((error) => {
-          setModalHeader("Login Error");
-          setModalText("Invalid credentials. Please try again.");
-          setModalVisible(true);
-        });
-    } else {
-      setModalHeader("Missing Fields");
-      setModalText("Please enter both email and password.");
-      setModalVisible(true);
-    }
-  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -88,8 +80,8 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.textContainer}>
-          <Text style={styles.headingText}>Welcome</Text>
-          <Text style={styles.headingText}>Back</Text>
+          <Text style={styles.headingText}>Reset</Text>
+          <Text style={styles.headingText}>Password</Text>
         </View>
 
         {/* form  */}
@@ -102,15 +94,15 @@ const LoginScreen = () => {
               color={colors.gray}
             />
             <TextInput
+              value={email}
               style={styles.textInput}
+              keyboardType="email-address"
               placeholder="Enter your email"
               placeholderTextColor={colors.gray}
-              keyboardType="email-address"
               onChangeText={(email) => setEmail(email)}
-              value={email}
             />
           </View>
-          <Text style={styles.label}>Password</Text>
+          <Text style={styles.label}>New Password</Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"lock"}
@@ -118,19 +110,18 @@ const LoginScreen = () => {
               color={colors.gray}
             />
             <TextInput
+              value={newPassword}
               style={styles.textInput}
-              placeholder="Enter your password"
+              secureTextEntry={passwordSecureEntry}
               placeholderTextColor={colors.gray}
-              secureTextEntry={secureEntry}
-              onChangeText={(pass) => setPassword(pass)}
-              value={password}
+              placeholder="Enter your new password"
+              onChangeText={(newPass) => setNewPassword(newPass)}
             />
-
             <TouchableOpacity
               onPress={() => {
-                setSecureEntry((toggle) => !toggle);
+                setPasswordSecureEntry((toggle) => !toggle);
               }}>
-              {secureEntry ? (
+              {passwordSecureEntry ? (
                 <Ionicons
                   name={"eye-off"}
                   size={Platform.OS === "android" ? 18 : 20}
@@ -145,35 +136,49 @@ const LoginScreen = () => {
               )}
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ResetPassword")}>
-            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-          </TouchableOpacity>
+          <Text style={styles.label}>Confirm Password</Text>
+          <View style={styles.inputContainer}>
+            <SimpleLineIcons
+              name={"lock"}
+              size={Platform.OS === "android" ? 18 : 20}
+              color={colors.gray}
+            />
+            <TextInput
+              value={confirmPassword}
+              style={styles.textInput}
+              placeholder="Confirm your password"
+              placeholderTextColor={colors.gray}
+              secureTextEntry={newPasswordSecureEntry}
+              onChangeText={(pass) => setConfirmPassword(pass)}
+            />
+
+            <TouchableOpacity
+              onPress={() => {
+                setNewPasswordSecureEntry((toggle) => !toggle);
+              }}>
+              {newPasswordSecureEntry ? (
+                <Ionicons
+                  name={"eye-off"}
+                  size={Platform.OS === "android" ? 18 : 20}
+                  color={colors.gray}
+                />
+              ) : (
+                <Ionicons
+                  name={"eye"}
+                  size={Platform.OS === "android" ? 18 : 20}
+                  color={colors.gray}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.authenticationButtonContainer}>
             <Button
               disabled={false}
               buttonType="AuthButton"
-              clickHandler={loginHandler}>
-              Login
+              clickHandler={onResetPassword}>
+              Reset Password
             </Button>
-
-            <Text style={styles.continueText}>or continue with</Text>
-
-            <Button
-              clickHandler={googleSigninHandler}
-              disabled={false}
-              buttonType="AuthButton"
-              imageSource={require("../assets/icons/social/google.png")}>
-              Sign In With Google
-            </Button>
-          </View>
-
-          <View style={styles.footerContainer}>
-            <Text style={styles.accountText}>Don’t have an account?</Text>
-            <TouchableOpacity onPress={redirectToSignupPage}>
-              <Text style={styles.signupText}>Sign up</Text>
-            </TouchableOpacity>
           </View>
         </View>
 
@@ -189,7 +194,7 @@ const LoginScreen = () => {
     </TouchableWithoutFeedback>
   );
 };
-export default LoginScreen;
+export default ResetPassword;
 
 const styles = StyleSheet.create({
   container: {

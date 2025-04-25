@@ -562,3 +562,31 @@ export const editSession = async (sessionId, payload) => {
     };
   }
 };
+
+// Reset Password
+export const resetPassword = async (password, email) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/auth/reset-password`,
+      { password, email },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true };
+    } else if (response.data.status === "failure") {
+      return {
+        success: false,
+        description: response.data.description,
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};

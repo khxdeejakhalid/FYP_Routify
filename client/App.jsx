@@ -8,28 +8,40 @@ import { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
+import { AuthProvider, AuthContext } from "./src/context/AuthContext";
 // Components
+
+import WelcomeScreen from "./src/screens/WelcomeScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+
+// * Auth Screens
 import SignupScreen from "./src/screens/SignupScreen";
 import LoginScreen from "./src/screens/LoginScreen";
-import WelcomeScreen from "./src/screens/WelcomeScreen";
-import { AuthProvider, AuthContext } from "./src/context/AuthContext";
-import HomeScreen from "./src/screens/HomeScreen";
-import FeedbackScreen from "./src/screens/Progress/FeedbackScreen";
-import HelpScreen from "./src/screens/Resources/HelpScreen";
-import UserProfileScreen from "./src/screens/Profile/ProfileScreen";
+import ResetPassword from "./src/screens/ForgetPassword";
+
+// * Maps
 import TestCenterScreen from "./src/screens/Maps/TestCentersScreen";
 import RouteScreen from "./src/screens/Maps/RoutesScreen";
 import MapScreen from "./src/screens/Maps/MapsScreen";
+
+// * Profile
+import UserProfileScreen from "./src/screens/Profile/ProfileScreen";
 import UserInformationScreen from "./src/screens/Profile/UserInformationScreen";
+
+// * Sessions
+import SessionsInfo from "./src/screens/SessionsCalendar/SessionsInfo";
+import Calendar from "./src/screens/SessionsCalendar/Calender";
+import BookedSessions from "./src/screens/SessionsCalendar/BookedSessions";
+import ViewLearnersScreen from "./src/screens/Instructor/ViewLearnersScreen";
+
+// * Resources
 import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
 import LinksScreen from "./src/screens/Resources/LinksScreen";
+import HelpScreen from "./src/screens/Resources/HelpScreen";
 import PreTestChecklist from "./src/screens/Resources/PretestChecklistScreen";
-import Calendar from "./src/screens/SessionsCalendar/Calender";
-import ViewLearnersScreen from "./src/screens/Instructor/ViewLearnersScreen";
+import FeedbackScreen from "./src/screens/Progress/FeedbackScreen";
 import LessonsFeedback from "./src/screens/LessonsFeedback/LessonsFeedback";
 import QuizScreen from "./src/screens/Resources/QuizScreen";
-import SessionsInfo from "./src/screens/SessionsCalendar/SessionsInfo";
-import BookedSessions from "./src/screens/SessionsCalendar/BookedSessions";
 
 const Stack = createNativeStackNavigator();
 
@@ -89,7 +101,10 @@ const App = () => {
               <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
               <Stack.Screen name={"Calendar"} component={Calendar} />
               <Stack.Screen name={"SessionsInfo"} component={SessionsInfo} />
-              <Stack.Screen name={"BookedSessions"} component={BookedSessions} />
+              <Stack.Screen
+                name={"BookedSessions"}
+                component={BookedSessions}
+              />
               <Stack.Screen
                 name={"LessonsFeedback"}
                 component={LessonsFeedback}
@@ -100,6 +115,7 @@ const App = () => {
               <Stack.Screen name={"Welcome"} component={WelcomeScreen} />
               <Stack.Screen name={"Login"} component={LoginScreen} />
               <Stack.Screen name={"Signup"} component={SignupScreen} />
+              <Stack.Screen name={"ResetPassword"} component={ResetPassword} />
               <Stack.Screen
                 name={"UserInformation"}
                 component={UserInformationScreen}

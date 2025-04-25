@@ -10,13 +10,11 @@ export const login = async (req, res, next) => {
           const { password: excludedPass, ...userDetails } = rows[0];
           req.session.isLoggedIn = true;
           req.session.user = rows[0].username;
-          res
-            .status(200)
-            .json({
-              status: "success",
-              description: "Login successful",
-              user: userDetails,
-            });
+          res.status(200).json({
+            status: "success",
+            description: "Login successful",
+            user: userDetails,
+          });
         } else {
           res.status(200).json({
             status: "failure",
@@ -72,4 +70,25 @@ export const logout = async (req, res, next) => {
       .status(200)
       .json({ status: "success", description: "Logout successful" });
   });
+};
+
+export const forgetPassword = (req, res) => {
+  const { password, email } = req.body;
+  User.resetPassword(email, password)
+    .then(([rows, fieldData]) => {
+      if (rows.affectedRows > 0) {
+        res.status(200).json({
+          status: "success",
+          description: "Password successfully updated",
+        });
+      } else {
+        res.status(200).json({
+          status: "failure",
+          description: "Email not found",
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(400).json({ status: "failure", description: error });
+    });
 };

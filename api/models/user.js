@@ -73,6 +73,13 @@ export default class User {
     );
   }
 
+  static resetPassword(email, newPassword) {
+    return db.execute(`UPDATE USERS SET password = ? WHERE USERS.email = ?`, [
+      newPassword,
+      email,
+    ]);
+  }
+
   static async updateUser(email, updatedData) {
     const { name, password } = updatedData;
     return db.execute(
