@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-
 import { useNavigation } from "@react-navigation/native";
 import {
   Image,
@@ -20,7 +19,7 @@ import moment from "moment";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
-import { getSessionsByEmail } from "../../utils/api";
+import { deleteSession, getSessionsByEmail } from "../../utils/api";
 
 const { width, height } = Dimensions.get("window");
 
@@ -28,13 +27,36 @@ const BookedSessions = () => {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
   const [sessions, setSessions] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   // * Functions
+
+  const toggleMenu = (index) => {
+    setSelectedIndex(index);
+  };
+
   const onGoBack = () => {
     navigation.goBack();
   };
 
-  //   * API Calls
+  const handleEdit = () => {
+    setSelectedIndex(null);
+    navigation.navigate("Calendar", {
+      session: sessions[selectedIndex],
+      isEditMode: true,
+    });
+  };
+
+  const handleDelete = async () => {
+    const response = await deleteSession(sessions[selectedIndex].id);
+    if (response.success) {
+      alert("Session deleted successfully!");
+      getBookedSessions();
+      setSelectedIndex(null);
+    }
+  };
+
+  // * API Calls
   const getBookedSessions = async () => {
     const response = await getSessionsByEmail(user.email);
 
@@ -74,35 +96,132 @@ const BookedSessions = () => {
         />
         <View style={styles.contentWrapper}>
           <Text style={styles.title}>{"Booked Sessions"}</Text>
-          <ScrollView
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={true}>
-            {sessions.map((session, index) => (
-              <View key={index} style={styles.card}>
-                <Text style={styles.dateTimeText}>
-                  {`${moment(session.date).format("DD, MMM")} ${session.startTime} - ${session.endTime}`}
-                </Text>
-
-                <View style={styles.row}>
-                  <View style={styles.divider} />
-                  <View style={styles.content}>
-                    <Text style={styles.sessionTitle}>
-                      {`Lesson ${index + 1}`}
+          {sessions.length === 0 ? (
+            <Text
+              style={{
+                fontSize: 24,
+                marginTop: "50%",
+                textAlign: "center",
+                fontFamily: fonts.Medium,
+              }}>
+              {"No sessions booked yet."}
+            </Text>
+          ) : (
+            <ScrollView
+              contentContainerStyle={styles.scrollContent}
+              showsVerticalScrollIndicator={true}>
+              {sessions.map((session, index) => (
+                <View key={index} style={styles.card}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}>
+                    <Text style={styles.dateTimeText}>
+                      {`${moment(session.date).format("DD, MMM")} ${session.startTime} - ${session.endTime}`}
                     </Text>
-                    <Text style={styles.sessionSubtitle}>
-                      {`Session is booked with ${session.instructorName ? session.instructorName : session.learnerName}`}
-                    </Text>
+                    {/* Status Chip */}
+                    {session.status && (
+                      <Text
+                        style={[
+                          styles.statusChip,
+                          session.status === "SCHEDULED"
+                            ? styles.pending
+                            : styles.cancelled,
+                        ]}>
+                        {session.status.charAt(0).toUpperCase() +
+                          session.status.slice(1)}
+                      </Text>
+                    )}
                   </View>
+
+                  <View style={styles.row}>
+                    <View style={styles.divider} />
+                    <View style={styles.content}>
+                      <Text style={styles.sessionTitle}>
+                        {`Lesson ${index + 1}`}
+                      </Text>
+                      <Text style={styles.sessionSubtitle}>
+                        {`Session is booked with ${session.instructorName ? session.instructorName : session.learnerName}`}
+                      </Text>
+                    </View>
+                    {session.status !== "CANCELLED" && (
+                      <TouchableOpacity
+                        onPress={() => toggleMenu(index)}
+                        style={styles.kebabIcon}>
+                        <Ionicons
+                          size={24}
+                          color="#fff"
+                          name="ellipsis-vertical-outline"
+                        />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+
+                  {/* Dropdown */}
+                  {selectedIndex === index && (
+                    <View style={styles.dropdown}>
+                      <TouchableOpacity
+                        style={styles.option}
+                        onPress={handleEdit}>
+                        <Text style={styles.optionText}>Edit</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.option}
+                        onPress={handleDelete}>
+                        <Text style={styles.optionText}>Cancel</Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
                 </View>
-              </View>
-            ))}
-          </ScrollView>
+              ))}
+            </ScrollView>
+          )}
         </View>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
+  statusChipContainer: {
+    flexDirection: "row",
+  },
+  statusChip: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+    fontSize: 14,
+    fontFamily: fonts.Medium,
+    color: "#fff",
+  },
+  pending: {
+    backgroundColor: "orange", // Change color as needed
+  },
+  cancelled: {
+    backgroundColor: "gray", // Change color as needed
+  },
+  kebabIcon: {
+    alignItems: "flex-end",
+    color: colors.white,
+  },
+  dropdown: {
+    position: "absolute",
+    top: 30,
+    zIndex: 1000,
+    right: 40,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    elevation: 5,
+    padding: 10,
+    width: 120,
+  },
+  option: {
+    paddingVertical: 8,
+  },
+  optionText: {
+    fontSize: 16,
+    color: "#333",
+  },
   container: {
     flex: 1,
     backgroundColor: colors.white,
@@ -115,7 +234,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: 3,
-    height: "80%",
+    height: "100%",
     backgroundColor: "#D4AF37",
     marginRight: 8,
   },

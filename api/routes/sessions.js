@@ -5,15 +5,17 @@ import {
   getSessionById,
   bookSession,
   cancelSession,
-  getSessionByUser,
+  getBookedSessions,
+  editSession,
 } from "../controllers/sessions.js";
 
 const router = express.Router();
 
 router.get("/", isAuth, getSessions);
-router.get("/booked", isAuth, getSessionByUser);
+router.get("/booked", isAuth, getBookedSessions);
 router.get("/:id", isAuth, getSessionById);
 router.post("/", isAuth, bookSession);
 router.patch("/:id", isAuth, cancelSession);
+router.patch("/edit/:id", isAuth, editSession);
 
 export default router;

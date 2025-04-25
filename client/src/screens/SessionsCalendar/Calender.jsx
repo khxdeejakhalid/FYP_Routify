@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   Image,
   StyleSheet,
@@ -21,44 +21,49 @@ import moment from "moment";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
-import { bookSession } from "../../utils/api";
+import { bookSession, editSession } from "../../utils/api";
 
 const { width, height } = Dimensions.get("window");
 const startTimes = [
-  "8:00 AM",
-  "9:00 AM",
+  "08:00 AM",
+  "09:00 AM",
   "10:00 AM",
   "11:00 AM",
   "12:00 PM",
-  "1:00 PM",
-  "2:00 PM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM",
-  "6:00 PM",
-  "7:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM",
+  "05:00 PM",
+  "06:00 PM",
+  "07:00 PM",
 ];
 const endTimes = [
-  "9:00 AM",
+  "09:00 AM",
   "10:00 AM",
   "11:00 AM",
   "12:00 PM",
-  "1:00 PM",
-  "2:00 PM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM",
-  "6:00 PM",
-  "7:00 PM",
-  "8:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM",
+  "05:00 PM",
+  "06:00 PM",
+  "07:00 PM",
+  "08:00 PM",
 ];
 const Calendar = () => {
+  // Receive route params
+  const route = useRoute();
+
+  const { session, isEditMode } = route.params || {};
+
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
 
   const [dates, setDates] = useState([]);
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
+  const [startTime, setStartTime] = useState("01:00 PM");
+  const [endTime, setEndTime] = useState("02:00 PM");
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [disabledEndTimes, setDisabledEndTimes] = useState([]);
 
@@ -78,25 +83,27 @@ const Calendar = () => {
 
   const handleStartTimeSelect = (time) => {
     setStartTime(time);
-    // Reset end time when start time changes
     setEndTime(null);
 
-    // Disable end times that are before or equal to selected start time
-    const disabledTimes = [];
     const startTimeIndex = startTimes.indexOf(time);
-
-    endTimes.forEach((endTime) => {
-      const endTimeIndex = startTimes.indexOf(endTime);
-
-      if (endTimeIndex <= startTimeIndex) {
-        disabledTimes.push(endTime);
-      }
-    });
+    const disabledTimes = endTimes.slice(0, startTimeIndex); // Disable end times up to and including start time
 
     setDisabledEndTimes(disabledTimes);
   };
 
+  const formatTime = (formattedDate, time) => {
+    return moment(`${formattedDate} ${time}`, "YYYY-MM-DD h:mm A").format(
+      "YYYY-MM-DD HH:mm:ss",
+    );
+  };
+
   const handleSubmit = async () => {
+    //logs
+    console.log("Submit button pressed");
+    console.log("Start time:", startTime);
+    console.log("End time:", endTime);
+    console.log("Selected date:", selectedDate);
+    console.log("Edit mode:", isEditMode);
     if (!startTime || !endTime) {
       alert("Please select both start and end times.");
       return;
@@ -104,15 +111,9 @@ const Calendar = () => {
 
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
-      const formattedStartTime = moment(
-        `${formattedDate} ${startTime}`,
-        "YYYY-MM-DD h:mm A",
-      ).format("YYYY-MM-DD HH:mm:ss");
-      // Format end time to match the format in the database
-      const formattedEndTime = moment(
-        `${formattedDate} ${endTime}`,
-        "YYYY-MM-DD h:mm A",
-      ).format("YYYY-MM-DD HH:mm:ss");
+
+      const formattedStartTime = formatTime(formattedDate, startTime);
+      const formattedEndTime = formatTime(formattedDate, endTime);
 
       const sessionPayload = {
         learnerEmail: user.email,
@@ -123,9 +124,18 @@ const Calendar = () => {
         status: "SCHEDULED",
       };
 
-      const response = await bookSession(sessionPayload);
+      //log
+      console.log("SessionPayload:", sessionPayload);
+
+      const promiseFn = isEditMode
+        ? () => editSession(session.id, sessionPayload)
+        : () => bookSession(sessionPayload);
+      const response = await promiseFn();
+      //log
+      console.log("response:", response);
+
       if (response.success) {
-        alert("Session booked successfully!");
+        alert(`Session ${!isEditMode ? "booked" : "updated"} successfully!`);
         navigation.navigate("Home");
       }
     } catch (error) {
@@ -137,6 +147,14 @@ const Calendar = () => {
   useEffect(() => {
     getDates();
   }, []);
+
+  useEffect(() => {
+    if (!session) return;
+
+    setSelectedDate(moment(session.date).format("YYYY-MM-DD"));
+    setStartTime(session.startTime);
+    setEndTime(session.endTime);
+  }, [session]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

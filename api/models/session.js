@@ -70,4 +70,11 @@ export default class Session {
       id,
     ]);
   }
+
+  static updateSession(id, { sessionStartTime, sessionEndTime, sessionDate }) {
+    return db.execute(
+      `UPDATE SESSIONS SET session_start_time = ?, session_end_time = ?, session_date = ? WHERE SESSIONS.id = ?`,
+      [sessionStartTime, sessionEndTime, sessionDate, id]
+    );
+  }
 }

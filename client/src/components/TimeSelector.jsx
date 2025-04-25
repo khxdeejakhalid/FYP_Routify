@@ -11,7 +11,12 @@ import {
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 
-const TimeSelector = ({ sessionTimeSlots, onSelectTime, selected, disabledTimes = [] }) => {
+const TimeSelector = ({
+  sessionTimeSlots,
+  onSelectTime,
+  selected,
+  disabledTimes = [],
+}) => {
   const renderItem = ({ item }) => {
     const [time, period] = item.split(" ");
     const isDisabled = disabledTimes.includes(item);

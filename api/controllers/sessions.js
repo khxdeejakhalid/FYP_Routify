@@ -60,7 +60,7 @@ export const bookSession = async (req, res) => {
   }
 };
 
-export const getSessionByUser = async (req, res) => {
+export const getBookedSessions = async (req, res) => {
   try {
     const userEmail = req.query.email;
     const [sessionRows] = await Session.fetchByEmail(userEmail);
@@ -99,6 +99,27 @@ export const cancelSession = async (req, res) => {
       status: "success",
       description: "Session has been cancelled successfully",
       session: cancelledSession,
+    });
+  } catch (error) {
+    res.status(500).json({ status: "failure", description: error });
+  }
+};
+
+export const editSession = async (req, res) => {
+  try {
+    const sessionId = req.params.id;
+    const { sessionDate, sessionStartTime, sessionEndTime } = req.body;
+
+    const updatedSession = await Session.updateSession(sessionId, {
+      sessionStartTime,
+      sessionEndTime,
+      sessionDate,
+    });
+
+    res.status(200).json({
+      status: "success",
+      description: "Session has been updated successfully",
+      session: updatedSession,
     });
   } catch (error) {
     res.status(500).json({ status: "failure", description: error });

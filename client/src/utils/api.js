@@ -522,3 +522,43 @@ export const bookSession = async (payload) => {
     };
   }
 };
+
+export const deleteSession = async (sessionId) => {
+  try {
+    const response = await axios.patch(`${BACKEND_URL}/sessions/${sessionId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.data.status === "success") {
+      return { success: true };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const editSession = async (sessionId, payload) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/sessions/edit/${sessionId}`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
