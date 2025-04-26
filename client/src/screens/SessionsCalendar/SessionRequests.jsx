@@ -19,11 +19,15 @@ import moment from "moment";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
-import { cancelSession, getSessionsByEmail } from "../../utils/api";
+import {
+  rejectSession,
+  approveSession,
+  getPendingSessions,
+} from "../../utils/api";
 
 const { width, height } = Dimensions.get("window");
 
-const BookedSessions = () => {
+const SessionRequests = () => {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
   const [sessions, setSessions] = useState([]);
@@ -39,28 +43,33 @@ const BookedSessions = () => {
     navigation.goBack();
   };
 
-  const handleEdit = () => {
-    setSelectedIndex(null);
-    navigation.navigate("Calendar", {
-      session: sessions[selectedIndex],
-      isEditMode: true,
-    });
+  const onApproveSession = async () => {
+    const response = await approveSession(sessions[selectedIndex].id);
+    if (response.success) {
+      alert("Session Approved");
+      fetchPendingSessions();
+      setSelectedIndex(null);
+    }
   };
 
-  const handleDelete = async () => {
-    const response = await cancelSession(sessions[selectedIndex].id);
+  const onRejectSession = async () => {
+    const response = await rejectSession(sessions[selectedIndex].id);
     if (response.success) {
-      alert("Session cancelled successfully!");
-      getBookedSessions();
+      alert("Session rejected");
+      fetchPendingSessions();
       setSelectedIndex(null);
     }
   };
 
   // * API Calls
-  const getBookedSessions = async () => {
-    const response = await getSessionsByEmail(user.email);
+  const fetchPendingSessions = async () => {
+    const response = await getPendingSessions(user.email);
+    // Filter out sessions booked by the logged-in user, so that they don't see their own requests
+    const filteredSessionsByLoggedInUser = response.sessions.filter(
+      (session) => session.bookedBy !== user.email,
+    );
 
-    response.sessions.forEach((session) => {
+    filteredSessionsByLoggedInUser.forEach((session) => {
       const startTime = session.startTime.replace("GMT+5", "+05:00");
       const endTime = session.endTime.replace("GMT+5", "+05:00");
       session.startTime = moment(startTime, "HH:mm:ssZ")
@@ -69,11 +78,11 @@ const BookedSessions = () => {
       session.endTime = moment(endTime, "HH:mm:ssZ").local().format("hh:mm A");
     });
 
-    setSessions(response.sessions || []);
+    setSessions(filteredSessionsByLoggedInUser || []);
   };
 
   useEffect(() => {
-    getBookedSessions();
+    fetchPendingSessions();
   }, []);
 
   return (
@@ -95,7 +104,7 @@ const BookedSessions = () => {
           source={require("../../assets/logo.png")}
         />
         <View style={styles.contentWrapper}>
-          <Text style={styles.title}>{"Booked Sessions"}</Text>
+          <Text style={styles.title}>{"pending sessions"}</Text>
           {sessions.length === 0 ? (
             <Text
               style={{
@@ -104,7 +113,7 @@ const BookedSessions = () => {
                 textAlign: "center",
                 fontFamily: fonts.Medium,
               }}>
-              {"No sessions booked yet."}
+              {"No pending sessions"}
             </Text>
           ) : (
             <ScrollView
@@ -142,7 +151,7 @@ const BookedSessions = () => {
                         {`Lesson ${index + 1}`}
                       </Text>
                       <Text style={styles.sessionSubtitle}>
-                        {`Session is booked with ${user.role === "instructor" ? session.learnerName : session.instructorName}`}
+                        {`Session is booked with ${session.instructorName ? session.instructorName : session.learnerName}`}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -159,20 +168,16 @@ const BookedSessions = () => {
                   {/* Dropdown */}
                   {selectedIndex === index && (
                     <View style={styles.dropdown}>
-                      {session.status !== "PENDING" && (
-                        <TouchableOpacity
-                          style={styles.option}
-                          onPress={handleEdit}>
-                          <Text style={styles.optionText}>Edit</Text>
-                        </TouchableOpacity>
-                      )}
-                      {session.status !== "CANCELLED" && (
-                        <TouchableOpacity
-                          style={styles.option}
-                          onPress={handleDelete}>
-                          <Text style={styles.optionText}>Cancel</Text>
-                        </TouchableOpacity>
-                      )}
+                      <TouchableOpacity
+                        style={styles.option}
+                        onPress={onApproveSession}>
+                        <Text style={styles.optionText}>Approve</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.option}
+                        onPress={onRejectSession}>
+                        <Text style={styles.optionText}>Reject</Text>
+                      </TouchableOpacity>
                     </View>
                   )}
                 </View>
@@ -305,4 +310,4 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
 });
-export default BookedSessions;
+export default SessionRequests;

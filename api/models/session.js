@@ -7,7 +7,8 @@ export default class Session {
     sessionStartTime,
     sessionEndTime,
     sessionDate,
-    status
+    status,
+    bookedBy
   ) {
     this.instructorEmail = instructorEmail;
     this.learnerEmail = learnerEmail;
@@ -15,11 +16,12 @@ export default class Session {
     this.sessionEndTime = sessionEndTime;
     this.sessionDate = sessionDate;
     this.status = status;
+    this.bookedBy = bookedBy;
   }
 
   save() {
     return db.execute(
-      `INSERT INTO SESSIONS (instructor_email, learner_email, session_start_time, session_end_time, session_date, status) VALUES (?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO SESSIONS (instructor_email, learner_email, session_start_time, session_end_time, session_date, status, booked_by) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         this.instructorEmail,
         this.learnerEmail,
@@ -27,6 +29,7 @@ export default class Session {
         this.sessionEndTime,
         this.sessionDate,
         this.status,
+        this.bookedBy,
       ]
     );
   }
@@ -48,6 +51,7 @@ export default class Session {
         SESSIONS.SESSION_END_TIME AS endTime,
         SESSIONS.status AS status,
         SESSIONS.id AS id,
+        SESSIONS.booked_by AS bookedBy,
         instructor.name AS instructorName,
         learner.name AS learnerName
       FROM 
@@ -71,10 +75,20 @@ export default class Session {
     ]);
   }
 
-  static updateSession(id, { sessionStartTime, sessionEndTime, sessionDate }) {
+  static updateSession(
+    id,
+    { status, sessionStartTime, sessionEndTime, sessionDate, bookedBy }
+  ) {
     return db.execute(
-      `UPDATE SESSIONS SET session_start_time = ?, session_end_time = ?, session_date = ? WHERE SESSIONS.id = ?`,
-      [sessionStartTime, sessionEndTime, sessionDate, id]
+      `UPDATE SESSIONS SET session_start_time = ?, session_end_time = ?, session_date = ?, status = ?, booked_by = ? WHERE SESSIONS.id = ?`,
+      [sessionStartTime, sessionEndTime, sessionDate, status, bookedBy, id]
     );
+  }
+
+  static updateSessionStatus(id, status) {
+    return db.execute(`UPDATE SESSIONS SET status = ? WHERE SESSIONS.id = ?`, [
+      status,
+      id,
+    ]);
   }
 }

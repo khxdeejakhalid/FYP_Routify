@@ -495,7 +495,76 @@ export const getSessionsByEmail = async (userEmail) => {
       `${BACKEND_URL}/sessions/booked?email=${userEmail}`,
     );
     if (response.data.status === "success") {
-      return { success: true, sessions: response.data.sessions };
+      // sort the sessions by date
+      const sortedSessions = response.data.sessions.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+      return { success: true, sessions: sortedSessions };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const getPendingSessions = async (userEmail) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_URL}/sessions/booked?email=${userEmail}`,
+    );
+    if (response.data.status === "success") {
+      // filter sessions by status
+      const pendingSessions = response.data.sessions.filter(
+        (session) => session.status === "PENDING",
+      );
+      const sortedSessions = pendingSessions.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+      return { success: true, sessions: sortedSessions };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const approveSession = async (sessionId) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/sessions/approve/${sessionId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
+
+export const rejectSession = async (sessionId) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/sessions/reject/${sessionId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.status === "success") {
+      return { success: true };
     }
   } catch (error) {
     return {
@@ -523,7 +592,7 @@ export const bookSession = async (payload) => {
   }
 };
 
-export const deleteSession = async (sessionId) => {
+export const cancelSession = async (sessionId) => {
   try {
     const response = await axios.patch(`${BACKEND_URL}/sessions/${sessionId}`, {
       headers: {

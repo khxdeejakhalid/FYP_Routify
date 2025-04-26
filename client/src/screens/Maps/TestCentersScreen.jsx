@@ -69,9 +69,9 @@ const TestCenterScreen = () => {
 
       {/* Logo */}
       <Image
-        source={require("../../assets/logo.png")}
-        style={styles.logo}
         alt="Logo"
+        style={styles.logo}
+        source={require("../../assets/logo.png")}
       />
 
       {/* Picker Content */}

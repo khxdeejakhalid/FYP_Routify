@@ -31,20 +31,24 @@ export const getSessionById = async (req, res) => {
 };
 
 export const bookSession = async (req, res) => {
-  const learnerEmail = req.body.learnerEmail;
-  const instructorEmail = req.body.instructorEmail;
-  const sessionDate = req.body.sessionDate;
-  const sessionStartTime = req.body.sessionStartTime;
-  const sessionEndTIme = req.body.sessionEndTime;
-  const status = req.body.status;
+  const {
+    bookedBy,
+    status,
+    sessionDate,
+    sessionEndTime,
+    instructorEmail,
+    sessionStartTime,
+    learnerEmail,
+  } = req.body;
 
   const session = new Session(
     instructorEmail,
     learnerEmail,
     sessionStartTime,
-    sessionEndTIme,
+    sessionEndTime,
     sessionDate,
-    status
+    status,
+    bookedBy
   );
 
   try {
@@ -108,18 +112,59 @@ export const cancelSession = async (req, res) => {
 export const editSession = async (req, res) => {
   try {
     const sessionId = req.params.id;
-    const { sessionDate, sessionStartTime, sessionEndTime } = req.body;
+    const { sessionDate, sessionStartTime, sessionEndTime, status, bookedBy } =
+      req.body;
 
     const updatedSession = await Session.updateSession(sessionId, {
+      status,
       sessionStartTime,
       sessionEndTime,
       sessionDate,
+      bookedBy,
     });
 
     res.status(200).json({
       status: "success",
       description: "Session has been updated successfully",
       session: updatedSession,
+    });
+  } catch (error) {
+    res.status(500).json({ status: "failure", description: error });
+  }
+};
+
+export const approveSession = async (req, res) => {
+  try {
+    const sessionId = req.params.id;
+
+    const approvedSession = await Session.updateSessionStatus(
+      sessionId,
+      "SCHEDULED"
+    );
+
+    res.status(200).json({
+      status: "success",
+      description: "Session has been approved successfully",
+      session: approvedSession,
+    });
+  } catch (error) {
+    res.status(500).json({ status: "failure", description: error });
+  }
+};
+
+export const rejectSession = async (req, res) => {
+  try {
+    const sessionId = req.params.id;
+
+    const rejectedSession = await Session.updateSessionStatus(
+      sessionId,
+      "CANCELLED"
+    );
+
+    res.status(200).json({
+      status: "success",
+      description: "Session has been rejected successfully",
+      session: rejectedSession,
     });
   } catch (error) {
     res.status(500).json({ status: "failure", description: error });

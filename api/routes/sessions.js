@@ -7,6 +7,8 @@ import {
   cancelSession,
   getBookedSessions,
   editSession,
+  approveSession,
+  rejectSession,
 } from "../controllers/sessions.js";
 
 const router = express.Router();
@@ -17,5 +19,7 @@ router.get("/:id", isAuth, getSessionById);
 router.post("/", isAuth, bookSession);
 router.patch("/:id", isAuth, cancelSession);
 router.patch("/edit/:id", isAuth, editSession);
+router.patch("/approve/:id", isAuth, approveSession);
+router.patch("/reject/:id", isAuth, rejectSession);
 
 export default router;

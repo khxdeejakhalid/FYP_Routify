@@ -56,7 +56,12 @@ const Calendar = () => {
   // Receive route params
   const route = useRoute();
 
-  const { session, isEditMode } = route.params || {};
+  // Learner email is passed when Admin is booking a session with a learner
+  const {
+    session,
+    isEditMode = false,
+    learnerEmail = undefined,
+  } = route.params || {};
 
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
@@ -98,12 +103,6 @@ const Calendar = () => {
   };
 
   const handleSubmit = async () => {
-    //logs
-    console.log("Submit button pressed");
-    console.log("Start time:", startTime);
-    console.log("End time:", endTime);
-    console.log("Selected date:", selectedDate);
-    console.log("Edit mode:", isEditMode);
     if (!startTime || !endTime) {
       alert("Please select both start and end times.");
       return;
@@ -114,25 +113,29 @@ const Calendar = () => {
 
       const formattedStartTime = formatTime(formattedDate, startTime);
       const formattedEndTime = formatTime(formattedDate, endTime);
-
       const sessionPayload = {
-        learnerEmail: user.email,
         sessionDate: formattedDate,
-        instructorEmail: user.assignedInstructor.instructorEmail,
         sessionStartTime: formattedStartTime,
         sessionEndTime: formattedEndTime,
-        status: "SCHEDULED",
+        status: isEditMode
+          ? session.status === "CANCELLED"
+            ? "PENDING"
+            : session.status
+          : "PENDING",
+        bookedBy: user.email,
       };
-
-      //log
-      console.log("SessionPayload:", sessionPayload);
+      if (!isEditMode) {
+        sessionPayload.learnerEmail = learnerEmail || user.email;
+        sessionPayload.instructorEmail =
+          user.role === "instructor"
+            ? user.email
+            : user.assignedInstructor.instructorEmail;
+      }
 
       const promiseFn = isEditMode
         ? () => editSession(session.id, sessionPayload)
         : () => bookSession(sessionPayload);
       const response = await promiseFn();
-      //log
-      console.log("response:", response);
 
       if (response.success) {
         alert(`Session ${!isEditMode ? "booked" : "updated"} successfully!`);

@@ -27,55 +27,49 @@ const HomeScreen = () => {
     ...(user.role === "instructor"
       ? [
           {
-            id: 1,
+            id: "view_learners",
             title: "View Learners",
             route: "ViewLearnersScreen",
             iconSrc: require("../assets/icons/dashboard/learners.png"),
           },
-          {
-            id: 2,
-            title: "Booked Sessions",
-            route: "BookedSessions",
-            iconSrc: require("../assets/icons/dashboard/calendar.png"),
-          },
         ]
       : [
           {
-            id: 1,
+            id: "routes",
             title: "Routes",
             route: "TestCenteres",
             iconSrc: require("../assets/icons/dashboard/routes-home-icon.png"),
           },
           {
-            id: 2,
+            id: "progress",
             title: "Progress",
             route: "Progress",
             iconSrc: require("../assets/icons/dashboard/progress-home-icon.png"),
           },
           {
-            id: 3,
+            id: "resources",
             title: "Resources",
             route: "Help",
             iconSrc: require("../assets/icons/dashboard/help-home-icon.png"),
           },
           {
-            id: 7,
+            id: "lesson_feedback",
             title: "Lesson Feedback",
             route: "LessonsFeedback",
             iconSrc: require("../assets/icons/dashboard/feedback.png"),
           },
-          {
-            id: 9,
-            title: "Calendar",
-            route: "SessionsInfo",
-            iconSrc: require("../assets/icons/dashboard/calendar.png"),
-          },
         ]),
     {
-      id: 4,
+      id: "profile",
       title: "Profile",
       route: "UserProfile",
       iconSrc: require("../assets/icons/dashboard/profile-home-icon.png"),
+    },
+    {
+      id: "sessions",
+      title: "Sessions",
+      route: "SessionsInfo",
+      iconSrc: require("../assets/icons/dashboard/calendar.png"),
     },
   ];
 

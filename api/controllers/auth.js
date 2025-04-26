@@ -2,7 +2,7 @@ import User from "../models/user.js";
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
-
+ 
   User.login(email)
     .then(([rows, fieldData]) => {
       if (rows.length > 0) {

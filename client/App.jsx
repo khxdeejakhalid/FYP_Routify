@@ -33,6 +33,8 @@ import SessionsInfo from "./src/screens/SessionsCalendar/SessionsInfo";
 import Calendar from "./src/screens/SessionsCalendar/Calender";
 import BookedSessions from "./src/screens/SessionsCalendar/BookedSessions";
 import ViewLearnersScreen from "./src/screens/Instructor/ViewLearnersScreen";
+import SessionRequests from "./src/screens/SessionsCalendar/SessionRequests";
+import LearnersSelections from "./src/screens/SessionsCalendar/LearnersSelections";
 
 // * Resources
 import TutorialsScreen from "./src/screens/Resources/TutorialsScreen";
@@ -104,6 +106,14 @@ const App = () => {
               <Stack.Screen
                 name={"BookedSessions"}
                 component={BookedSessions}
+              />
+              <Stack.Screen
+                name={"SessionRequests"}
+                component={SessionRequests}
+              />
+              <Stack.Screen
+                name={"LearnersSelections"}
+                component={LearnersSelections}
               />
               <Stack.Screen
                 name={"LessonsFeedback"}
