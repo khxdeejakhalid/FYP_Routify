@@ -109,27 +109,27 @@ INSERT INTO
 VALUES
     (
         3,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz03/Question01.png'
     ),
     (
         3,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz03/Question02.png'
     ),
     (
         3,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz03/Question03.png'
     ),
     (
         3,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz03/Question04.png'
     ),
     (
         3,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz03/Question05.png'
     );
 
@@ -139,27 +139,27 @@ INSERT INTO
 VALUES
     (
         4,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz04/Question01.png'
     ),
     (
         4,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz04/Question02.png'
     ),
     (
         4,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz04/Question03.png'
     ),
     (
         4,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz04/Question04.png'
     ),
     (
         4,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz04/Question05.png'
     );
 
@@ -169,27 +169,27 @@ INSERT INTO
 VALUES
     (
         5,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz05/Question01.png'
     ),
     (
         5,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz05/Question02.png'
     ),
     (
         5,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz05/Question03.png'
     ),
     (
         5,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz05/Question04.png'
     ),
     (
         5,
-        'What does this road sign mean?',
+        'What does this hand signal mean?',
         'quiz05/Question05.png'
     );
 
@@ -416,7 +416,7 @@ VALUES
     (5, 22, 'One-way street', 0),
     (5, 22, 'Give way', 0),
     (5, 23, 'No stopping at any time', 0),
-    (5, 23, 'Max speed limit 60km/h', 1),
+    (5, 23, 'Max speed limit 80km/h', 1),
     (5, 23, 'No overtaking', 0),
     (5, 24, 'T-junction with dual carriageway', 1),
     (5, 24, 'Dual carriageway ends', 0),
@@ -479,8 +479,8 @@ VALUES
         1
     ),
     (7, 35, 'Check the colour of the exhaust', 0),
-    (7, 36, 'A steering wheel', 1),
-    (7, 36, 'A water spray hitting a windscreen', 0),
+    (7, 36, 'A steering wheel', 0),
+    (7, 36, 'A water spray hitting a windscreen', 1),
     (7, 36, 'A tyre', 0);
 
 -- QUIZ 08 OPTIONS
