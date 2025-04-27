@@ -73,6 +73,13 @@ const SessionRequests = () => {
     }
   };
 
+  const onEditSession = () => {
+    setSelectedIndex(null);
+    navigation.navigate("Calendar", {
+      session: sessions[selectedIndex],
+      isEditMode: true,
+    });
+  };
   const onRejectSession = async () => {
     const response = await rejectSession(sessions[selectedIndex].id);
     if (response.success) {
@@ -214,6 +221,11 @@ const SessionRequests = () => {
                         style={styles.option}
                         onPress={onRejectSession}>
                         <Text style={styles.optionText}>Reject</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.option}
+                        onPress={onEditSession}>
+                        <Text style={styles.optionText}>Edit</Text>
                       </TouchableOpacity>
                     </View>
                   )}

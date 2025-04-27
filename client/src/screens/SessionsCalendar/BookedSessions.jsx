@@ -154,9 +154,7 @@ const BookedSessions = () => {
                   <View style={styles.row}>
                     <View style={styles.divider} />
                     <View style={styles.content}>
-                      <Text style={styles.sessionTitle}>
-                        {`Lesson ${index + 1}`}
-                      </Text>
+                      <Text style={styles.sessionTitle}>{`Lesson`}</Text>
                       <Text style={styles.sessionSubtitle}>
                         {`Session is booked with ${user.role === "instructor" ? session.learnerName : session.instructorName}`}
                       </Text>

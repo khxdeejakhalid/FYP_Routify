@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = `http://192.168.18.20:8080/api`;
+const BACKEND_URL = `http://192.168.0.94:8080/api`;
 
 export const signIn = async (email, password) => {
   try {
@@ -499,7 +499,14 @@ export const getSessionsByEmail = async (userEmail) => {
       const sortedSessions = response.data.sessions.sort((a, b) => {
         return new Date(a.date) - new Date(b.date);
       });
-      return { success: true, sessions: sortedSessions };
+      // Filter all sessions that are pass today's date
+      const filteredSessions = sortedSessions.filter(
+        (session) =>
+          session.status === "SCHEDULED" &&
+          new Date(session.date) >= new Date(),
+      );
+
+      return { success: true, sessions: filteredSessions };
     }
   } catch (error) {
     return {
