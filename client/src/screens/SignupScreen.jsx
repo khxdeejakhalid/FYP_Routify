@@ -20,7 +20,8 @@ import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
 import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 import { checkEmail } from "../utils/api";
-
+import { registerIndieID } from "native-notify";
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
 const { height } = Dimensions.get("window");
 
 const SignupScreen = () => {
@@ -84,6 +85,11 @@ const SignupScreen = () => {
           setModalVisible(true);
         } else {
           if (email && password && username) {
+            registerIndieID(
+              response.user.email,
+              NOTIFY_APP_ID,
+              NOTIFY_APP_TOKEN,
+            );
             navigation.navigate("UserInformation", {
               email,
               password,

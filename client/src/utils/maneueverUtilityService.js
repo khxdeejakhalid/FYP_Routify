@@ -11,7 +11,7 @@ export const maneuverUtils = (function () {
     }
   };
 
-  // Excessively slow or fast completion --> may indicate inefficiency or recklessness.
+  // Excessively slow or fast completion may indicate inefficiency or recklessness.
   const trackTimeTakenToCompleteManuever = (
     startTime,
     { startLat, startLng, endLat, endLng },
@@ -35,7 +35,7 @@ export const maneuverUtils = (function () {
     }
   };
 
-  // Analyse acceleration and braking patterns. -->  Erratic changes could indicate poor control.
+  // Analyze acceleration and braking patterns. Erratic changes could indicate poor control.
   const evaluateSmoothness = (speedHistory) => {
     const ACCEPTABLE_JERK_THRESHOLD = 2.5;
 

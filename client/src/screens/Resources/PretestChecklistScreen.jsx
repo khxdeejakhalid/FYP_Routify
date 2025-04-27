@@ -88,7 +88,7 @@ const PreTestChecklist = () => {
         );
       } else {
         Alert.alert(
-          "Reminder",
+          "Set Reminder",
           "Please complete all tasks before the test.",
         );
         navigation.navigate("Home");

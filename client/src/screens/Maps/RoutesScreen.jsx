@@ -26,7 +26,7 @@ const RoutesScreen = () => {
 
   const [selectedRoute, setSelectedRoute] = useState("route1");
 
-  const TALAGHAT_ROUTES = [
+  const TALLAGHT_ROUTES = [
     { label: "Route 1", value: "1" },
     { label: "Route 2", value: "2" },
     { label: "Route 3", value: "3" },
@@ -85,7 +85,7 @@ const RoutesScreen = () => {
         <FlatList
           style={styles.list}
           data={
-            selectedCenter === "Talaghat" ? TALAGHAT_ROUTES : FINGLAS_ROUTES
+            selectedCenter === "Tallaght" ? TALLAGHT_ROUTES : FINGLAS_ROUTES
           }
           renderItem={renderItem}
           keyExtractor={(item) => item.value}
