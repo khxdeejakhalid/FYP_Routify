@@ -126,7 +126,7 @@ const Calendar = () => {
         sessionDate: formattedDate,
         sessionStartTime: formattedStartTime,
         sessionEndTime: formattedEndTime,
-        status: !isEditMode ? session.status : "PENDING",
+        status: "PENDING",
         bookedBy: user.email,
       };
       if (!isEditMode) {
