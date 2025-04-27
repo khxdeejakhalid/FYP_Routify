@@ -25,6 +25,10 @@ import {
   getPendingSessions,
 } from "../../utils/api";
 
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
+import { indieNotificationDataService } from "../../services/notifications/indieNotificationDataService";
+import { formatTime } from "../../utils/routifyUtilityService";
+
 const { width, height } = Dimensions.get("window");
 
 const SessionRequests = () => {
@@ -45,25 +49,60 @@ const SessionRequests = () => {
 
   const onApproveSession = async () => {
     const response = await approveSession(sessions[selectedIndex].id);
+    setSelectedIndex(null);
     if (response.success) {
       alert("Session Approved");
+
+      //   Notify the instructor or learner about the approval
+      const notificationPayload = {
+        subID:
+          user.email === sessions[selectedIndex].learnerEmail
+            ? sessions[selectedIndex].instructorEmail
+            : sessions[selectedIndex].learnerEmail,
+        title: `Session Approval Notification`,
+        appId: NOTIFY_APP_ID,
+        appToken: NOTIFY_APP_TOKEN,
+        message: `${user.name} has approved your session request`,
+        pushData: {
+          read: false,
+        },
+      };
+
+      await indieNotificationDataService.pushNotification(notificationPayload);
       fetchPendingSessions();
-      setSelectedIndex(null);
     }
   };
 
   const onRejectSession = async () => {
     const response = await rejectSession(sessions[selectedIndex].id);
     if (response.success) {
+      setSelectedIndex(null);
+
+      //   Notify the instructor or learner about the approval
+      const notificationPayload = {
+        subID:
+          user.email === sessions[selectedIndex].learnerEmail
+            ? sessions[selectedIndex].instructorEmail
+            : sessions[selectedIndex].learnerEmail,
+        title: `Session Cancellation Notification`,
+        appId: NOTIFY_APP_ID,
+        appToken: NOTIFY_APP_TOKEN,
+        message: `${user.name} has cancelled your session request`,
+        pushData: {
+          read: false,
+        },
+      };
+      await indieNotificationDataService.pushNotification(notificationPayload);
+
       alert("Session rejected");
       fetchPendingSessions();
-      setSelectedIndex(null);
     }
   };
 
   // * API Calls
   const fetchPendingSessions = async () => {
     const response = await getPendingSessions(user.email);
+
     // Filter out sessions booked by the logged-in user, so that they don't see their own requests
     const filteredSessionsByLoggedInUser = response.sessions.filter(
       (session) => session.bookedBy !== user.email,
@@ -72,10 +111,8 @@ const SessionRequests = () => {
     filteredSessionsByLoggedInUser.forEach((session) => {
       const startTime = session.startTime.replace("GMT+5", "+05:00");
       const endTime = session.endTime.replace("GMT+5", "+05:00");
-      session.startTime = moment(startTime, "HH:mm:ssZ")
-        .local()
-        .format("hh:mm A");
-      session.endTime = moment(endTime, "HH:mm:ssZ").local().format("hh:mm A");
+      session.startTime = formatTime(startTime);
+      session.endTime = formatTime(endTime);
     });
 
     setSessions(filteredSessionsByLoggedInUser || []);

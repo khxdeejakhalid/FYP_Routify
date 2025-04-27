@@ -9,6 +9,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import { AuthProvider, AuthContext } from "./src/context/AuthContext";
+// Push Notifications
+import registerNNPushToken from "native-notify";
+
 // Components
 
 import WelcomeScreen from "./src/screens/WelcomeScreen";
@@ -45,9 +48,15 @@ import FeedbackScreen from "./src/screens/Progress/FeedbackScreen";
 import LessonsFeedback from "./src/screens/LessonsFeedback/LessonsFeedback";
 import QuizScreen from "./src/screens/Resources/QuizScreen";
 
+// * Notifications
+import Notifications from "./src/screens/Notifications/Notifications";
+
 const Stack = createNativeStackNavigator();
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
 
 const App = () => {
+  registerNNPushToken(NOTIFY_APP_ID, NOTIFY_APP_TOKEN);
+
   const { isLogin } = useContext(AuthContext);
 
   const [fontsLoaded] = useFonts({
@@ -119,6 +128,7 @@ const App = () => {
                 name={"LessonsFeedback"}
                 component={LessonsFeedback}
               />
+              <Stack.Screen name={"Notifications"} component={Notifications} />
             </>
           ) : (
             <>

@@ -2,6 +2,8 @@ import { createContext, useState, useEffect } from "react";
 import { signIn, signUp, logout, fetchProfile } from "../utils/api";
 
 export const AuthContext = createContext();
+// Notification
+import { indieNotificationDataService } from "../services/notifications/indieNotificationDataService";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -63,6 +65,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleSignOut = async () => {
+    // Unregister the unique sub id(user) from notifications
+
+   // await indieNotificationDataService.unregisterIndieSubID(user.email);
     const response = await logout();
     if (response.success) {
       setUser(null);

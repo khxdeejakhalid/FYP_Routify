@@ -20,6 +20,9 @@ import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
 import { cancelSession, getSessionsByEmail } from "../../utils/api";
+import { formatTime } from "../../utils/routifyUtilityService";
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
+import { indieNotificationDataService } from "../../services/notifications/indieNotificationDataService";
 
 const { width, height } = Dimensions.get("window");
 
@@ -50,9 +53,24 @@ const BookedSessions = () => {
   const handleDelete = async () => {
     const response = await cancelSession(sessions[selectedIndex].id);
     if (response.success) {
-      alert("Session cancelled successfully!");
-      getBookedSessions();
       setSelectedIndex(null);
+      //   Notify the instructor or learner about the approval
+      const notificationPayload = {
+        subID:
+          user.email === sessions[selectedIndex].learnerEmail
+            ? sessions[selectedIndex].instructorEmail
+            : sessions[selectedIndex].learnerEmail,
+        title: `Session Cancellation Notification`,
+        appId: NOTIFY_APP_ID,
+        appToken: NOTIFY_APP_TOKEN,
+        message: `${user.name} has cancelled the session, you may want to reschedule it.`,
+        pushData: {
+          read: false,
+        },
+      };
+
+      await indieNotificationDataService.pushNotification(notificationPayload);
+      getBookedSessions();
     }
   };
 
@@ -63,10 +81,8 @@ const BookedSessions = () => {
     response.sessions.forEach((session) => {
       const startTime = session.startTime.replace("GMT+5", "+05:00");
       const endTime = session.endTime.replace("GMT+5", "+05:00");
-      session.startTime = moment(startTime, "HH:mm:ssZ")
-        .local()
-        .format("hh:mm A");
-      session.endTime = moment(endTime, "HH:mm:ssZ").local().format("hh:mm A");
+      session.startTime = formatTime(startTime);
+      session.endTime = formatTime(endTime);
     });
 
     setSessions(response.sessions || []);

@@ -51,6 +51,8 @@ export default class Session {
         SESSIONS.SESSION_END_TIME AS endTime,
         SESSIONS.status AS status,
         SESSIONS.id AS id,
+        SESSIONS.LEARNER_EMAIL AS learnerEmail,
+        SESSIONS.INSTRUCTOR_EMAIL AS instructorEmail,
         SESSIONS.booked_by AS bookedBy,
         instructor.name AS instructorName,
         learner.name AS learnerName

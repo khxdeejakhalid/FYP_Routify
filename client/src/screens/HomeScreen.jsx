@@ -7,17 +7,20 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthContext } from "../context/AuthContext";
+import { getUnreadIndieNotificationInboxCount } from "native-notify";
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
 
 const { width, height } = Dimensions.get("window");
 const HomeScreen = () => {
   const { handleSignOut, user, isLogin } = useContext(AuthContext);
   const navigation = useNavigation();
+  const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
 
   const handleLogout = async () => {
     await handleSignOut();
@@ -73,17 +76,45 @@ const HomeScreen = () => {
     },
   ];
 
+  const getUnreadNotificationsCount = async () => {
+    try {
+      const unreadCount = await getUnreadIndieNotificationInboxCount(
+        user.email,
+        NOTIFY_APP_ID,
+        NOTIFY_APP_TOKEN,
+        20,
+      );
+      setUnreadNotificationCount(unreadCount);
+    } catch (error) {
+      console.error("Error fetching unread notifications count:", error);
+    }
+  };
+
   useEffect(() => {
     if (!isLogin) {
       navigation.navigate("Welcome");
     }
   }, [isLogin]);
 
+  useEffect(() => {
+    getUnreadNotificationsCount();
+  }, []);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={styles.logoutButtonWrapper}
-        onPress={handleLogout}>
+        onPress={() => navigation.navigate("Notifications")}
+        style={styles.notificationButtonWrapper}>
+        <Ionicons
+          name={"notifications-outline"}
+          color={colors.primary}
+          size={25}
+        />
+        {unreadNotificationCount && <View style={styles.unreadDot}></View>}
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={handleLogout}
+        style={styles.logoutButtonWrapper}>
         <Ionicons name={"log-out-outline"} color={colors.primary} size={25} />
       </TouchableOpacity>
 
@@ -120,9 +151,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  notificationButtonWrapper: {
+    position: "absolute",
+    top: 65,
+    left: 20,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    borderColor: colors.primary,
+    borderWidth: 1,
+    alignItems: "center",
+  },
+  unreadDot: {
+    position: "absolute",
+    top: 0,
+    // Adjust the position as needed
+    right: 0, // Adjust the position as needed
+    height: 10,
+    width: 10,
+    backgroundColor: colors.primary,
+    borderRadius: 5,
+  },
   logoutButtonWrapper: {
     position: "absolute",
-    top: 50,
+    top: 55,
     right: 10,
     height: 40,
     width: 40,

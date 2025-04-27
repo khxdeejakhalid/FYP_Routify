@@ -22,6 +22,9 @@ import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
 import { bookSession, editSession } from "../../utils/api";
+// Notifications
+import { indieNotificationDataService } from "../../services/notifications/indieNotificationDataService";
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
 
 const { width, height } = Dimensions.get("window");
 const startTimes = [
@@ -103,8 +106,14 @@ const Calendar = () => {
   };
 
   const handleSubmit = async () => {
+    const subId =
+      user.role === "instructor"
+        ? isEditMode
+          ? session.learnerEmail
+          : learnerEmail
+        : user.assignedInstructor.instructorEmail;
     if (!startTime || !endTime) {
-      alert("Please select both start and end times.");
+      alert("Please select the lesson's start and end times.");
       return;
     }
 
@@ -125,6 +134,8 @@ const Calendar = () => {
         bookedBy: user.email,
       };
       if (!isEditMode) {
+        // If its a new booking, and we have learnerEmail, then Admin is booking a session with a learner otherwise
+        //  a learner is booking a session with an instructor
         sessionPayload.learnerEmail = learnerEmail || user.email;
         sessionPayload.instructorEmail =
           user.role === "instructor"
@@ -138,12 +149,28 @@ const Calendar = () => {
       const response = await promiseFn();
 
       if (response.success) {
+        // Notify the opposite party about the session booking
+        const notificationPayload = {
+          subID: subId,
+          title: isEditMode ? "New time slot requested" : "New Session Booking",
+          appId: NOTIFY_APP_ID,
+          appToken: NOTIFY_APP_TOKEN,
+          message: isEditMode
+            ? `${user.email} has requested a new time slot. Please respond in Sessions Tab`
+            : `${user.email} has booked a session with you!`,
+          pushData: {
+            read: false,
+          },
+        };
+        await indieNotificationDataService.pushNotification(
+          notificationPayload,
+        );
         alert(`Session ${!isEditMode ? "booked" : "updated"} successfully!`);
         navigation.navigate("Home");
       }
     } catch (error) {
       console.error("Error booking session:", error);
-      alert("Failed to book session. Please try again.");
+      alert("Failed to book session! Please try again.");
     }
   };
 

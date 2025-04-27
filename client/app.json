@@ -19,7 +19,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.routify"
+      "package": "com.anonymous.routify",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,6 +36,12 @@
           "locationAlwaysAndWhenInUsePermission": "Allow $(my-new-project) to use your location."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3151cff9-421e-4943-8487-f1b0561ce46d"
+      }
+    },
+    "owner": "khxdeejakhalid"
   }
 }

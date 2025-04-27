@@ -20,6 +20,9 @@ import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 import { AuthContext } from "../context/AuthContext";
+// Notification
+import { registerIndieID } from "native-notify";
+import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
 
 const { height } = Dimensions.get("window");
 
@@ -48,11 +51,15 @@ const LoginScreen = () => {
   const loginHandler = async () => {
     if (email && password) {
       const response = await handleSignIn(email, password);
-      if (!response.success) {
-        setModalHeader("Failure");
-        setModalText(response.description);
-        setModalVisible(true);
+      if (response.success) {
+        // Setup a unique ID for the user
+        registerIndieID(response.user.email, NOTIFY_APP_ID, NOTIFY_APP_TOKEN);
+        return;
       }
+
+      setModalHeader("Failure");
+      setModalText(response.description);
+      setModalVisible(true);
     }
   };
 
@@ -156,16 +163,6 @@ const LoginScreen = () => {
               buttonType="AuthButton"
               clickHandler={loginHandler}>
               Login
-            </Button>
-
-            <Text style={styles.continueText}>or continue with</Text>
-
-            <Button
-              clickHandler={googleSigninHandler}
-              disabled={false}
-              buttonType="AuthButton"
-              imageSource={require("../assets/icons/social/google.png")}>
-              Sign In With Google
             </Button>
           </View>
 

@@ -224,16 +224,6 @@ const SignupScreen = () => {
               buttonType="AuthButton">
               Sign Up
             </Button>
-
-            <Text style={styles.continueText}>or continue with</Text>
-
-            <Button
-              clickHandler={googleSignupHandler}
-              disabled={false}
-              buttonType="AuthButton"
-              imageSource={require("../assets/icons/social/google.png")}>
-              Sign Up With Google
-            </Button>
           </View>
 
           <View style={styles.footerContainer}>
