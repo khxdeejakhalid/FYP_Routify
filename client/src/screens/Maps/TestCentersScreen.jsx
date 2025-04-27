@@ -34,6 +34,7 @@ const TestCenterScreen = () => {
       const response = await getTestCenters();
       if (response.success) {
         setTestCenters(response.centers);
+        setSelectedCenter(response.centers[0].NAME);
       } else {
         setModalHeader("Failure");
         setModalText(response.description);
@@ -53,7 +54,7 @@ const TestCenterScreen = () => {
   };
 
   const handleNext = () => {
-    navigation.navigate("Routes");
+    navigation.navigate("Routes", { selectedCenter });
   };
 
   return (

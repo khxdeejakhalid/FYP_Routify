@@ -29,7 +29,6 @@ export const indieNotificationDataService = (function () {
   }
 
   function pushNotification(payload) {
-    console.log(payload)
     const url = `${INDIE_NOTIFICATION_APP_URL}/indie/notification`;
     return axios
       .post(url, payload,  {

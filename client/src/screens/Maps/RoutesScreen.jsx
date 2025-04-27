@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import RouteCard from "../../components/RouteCard";
 import Button from "../../components/Button";
@@ -19,14 +19,23 @@ import Button from "../../components/Button";
 const { width, height } = Dimensions.get("window");
 
 const RoutesScreen = () => {
+  const routeParams = useRoute();
   const navigation = useNavigation();
+
+  const { selectedCenter } = routeParams.params;
+
   const [selectedRoute, setSelectedRoute] = useState("route1");
 
-  const routes = [
-    { label: "Route 1", value: "route1" },
-    { label: "Route 2", value: "route2" },
-    { label: "Route 3", value: "route3" },
-    { label: "Route 4", value: "route4" },
+  const TALAGHAT_ROUTES = [
+    { label: "Route 1", value: "1" },
+    { label: "Route 2", value: "2" },
+    { label: "Route 3", value: "3" },
+  ];
+
+  const FINGLAS_ROUTES = [
+    { label: "Route 1", value: "4" },
+    { label: "Route 2", value: "5" },
+    { label: "Route 3", value: "6" },
   ];
 
   const handleGoBack = () => {
@@ -75,7 +84,9 @@ const RoutesScreen = () => {
         <Text style={styles.title}>Select a Route</Text>
         <FlatList
           style={styles.list}
-          data={routes}
+          data={
+            selectedCenter === "Talaghat" ? TALAGHAT_ROUTES : FINGLAS_ROUTES
+          }
           renderItem={renderItem}
           keyExtractor={(item) => item.value}
           extraData={selectedRoute}

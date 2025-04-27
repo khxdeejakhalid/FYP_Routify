@@ -153,14 +153,14 @@ const styles = StyleSheet.create({
   },
   notificationButtonWrapper: {
     position: "absolute",
-    top: 65,
-    left: 20,
+    top: 55,
+    left: 10,
     height: 40,
     width: 40,
     borderRadius: 20,
     justifyContent: "center",
     borderColor: colors.primary,
-    borderWidth: 1,
+    // borderWidth: 1,
     alignItems: "center",
   },
   unreadDot: {

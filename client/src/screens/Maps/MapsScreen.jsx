@@ -7,7 +7,7 @@ import {
   Text,
 } from "react-native";
 import MapView, { Marker, Polyline, AnimatedRegion } from "react-native-maps";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import * as Speech from "expo-speech";
@@ -37,9 +37,12 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const MapScreen = () => {
-  const routeId = 1;
+  const routeParams = useRoute();
   const navigation = useNavigation();
+
+  const { selectedRoute } = routeParams.params;
   const { user } = useContext(AuthContext);
+
   // * Refs
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -48,8 +51,8 @@ const MapScreen = () => {
   const isManeuverActiveRef = useRef(false);
   const userLocation = useRef(
     new AnimatedRegion({
-      latitude: 53.296626,
-      longitude: -6.361573,
+      latitude: 0,
+      longitude: 0,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     }),
@@ -63,8 +66,8 @@ const MapScreen = () => {
   const [currentInstruction, setCurrentInstruction] = useState(null);
   const [isJourneyStarted, setIsJourneyStarted] = useState(false);
   const [currentLocation, setCurrentLocation] = useState({
-    latitude: 53.296626143012745,
-    longitude: -6.361571573136808,
+    latitude: 0,
+    longitude: 0,
     heading: 90,
   });
   const [maneuverFeedback, setManeuverFeedback] = useState(4);
@@ -100,9 +103,9 @@ const MapScreen = () => {
   const fetchRouteData = useCallback(async () => {
     const [waypointsResponse, turnsResponse, maneuversResponse] =
       await Promise.all([
-        getWaypoints(routeId),
-        getTurnsByRoute(routeId),
-        getManeuversByRoute(routeId),
+        getWaypoints(selectedRoute),
+        getTurnsByRoute(selectedRoute),
+        getManeuversByRoute(selectedRoute),
       ]);
 
     if (waypointsResponse.success) {
@@ -134,7 +137,7 @@ const MapScreen = () => {
       setModalText(response.description);
       setModalVisible(true);
     }
-  }, [routeId]);
+  }, [selectedRoute]);
 
   async function fetchRouteFromJSON() {
     const response = await processRoute(routeData);
@@ -143,8 +146,45 @@ const MapScreen = () => {
   }
 
   useEffect(() => {
-    // fetchRouteFromJSON();
+    const getInitialLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setModalHeader("Permission Denied");
+        setModalText("Location permission is required for this app.");
+        setModalVisible(true);
+        return;
+      }
+
+      try {
+        const currentPosition = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.BestForNavigation,
+        });
+
+        const { latitude, longitude, heading } = currentPosition.coords;
+
+        setCurrentLocation({ latitude, longitude, heading: heading || 90 });
+
+        userLocation.setValue({
+          latitude,
+          longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        });
+
+        if (mapRef.current) {
+          mapUtils.animateToRegion(mapRef, userLocation, {
+            latitude,
+            longitude,
+          });
+        }
+      } catch (error) {
+        console.error("Error getting current location:", error);
+      }
+    };
+
+    getInitialLocation();
     fetchRouteData();
+    // fetchRouteFromJSON();
   }, [fetchRouteData]);
 
   // * Functions / Handlers
@@ -374,7 +414,7 @@ const MapScreen = () => {
 
         setManeuverFeedback(parseInt(overallScore));
         saveManueverFeedbackScore({
-          routeId,
+          selectedRoute,
           score: overallScore,
           manueverType: MANEUVERS_TYPE.HILLTOP.ID,
           userEmail: user.email,
@@ -497,7 +537,7 @@ const MapScreen = () => {
 
       setFeedbackManeuverType("REVERSE AROUND CORNER");
       saveManueverFeedbackScore({
-        routeId,
+        selectedRoute,
         score: overallScore,
         manueverType: MANEUVERS_TYPE.REVERSE_PARKING.ID,
         userEmail: user.email,
@@ -575,7 +615,7 @@ const MapScreen = () => {
 
       setFeedbackManeuverType("TURN ABOUT");
       saveManueverFeedbackScore({
-        routeId,
+        selectedRoute,
         score: overallScore,
         manueverType: MANEUVERS_TYPE.TURN_ABOUT.ID,
         userEmail: user.email,
