@@ -21,10 +21,15 @@ import moment from "moment";
 import { colors } from "../../utils/colors";
 import { fonts } from "../../utils/fonts";
 import { AuthContext } from "../../context/AuthContext";
-import { bookSession, editSession } from "../../utils/api";
+import {
+  bookSession,
+  editSession,
+  getAllPendingAndScheduledSessions,
+} from "../../utils/api";
 // Notifications
 import { indieNotificationDataService } from "../../services/notifications/indieNotificationDataService";
 import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
+import { formatTime } from "../../utils/routifyUtilityService";
 
 const { width, height } = Dimensions.get("window");
 const startTimes = [
@@ -70,10 +75,11 @@ const Calendar = () => {
   const { user } = useContext(AuthContext);
 
   const [dates, setDates] = useState([]);
-  const [startTime, setStartTime] = useState("01:00 PM");
-  const [endTime, setEndTime] = useState("02:00 PM");
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [disabledEndTimes, setDisabledEndTimes] = useState([]);
+  const [disabledStartTimes, setDisabledStartTImes] = useState([]);
 
   // * Functions
   const onGoBack = () => {
@@ -96,16 +102,30 @@ const Calendar = () => {
     const startTimeIndex = startTimes.indexOf(time);
     const disabledTimes = endTimes.slice(0, startTimeIndex); // Disable end times up to and including start time
 
-    setDisabledEndTimes(disabledTimes);
+    setDisabledEndTimes((prev) => [...prev, ...disabledTimes]);
   };
 
-  const formatTime = (formattedDate, time) => {
+  const getCombinedDateAndTime = (formattedDate, time) => {
     return moment(`${formattedDate} ${time}`, "YYYY-MM-DD h:mm A").format(
       "YYYY-MM-DD HH:mm:ss",
     );
   };
 
   const handleSubmit = async () => {
+    if (!startTime || !endTime) {
+      alert("Please select both start and end times.");
+      return;
+    }
+    //check that the difference between start and end time is only 1 hour
+    const startTimeMoment = moment(startTime, "hh:mm A");
+    const endTimeMoment = moment(endTime, "hh:mm A");
+    const duration = moment.duration(endTimeMoment.diff(startTimeMoment));
+    const hours = duration.asHours();
+    if (hours > 1) {
+      alert("Session duration should only be 1 hour.");
+      return;
+    }
+
     const subId =
       user.role === "instructor"
         ? isEditMode
@@ -120,8 +140,11 @@ const Calendar = () => {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
 
-      const formattedStartTime = formatTime(formattedDate, startTime);
-      const formattedEndTime = formatTime(formattedDate, endTime);
+      const formattedStartTime = getCombinedDateAndTime(
+        formattedDate,
+        startTime,
+      );
+      const formattedEndTime = getCombinedDateAndTime(formattedDate, endTime);
       const sessionPayload = {
         sessionDate: formattedDate,
         sessionStartTime: formattedStartTime,
@@ -170,8 +193,31 @@ const Calendar = () => {
     }
   };
 
+  const getSessionsByUser = async (email) => {
+    const { sessions = [] } = await getAllPendingAndScheduledSessions(email);
+
+    let startTimes = [];
+    let endTimes = [];
+    sessions.forEach((session) => {
+      const startTime = session.startTime.replace("GMT+5", "+05:00");
+      const endTime = session.endTime.replace("GMT+5", "+05:00");
+      startTimes.push(formatTime(startTime));
+      endTimes.push(formatTime(endTime));
+    });
+
+    setDisabledStartTImes((prev) => [...prev, ...startTimes]);
+    setDisabledEndTimes((prev) => [...prev, ...endTimes]);
+  };
+
   useEffect(() => {
+    // Fetch sessions for logged in user
+    getSessionsByUser(user.email);
     getDates();
+    // A learner has 1:M relation with instructor, so an instructor might have different times booked with different learners
+    // so need to get the sessions by instructor email, and disable them
+    if (user.role === "learner") {
+      getSessionsByUser(user.assignedInstructor.instructorEmail);
+    }
   }, []);
 
   useEffect(() => {
@@ -227,6 +273,7 @@ const Calendar = () => {
                 selected={startTime}
                 sessionTimeSlots={startTimes}
                 onSelectTime={handleStartTimeSelect}
+                disabledTimes={disabledStartTimes}
               />
             </ScrollView>
           </View>

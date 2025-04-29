@@ -110,9 +110,9 @@ const HomeScreen = () => {
           color={colors.primary}
           size={25}
         />
-        <View>
+        {/* <View>
           {!!unreadNotificationCount && <View style={styles.unreadDot}></View>}
-        </View>
+        </View> */}
       </TouchableOpacity>
       <TouchableOpacity
         onPress={handleLogout}

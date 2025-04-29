@@ -538,7 +538,26 @@ export const getPendingSessions = async (userEmail) => {
     };
   }
 };
+export const getAllPendingAndScheduledSessions = async (userEmail) => {
+  try {
+    const response = await axios.get(
+      `${BACKEND_URL}/sessions/booked?email=${userEmail}`,
+    );
+    if (response.data.status === "success") {
+      // Filter all sessions that are pass today's date
+      const filteredSessions = response.data.sessions.filter(
+        (session) => new Date(session.date) >= new Date(),
+      );
 
+      return { success: true, sessions: filteredSessions };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      description: "System Cannot Process. Please try again.",
+    };
+  }
+};
 export const approveSession = async (sessionId) => {
   try {
     const response = await axios.patch(
