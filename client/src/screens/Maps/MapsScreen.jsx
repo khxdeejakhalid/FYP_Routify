@@ -434,6 +434,7 @@ const MapScreen = () => {
     currLocation,
     speed,
     timestamp,
+    counter,
   ) => {
     const kerbCoordinates = maneuvers[MANEUVERS_TYPE.REVERSE_PARKING.ID].kerb;
 
@@ -452,23 +453,27 @@ const MapScreen = () => {
       const minDeviation = maneuverUtils.getMinimumDeviation(deviations);
 
       if (minDeviation <= 1.5 && minDeviation > 1) {
-        playRemindersWithDelay(
-          [
-            routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
-              .KERB_TOO_CLOSE,
-          ],
-          1000,
-          false,
-        );
+        if (counter % 5 === 0) {
+          playRemindersWithDelay(
+            [
+              routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+                .KERB_TOO_CLOSE,
+            ],
+            1000,
+            false,
+          );
+        }
       } else if (minDeviation > 3) {
-        playRemindersWithDelay(
-          [
-            routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
-              .KERB_TOO_FAR,
-          ],
-          1000,
-          false,
-        );
+        if (counter % 5 === 0) {
+          playRemindersWithDelay(
+            [
+              routifyConstantsService.REVERSE_AROUND_CORNER_REMINDERS
+                .KERB_TOO_FAR,
+            ],
+            1000,
+            false,
+          );
+        }
       }
 
       totalDeviations.push(minDeviation);
@@ -653,29 +658,7 @@ const MapScreen = () => {
   };
 
   const simulateJourney = async () => {
-    // journeyIntervalRef.current = setInterval(async () => {
-    //   const { latitude, longitude, heading, speed, timestamp } =
-    //     await mapUtils.getCurrentLocation();
-
-    //   setCurrentLocation({ latitude, longitude, heading });
-    //   detectUpcomingTurn(latitude, longitude);
-    //   testHilltopManuever(latitude, longitude, heading, speed, timestamp);
-    //   evaluateReverseAroundCornerManeuver(
-    //     { latitude, longitude, heading },
-    //     speed,
-    //     timestamp,
-    //   );
-    //   evaluateTurnAboutManeuver({
-    //     latitude,
-    //     longitude,
-    //     heading,
-    //     speed,
-    //     timestamp,
-    //   });
-
-    //   mapUtils.animateToRegion(mapRef, userLocation, { latitude, longitude });
-    // }, 3000);
-
+    let counter = -1;
     const locationSubscription = await Location.watchPositionAsync(
       {
         accuracy: Location.Accuracy.BestForNavigation,
@@ -683,6 +666,7 @@ const MapScreen = () => {
         distanceInterval: 1,
       },
       ({ coords: { latitude, longitude, heading, speed }, timestamp }) => {
+        counter = counter + 1;
         setCurrentLocation({ latitude, longitude, heading });
         detectUpcomingTurn(latitude, longitude);
         testHilltopManuever(latitude, longitude, heading, speed, timestamp);
@@ -690,6 +674,7 @@ const MapScreen = () => {
           { latitude, longitude, heading },
           speed,
           timestamp,
+          counter,
         );
         evaluateTurnAboutManeuver({
           latitude,
