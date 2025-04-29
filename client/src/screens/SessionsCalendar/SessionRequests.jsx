@@ -148,16 +148,16 @@ const SessionRequests = () => {
           source={require("../../assets/logo.png")}
         />
         <View style={styles.contentWrapper}>
-          <Text style={styles.title}>{"pending sessions"}</Text>
+          <Text style={styles.title}>{"Pending Sessions"}</Text>
           {sessions.length === 0 ? (
             <Text
               style={{
-                fontSize: 24,
+                fontSize: 18,
                 marginTop: "50%",
                 textAlign: "center",
                 fontFamily: fonts.Medium,
               }}>
-              {"No pending sessions"}
+              {"No Pending Sessions"}
             </Text>
           ) : (
             <ScrollView
@@ -192,10 +192,10 @@ const SessionRequests = () => {
                     <View style={styles.divider} />
                     <View style={styles.content}>
                       <Text style={styles.sessionTitle}>
-                        {`Lesson ${index + 1}`}
+                        {`Lesson`}
                       </Text>
                       <Text style={styles.sessionSubtitle}>
-                        {`Session is booked with ${session.instructorName ? session.instructorName : session.learnerName}`}
+                        {`Session is booked with ${user.role === "instructor" ? session.learnerName : session.instructorName}`}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -212,22 +212,20 @@ const SessionRequests = () => {
                   {/* Dropdown */}
                   {selectedIndex === index && (
                     <View style={styles.dropdown}>
-                      <TouchableOpacity
-                        style={styles.option}
-                        onPress={onApproveSession}>
+                    <ScrollView contentContainerStyle={styles.dropdownContent}>
+                      <TouchableOpacity style={styles.option} onPress={onApproveSession}>
                         <Text style={styles.optionText}>Approve</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.option}
-                        onPress={onRejectSession}>
+                      <TouchableOpacity style={styles.option} onPress={onRejectSession}>
                         <Text style={styles.optionText}>Reject</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.option}
-                        onPress={onEditSession}>
+                      <TouchableOpacity style={styles.option} onPress={onEditSession}>
                         <Text style={styles.optionText}>Edit</Text>
                       </TouchableOpacity>
-                    </View>
+                      {/* Add more options here if needed */}
+                    </ScrollView>
+                  </View>
+                  
                   )}
                 </View>
               ))}
@@ -251,10 +249,10 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   pending: {
-    backgroundColor: "orange", // Change color as needed
+    backgroundColor: "orange", 
   },
   cancelled: {
-    backgroundColor: "gray", // Change color as needed
+    backgroundColor: "gray", 
   },
   kebabIcon: {
     alignItems: "flex-end",
@@ -262,6 +260,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     position: "absolute",
+    overflow: "hidden",
     top: 30,
     zIndex: 1000,
     right: 40,
@@ -270,9 +269,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     padding: 10,
     width: 120,
+    maxHeight: 100, 
   },
   option: {
-    paddingVertical: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
   optionText: {
     fontSize: 16,

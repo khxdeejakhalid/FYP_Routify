@@ -86,7 +86,8 @@ const SignupScreen = () => {
         } else {
           if (email && password && username) {
             registerIndieID(
-              response.user.email,
+              //response.user.email,
+              email,
               NOTIFY_APP_ID,
               NOTIFY_APP_TOKEN,
             );
