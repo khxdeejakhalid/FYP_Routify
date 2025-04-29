@@ -110,7 +110,9 @@ const HomeScreen = () => {
           color={colors.primary}
           size={25}
         />
-        {unreadNotificationCount && <View style={styles.unreadDot}></View>}
+        <View>
+          {!!unreadNotificationCount && <View style={styles.unreadDot}></View>}
+        </View>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={handleLogout}
@@ -166,8 +168,7 @@ const styles = StyleSheet.create({
   unreadDot: {
     position: "absolute",
     top: 0,
-    // Adjust the position as needed
-    right: 0, // Adjust the position as needed
+    right: 0,
     height: 10,
     width: 10,
     backgroundColor: colors.primary,

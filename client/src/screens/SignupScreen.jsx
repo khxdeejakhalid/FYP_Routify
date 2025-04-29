@@ -70,40 +70,39 @@ const SignupScreen = () => {
   };
 
   const signupHandler = async () => {
-    if (email) {
-      try {
-        const response = await checkEmail(email);
-        if (!response.success) {
-          setModalHeader("Failure");
-          setModalText(response.description);
-          setModalVisible(true);
-        } else if (response.exists) {
-          setModalHeader(`Email Already Exists`);
-          setModalText(
-            `Please try a different email. This email already exists.`,
-          );
-          setModalVisible(true);
-        } else {
-          if (email && password && username) {
-            registerIndieID(
-              //response.user.email,
-              email,
-              NOTIFY_APP_ID,
-              NOTIFY_APP_TOKEN,
-            );
-            navigation.navigate("UserInformation", {
-              email,
-              password,
-              username,
-              role: selectedRole,
-            });
-          }
-        }
-      } catch (error) {
+    if (!email || !password || !username || !selectedRole) {
+      setModalHeader("Missing Fields");
+      setModalText("Please fill all required fields.");
+      setModalVisible(true);
+      return;
+    }
+    try {
+      const response = await checkEmail(email);
+      if (!response.success) {
         setModalHeader("Failure");
-        setModalText("System Cannot Process. Please try again.");
+        setModalText(response.description);
         setModalVisible(true);
+      } else if (response.exists) {
+        setModalHeader(`Email Already Exists`);
+        setModalText(
+          `Please try a different email. This email already exists.`,
+        );
+        setModalVisible(true);
+      } else {
+        if (email && password && username) {
+          registerIndieID(email, NOTIFY_APP_ID, NOTIFY_APP_TOKEN);
+          navigation.navigate("UserInformation", {
+            email,
+            password,
+            username,
+            role: selectedRole,
+          });
+        }
       }
+    } catch (error) {
+      setModalHeader("Failure");
+      setModalText("System Cannot Process. Please try again.");
+      setModalVisible(true);
     }
   };
 
@@ -127,7 +126,10 @@ const SignupScreen = () => {
 
         {/* Form  */}
         <View style={styles.formContainer}>
-          <Text style={styles.label}>Username</Text>
+          <Text style={styles.label}>
+            Username
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"screen-smartphone"}
@@ -143,7 +145,10 @@ const SignupScreen = () => {
               value={username}
             />
           </View>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>
+            Email
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <Ionicons
               name={"mail-outline"}
@@ -159,7 +164,10 @@ const SignupScreen = () => {
               value={email}
             />
           </View>
-          <Text style={styles.label}>Password</Text>
+          <Text style={styles.label}>
+            Password
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"lock"}
@@ -195,7 +203,10 @@ const SignupScreen = () => {
           </View>
 
           {/* Select Role */}
-          <Text style={styles.label}>Role</Text>
+          <Text style={styles.label}>
+            Role
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <Dropdown
             data={[
               {
@@ -303,6 +314,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: "3%",
     paddingLeft: "1%",
+  },
+  mandatory: {
+    color: colors.primary,
   },
   inputContainer: {
     borderWidth: 1,

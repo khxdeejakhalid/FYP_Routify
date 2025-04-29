@@ -43,9 +43,9 @@ const ResetPassword = () => {
   };
 
   const onResetPassword = async () => {
-    if (!email) {
-      setModalHeader("Failure");
-      setModalText("Email is required");
+    if (!email || !newPassword || !confirmPassword) {
+      setModalHeader("Missing Fields");
+      setModalText("Please input all required fields.");
       setModalVisible(true);
       return;
     }
@@ -54,15 +54,15 @@ const ResetPassword = () => {
       setModalText("Passwords do not match");
       setModalVisible(true);
       return;
+    }
+
+    const response = await resetPassword(newPassword, email);
+    if (!response.success) {
+      setModalHeader("Failure");
+      setModalText(response.description);
+      setModalVisible(true);
     } else {
-      const response = await resetPassword(newPassword, email);
-      if (!response.success) {
-        setModalHeader("Failure");
-        setModalText(response.description);
-        setModalVisible(true);
-      } else {
-        navigation.navigate("Login");
-      }
+      navigation.navigate("Login");
     }
   };
 
@@ -86,7 +86,10 @@ const ResetPassword = () => {
 
         {/* form  */}
         <View style={styles.formContainer}>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>
+            Email
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <Ionicons
               name={"mail-outline"}
@@ -102,7 +105,10 @@ const ResetPassword = () => {
               onChangeText={(email) => setEmail(email)}
             />
           </View>
-          <Text style={styles.label}>New Password</Text>
+          <Text style={styles.label}>
+            New Password
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"lock"}
@@ -136,7 +142,11 @@ const ResetPassword = () => {
               )}
             </TouchableOpacity>
           </View>
-          <Text style={styles.label}>Confirm Password</Text>
+          <Text style={styles.label}>
+            Confirm Password
+            <Text style={styles.mandatory}> *</Text>
+          </Text>
+
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"lock"}
@@ -229,6 +239,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: "3%",
     paddingLeft: "1%",
+  },
+  mandatory: {
+    color: colors.primary,
   },
   inputContainer: {
     borderWidth: 1,

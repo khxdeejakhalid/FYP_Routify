@@ -49,18 +49,22 @@ const LoginScreen = () => {
   };
 
   const loginHandler = async () => {
-    if (email && password) {
-      const response = await handleSignIn(email, password);
-      if (response.success) {
-        // Setup a unique ID for the user
-        registerIndieID(response.user.email, NOTIFY_APP_ID, NOTIFY_APP_TOKEN);
-        return;
-      }
-
-      setModalHeader("Failure");
-      setModalText(response.description);
+    if (!email || !password) {
+      setModalHeader("Missing Fields");
+      setModalText("Please enter both email and password.");
       setModalVisible(true);
+      return;
     }
+    const response = await handleSignIn(email, password);
+    if (response.success) {
+      // Setup a unique ID for the user
+      registerIndieID(email, NOTIFY_APP_ID, NOTIFY_APP_TOKEN);
+      return;
+    }
+
+    setModalHeader("Failure");
+    setModalText(response.description);
+    setModalVisible(true);
   };
 
   const googleSigninHandler = () => {
@@ -101,7 +105,10 @@ const LoginScreen = () => {
 
         {/* form  */}
         <View style={styles.formContainer}>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>
+            Email 
+            <Text style={styles.mandatory}> </Text>
+          </Text>
           <View style={styles.inputContainer}>
             <Ionicons
               name={"mail-outline"}
@@ -117,7 +124,10 @@ const LoginScreen = () => {
               value={email}
             />
           </View>
-          <Text style={styles.label}>Password</Text>
+          <Text style={styles.label}>
+            Password
+            <Text style={styles.mandatory}> </Text>
+          </Text>
           <View style={styles.inputContainer}>
             <SimpleLineIcons
               name={"lock"}
@@ -221,6 +231,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: "3%",
     paddingLeft: "1%",
+  },
+  mandatory: {
+    color: colors.primary,
   },
   inputContainer: {
     borderWidth: 1,
