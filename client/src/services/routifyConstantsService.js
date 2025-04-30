@@ -20,8 +20,8 @@ export const routifyConstantsService = (function () {
   };
 
   const HILL_TOP_REMINDERS = {
-    STARTING_POINT: "Hill Top Manoeuvre Started",
-    ENDING_POINT: "Hill Top Manoeuvre Completed",
+    STARTING_POINT: "Hill Start Manoeuvre Started",
+    ENDING_POINT: "Hill Start Manoeuvre Completed",
   };
 
   const TURN_ABOUT_REMINDERS = {
@@ -40,7 +40,7 @@ export const routifyConstantsService = (function () {
     },
     HILLTOP: {
       ID: "HILL_TOP",
-      DISPLAY_NAME: "Hillstart",
+      DISPLAY_NAME: "Hill Start",
     },
   };
 

@@ -280,7 +280,7 @@ export const getManeuverFeedback = async (userEmail) => {
       `${BACKEND_URL}/feedback?userEmail=${userEmail}`,
     );
     if (response.data.status === "success") {
-      return { success: true, feedback: response.data.feedback };
+      return { success: true, feedback: response.data.feedback, completedRoutes: response.data.completedRoutes };
     }
     return response.data;
   } catch (error) {
@@ -295,9 +295,9 @@ export const saveManueverFeedbackScore = async (reqParams) => {
   try {
     const response = await axios.post(
       `${BACKEND_URL}/feedback`,
-      { reqParams },
+       reqParams ,
       {
-        headers: {
+        headers: { 
           "Content-Type": "application/json",
         },
       },

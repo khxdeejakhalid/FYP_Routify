@@ -23,4 +23,13 @@ export default class Feedback {
       [userEmail]
     );
   }
+ 
+  static getCompletedRoutes(userEmail) {
+    return db.execute(
+      `SELECT ROUTE_ID
+       FROM FEEDBACK
+       WHERE USER_EMAIL = ?`,
+      [userEmail]
+    );
+  }
 }

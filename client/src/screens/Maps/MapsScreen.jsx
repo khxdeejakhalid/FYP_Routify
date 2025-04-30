@@ -343,7 +343,7 @@ const MapScreen = () => {
     }
   };
 
-  const testHilltopManuever = (
+  const testHilltopManuever = async (
     currentLat,
     currentLng,
     direction,
@@ -408,12 +408,12 @@ const MapScreen = () => {
           },
         ];
 
+
         const overallScore = maneuverUtils.scoreManuever(
           manueverEvaluationCriteria,
         );
-
         setManeuverFeedback(parseInt(overallScore));
-        saveManueverFeedbackScore({
+        await saveManueverFeedbackScore({
           selectedRoute,
           score: overallScore,
           manueverType: MANEUVERS_TYPE.HILLTOP.ID,
@@ -430,7 +430,7 @@ const MapScreen = () => {
     }
   };
 
-  const evaluateReverseAroundCornerManeuver = (
+  const evaluateReverseAroundCornerManeuver = async (
     currLocation,
     speed,
     timestamp,
@@ -541,7 +541,7 @@ const MapScreen = () => {
       }
 
       setFeedbackManeuverType("REVERSE AROUND CORNER");
-      saveManueverFeedbackScore({
+      await saveManueverFeedbackScore({
         selectedRoute,
         score: overallScore,
         manueverType: MANEUVERS_TYPE.REVERSE_PARKING.ID,
@@ -551,7 +551,7 @@ const MapScreen = () => {
     }
   };
 
-  const evaluateTurnAboutManeuver = (currentLoc) => {
+  const evaluateTurnAboutManeuver = async (currentLoc) => {
     const maneuverCoordinates = maneuvers[MANEUVERS_TYPE.TURN_ABOUT.ID];
     const kerbCoordinates = maneuverCoordinates.kerb;
 
@@ -619,7 +619,7 @@ const MapScreen = () => {
       }
 
       setFeedbackManeuverType("TURN ABOUT");
-      saveManueverFeedbackScore({
+      await saveManueverFeedbackScore({
         selectedRoute,
         score: overallScore,
         manueverType: MANEUVERS_TYPE.TURN_ABOUT.ID,

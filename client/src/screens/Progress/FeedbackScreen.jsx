@@ -33,14 +33,18 @@ const FeedbackScreen = () => {
 
   const fetchManeueverFeedback = async () => {
     const response = (await getManeuverFeedback(user.email)) || [];
+
     setFeedback(response.feedback || []);
+    setNoOfRoutesCompleted(response.completedRoutes.length)
   };
+
   const getManeuverRating = (manueverType) => {
     const manueverFeedback = feedback.find(
       (feedback) => feedback.MANUEVER_TYPE === manueverType,
     ) || {};
     return manueverFeedback ? manueverFeedback.AVG_SCORE : 0;
   };
+
   useEffect(() => {
     fetchManeueverFeedback();
   }, []);
