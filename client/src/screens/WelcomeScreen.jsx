@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   logo: {
-    height: height * 0.1,
-    width: width * 0.8,
-    marginTop: "30%",
+    height: height * 0.13,
+    width: width * 0.9,
+    marginTop: "40%",
   },
   title: {
     fontSize: 24,

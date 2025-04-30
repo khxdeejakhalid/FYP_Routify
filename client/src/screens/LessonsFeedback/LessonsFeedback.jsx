@@ -189,7 +189,7 @@ const LessonsFeedback = ({ route }) => {
           loading={loading}
           buttonOneText="Close"
           buttonTwoText="Submit"
-          title={"Give Feedback"}
+          title={"Feedback"} //
           visible={isModalVisible}
           children={feedbackComponent()}
           onButtonOnePress={handleModalClose}

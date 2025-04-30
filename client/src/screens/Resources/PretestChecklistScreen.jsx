@@ -88,8 +88,8 @@ const PreTestChecklist = () => {
         );
       } else {
         Alert.alert(
-          "Set Reminder",
-          "Please complete all tasks before the test.",
+          "Reminder",
+          "Please complete all tasks before your driving test!",
         );
         navigation.navigate("Home");
       }

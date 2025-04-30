@@ -72,7 +72,7 @@ const FeedbackScreen = () => {
         <Text style={styles.title}>YOUR PROGRESS</Text>
         <View style={styles.routesCompleted}>
           <Text style={[styles.description, styles.fontSize18]}>
-            NO. OF ROUTES COMPLETED: {noOfRoutesCompleted}
+            JOURNEYS ATTEMPTED: {noOfRoutesCompleted}
           </Text>
         </View>
         <View style={styles.manouvreContainer}>
