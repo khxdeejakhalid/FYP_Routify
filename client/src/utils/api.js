@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = `http://192.168.0.94:8080/api`;
+const BACKEND_URL = `http://172.20.10.13:8080/api`;
 
 export const signIn = async (email, password) => {
   try {

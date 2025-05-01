@@ -96,7 +96,7 @@ const UserInformationScreen = ({ route }) => {
       }
     } else {
       setModalHeader("Missing Fields");
-      setModalText("Please enter full name, date of permit and date of birth.");
+      setModalText("Please ensure you have entered all required information");
       setModalVisible(true);
     }
   };

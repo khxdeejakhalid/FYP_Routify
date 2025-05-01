@@ -77,7 +77,7 @@ const TestCenterScreen = () => {
 
       {/* Picker Content */}
       <View style={styles.contentWrapper}>
-        <Text style={styles.title}>Select a Test Center</Text>
+        <Text style={styles.title}>Select a Test Centre</Text>
         <View style={styles.pickerWrapper}>
           <Picker
             selectedValue={selectedCenter}
