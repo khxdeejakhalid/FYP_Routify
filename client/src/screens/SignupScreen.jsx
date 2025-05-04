@@ -18,7 +18,6 @@ import Button from "../components/Button";
 import { colors } from "../utils/colors";
 import { fonts } from "../utils/fonts";
 import { useNavigation } from "@react-navigation/native";
-import { firebaseUtilService } from "../services/firebase/firebaseUtilService";
 import { checkEmail } from "../utils/api";
 import { registerIndieID } from "native-notify";
 import { NOTIFY_APP_ID, NOTIFY_APP_TOKEN } from "@env";
