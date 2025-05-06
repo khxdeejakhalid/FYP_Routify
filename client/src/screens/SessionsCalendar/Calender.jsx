@@ -77,7 +77,7 @@ const Calendar = () => {
   const [dates, setDates] = useState([]);
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
+  const [selectedDate, setSelectedDate] = useState();
   const [disabledEndTimes, setDisabledEndTimes] = useState([]);
   const [disabledStartTimes, setDisabledStartTImes] = useState([]);
 
@@ -195,10 +195,16 @@ const Calendar = () => {
 
   const getSessionsByUser = async (email) => {
     const { sessions = [] } = await getAllPendingAndScheduledSessions(email);
-
+    
     let startTimes = [];
     let endTimes = [];
-    sessions.forEach((session) => {
+    const date = selectedDate || new Date().toISOString();
+    //filter sessions by date
+    const filteredSessions = sessions.filter((session) => {
+      const sessionDate = moment(session.date).format("YYYY-MM-DD");
+      return sessionDate === moment(date).format("YYYY-MM-DD");
+    });
+    filteredSessions.forEach((session) => {
       const startTime = session.startTime.replace("GMT+5", "+05:00");
       const endTime = session.endTime.replace("GMT+5", "+05:00");
       startTimes.push(formatTime(startTime));
@@ -208,6 +214,7 @@ const Calendar = () => {
     setDisabledStartTImes((prev) => [...prev, ...startTimes]);
     setDisabledEndTimes((prev) => [...prev, ...endTimes]);
   };
+  
 
   useEffect(() => {
     // Fetch sessions for logged in user
@@ -227,6 +234,17 @@ const Calendar = () => {
     setStartTime(session.startTime);
     setEndTime(session.endTime);
   }, [session]);
+
+  useEffect(() => {
+    setDisabledEndTimes([]);
+    setDisabledStartTImes([]);
+    // Fetch sessions for logged in user
+    getSessionsByUser(user.email);
+    // A learner has 1:M relation with instructor, so an instructor might have different times booked with different learners
+    if (user.role === "learner") {
+      getSessionsByUser(user.assignedInstructor.instructorEmail);
+    }
+  }, [selectedDate])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
